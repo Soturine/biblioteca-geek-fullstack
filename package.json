@@ -1,0 +1,29 @@
+{
+  "name": "biblioteca-geek-fullstack",
+  "version": "1.0.0",
+  "description": "Sistema Biblioteca Geek - projeto full stack academico com Node.js, Express, MySQL, MongoDB e frontend Bootstrap.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mysql",
+    "mongodb",
+    "biblioteca"
+  ],
+  "author": "Rafael",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.12.0",
+    "multer": "^2.1.1",
+    "mysql2": "^3.12.0"
+  }
+}
