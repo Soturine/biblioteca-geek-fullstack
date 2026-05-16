@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="480" viewBox="0 0 320 480">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#312e81" />
+      <stop offset="0.5" stop-color="#581c87" />
+      <stop offset="1" stop-color="#111827" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="480" rx="18" fill="url(#bg)" />
+  <rect x="92" y="80" width="136" height="172" rx="6" fill="#111827" stroke="#c084fc" stroke-width="5" />
+  <circle cx="160" cy="166" r="34" fill="#0f172a" stroke="#f0abfc" stroke-width="4" />
+  <circle cx="160" cy="166" r="9" fill="#f0abfc" />
+  <path d="M126 122h68M126 210h68M108 102l-38-34M212 102l38-34M110 232l-32 48M210 232l32 48" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" />
+  <text x="160" y="314" text-anchor="middle" fill="#faf5ff" font-family="Georgia, serif" font-size="46" font-weight="700">Coraline</text>
+  <text x="160" y="388" text-anchor="middle" fill="#e9d5ff" font-family="Arial, sans-serif" font-size="19" font-weight="700">Neil Gaiman</text>
+  <text x="160" y="420" text-anchor="middle" fill="#f5d0fe" font-family="Arial, sans-serif" font-size="13">porta secreta • botões • coragem</text>
+</svg>

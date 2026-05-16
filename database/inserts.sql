@@ -20,7 +20,15 @@ INSERT INTO autores (nome, nacionalidade) VALUES
 ('Alan Moore', 'Britânica'),
 ('Neil Gaiman', 'Britânica'),
 ('Neal Stephenson', 'Americana'),
-('Ernest Cline', 'Americana');
+('Ernest Cline', 'Americana'),
+('Aldous Huxley', 'Britânica'),
+('Ray Bradbury', 'Americana'),
+('Michael Crichton', 'Americana'),
+('Patrick Rothfuss', 'Americana'),
+('Christopher Paolini', 'Americana'),
+('Stephen King', 'Americana'),
+('Mary Shelley', 'Britânica'),
+('Liu Cixin', 'Chinesa');
 
 INSERT INTO categorias (nome) VALUES
 ('Ficção Científica'),
@@ -28,7 +36,8 @@ INSERT INTO categorias (nome) VALUES
 ('Fantasia'),
 ('Cyberpunk'),
 ('HQ e Graphic Novel'),
-('Terror Geek');
+('Terror Geek'),
+('Fantasia Sombria');
 
 INSERT INTO livros (
   titulo, ano, quantidade, imagem, paginas, sinopse, editora, isbn, id_autor, id_categoria
@@ -52,7 +61,17 @@ INSERT INTO livros (
 ('Watchmen', 1986, 2, '/uploads/capas-demo/watchmen.svg', 416, 'Heróis aposentados investigam uma conspiração em um mundo politicamente tenso. A obra questiona poder, vigilância e moralidade.', 'Editora Nona Arte', '978-85-100-0017-5', 14, 5),
 ('Sandman: Prelúdios e Noturnos', 1989, 3, '/uploads/capas-demo/sandman-preludios-e-noturnos.svg', 240, 'Sonho retorna ao mundo depois de décadas preso e tenta recuperar seus artefatos. A fantasia sombria mistura mitologia, horror e poesia visual.', 'Editora Sonhar', '978-85-100-0018-2', 15, 5),
 ('Snow Crash', 1992, 3, '/uploads/capas-demo/snow-crash.svg', 480, 'Um entregador e hacker atravessa ruas caóticas e ambientes virtuais para investigar uma ameaça linguística. O livro mistura ação, metaverso e sátira tecnológica.', 'Editora Metaverso', '978-85-100-0019-9', 16, 4),
-('Jogador Número 1', 2011, 4, '/uploads/capas-demo/jogador-numero-1.svg', 464, 'Em um futuro difícil, jovens competem dentro de um mundo virtual cheio de referências pop. A aventura celebra jogos, cultura geek e busca por identidade.', 'Editora Oasis', '978-85-100-0020-5', 17, 1);
+('Jogador Número 1', 2011, 4, '/uploads/capas-demo/jogador-numero-1.svg', 464, 'Em um futuro difícil, jovens competem dentro de um mundo virtual cheio de referências pop. A aventura celebra jogos, cultura geek e busca por identidade.', 'Editora Oasis', '978-85-100-0020-5', 17, 1),
+('Admirável Mundo Novo', 1932, 4, '/uploads/capas-demo/admiravel-mundo-novo.svg', 288, 'Uma sociedade perfeita controla felicidade, consumo e memória para evitar conflitos. A distopia observa o preço de trocar liberdade por conforto permanente.', 'Editora Soma', '978-85-100-0021-2', 18, 2),
+('Fahrenheit 451', 1953, 4, '/uploads/capas-demo/fahrenheit-451.svg', 216, 'Em um futuro que queima livros, um bombeiro começa a duvidar da ordem que protege. A história fala de censura, imaginação e resistência silenciosa.', 'Editora Fênix', '978-85-100-0022-9', 19, 2),
+('Jurassic Park', 1990, 3, '/uploads/capas-demo/jurassic-park.svg', 448, 'Um parque de dinossauros recriados por engenharia genética vira laboratório de caos. A aventura mistura ciência, ambição e consequências imprevisíveis.', 'Editora Âmbar', '978-85-100-0023-6', 20, 1),
+('O Nome do Vento', 2007, 4, '/uploads/capas-demo/o-nome-do-vento.svg', 656, 'Kvothe relembra uma vida marcada por música, magia e perdas. A fantasia acompanha a formação de uma lenda contada por quem ainda carrega suas cicatrizes.', 'Editora Quatro Cantos', '978-85-100-0024-3', 21, 3),
+('Eragon', 2002, 3, '/uploads/capas-demo/eragon.svg', 512, 'Um jovem encontra um ovo de dragão e é puxado para uma guerra maior do que imaginava. A jornada combina amizade, magia e descoberta de responsabilidade.', 'Editora Alagaësia', '978-85-100-0025-0', 22, 3),
+('Coraline', 2002, 3, '/uploads/capas-demo/coraline.svg', 192, 'Coraline atravessa uma porta secreta e encontra um lar parecido demais com o seu. A fantasia sombria transforma curiosidade em coragem diante do estranho.', 'Editora Outra Casa', '978-85-100-0026-7', 15, 7),
+('It: A Coisa', 1986, 2, '/uploads/capas-demo/it-a-coisa.svg', 1104, 'Amigos enfrentam uma presença antiga que usa medos pessoais para assombrar a cidade. A história mistura terror, memória e laços de infância.', 'Editora Derry', '978-85-100-0027-4', 23, 6),
+('A Guerra dos Mundos', 1898, 3, '/uploads/capas-demo/a-guerra-dos-mundos.svg', 240, 'Máquinas vindas de Marte atravessam cidades e desmontam a confiança humana no próprio domínio. O clássico une invasão alienígena e crítica ao orgulho tecnológico.', 'Editora Marciana', '978-85-100-0028-1', 5, 1),
+('Frankenstein', 1818, 3, '/uploads/capas-demo/frankenstein.svg', 304, 'Um cientista dá vida a uma criatura e precisa encarar as consequências de sua ambição. A obra aproxima ciência, solidão e responsabilidade moral.', 'Editora Prometeu', '978-85-100-0029-8', 24, 1),
+('O Problema dos Três Corpos', 2008, 3, '/uploads/capas-demo/o-problema-dos-tres-corpos.svg', 400, 'Sinais vindos do espaço colocam cientistas diante de uma civilização instável e ameaçadora. A ficção científica combina física, história e suspense cósmico.', 'Editora Trissolaris', '978-85-100-0030-4', 25, 1);
 
 INSERT INTO emprestimos (id_usuario, nome_leitor, data_emprestimo, data_devolucao, status) VALUES
 (1, 'Peter Parker', '2026-05-01', '2026-05-15', 'aberto'),

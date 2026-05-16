@@ -20,11 +20,12 @@
 | CRUD categorias                         | Implementado           | `Categoria*` e `categorias.html`                   | Tela Categorias                       | `docs/assets/screenshots/06-categorias.png`     |
 | CRUD livros                             | Implementado           | `Livro*` e `livros.html`                           | Tela Livros                           | `docs/assets/screenshots/03-livros.png`         |
 | Detalhes do livro                       | Implementado           | `livros.html`, `livros.js`, `LivroDAO`             | Botão Detalhes na tela Livros         | `docs/assets/screenshots/04-detalhes-livro.png` |
+| Atalho Nova categoria em Livros         | Implementado           | `livros.html`, `livros.js`, `CategoriaController`  | Botão Nova categoria na tela Livros   | `docs/assets/screenshots/03-livros.png`         |
 | Campos páginas, editora, ISBN e sinopse | Implementado           | `schema.sql`, `Livro*`, `livros.html`              | Criar/editar livro                    | `docs/assets/screenshots/03-livros.png`         |
 | CRUD empréstimos                        | Implementado           | `Emprestimo*` e `emprestimos.html`                 | Tela Empréstimos                      | `docs/assets/screenshots/07-emprestimos.png`    |
 | Pesquisa de livros                      | Implementado           | `LivroDAO.findAll`                                 | `/livros?busca=Hobbit`                | `docs/assets/screenshots/03-livros.png`         |
 | MySQL com 6 tabelas                     | Implementado           | `database/schema.sql`                              | Importar schema                       | `docs/DER.png`                                  |
-| Banco inicial com 20 livros             | Implementado           | `database/inserts.sql`                             | Importar inserts e listar livros      | `docs/assets/screenshots/03-livros.png`         |
+| Banco inicial com 30 livros             | Implementado           | `database/inserts.sql`                             | Importar inserts e listar livros      | `docs/assets/screenshots/03-livros.png`         |
 | Relacionamento 1:N                      | Implementado           | FKs no schema                                      | Conferir DER                          | `docs/DER.png`                                  |
 | Relacionamento N:N                      | Implementado           | `itens_emprestimo`                                 | Conferir DER                          | `docs/DER.png`                                  |
 | Regras de estoque                       | Implementado           | `EmprestimoService`, `EmprestimoDAO`               | Criar/excluir empréstimo              | `docs/assets/screenshots/07-emprestimos.png`    |

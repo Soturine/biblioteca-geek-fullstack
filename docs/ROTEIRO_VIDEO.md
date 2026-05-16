@@ -72,7 +72,7 @@ Mostrar:
 
 ## 9. CRUD de livros
 
-Mostrar a listagem com capas, abrir o modal **Detalhes**, cadastrar um livro, editar, pesquisar pelo título e excluir.
+Mostrar a listagem com capas, abrir o modal **Detalhes** com sinopse em destaque, cadastrar uma categoria pelo botão **Nova categoria**, cadastrar um livro, editar, pesquisar pelo título e excluir.
 
 ## 10. Upload de imagem
 

@@ -82,7 +82,16 @@
                   <select class="form-select" id="autorLivro" required></select>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label" for="categoriaLivro">Categoria</label>
+                  <div class="d-flex align-items-center justify-content-between gap-2 mb-1">
+                    <label class="form-label mb-0" for="categoriaLivro">Categoria</label>
+                    <button
+                      class="btn btn-sm btn-outline-primary"
+                      type="button"
+                      id="btnNovaCategoria"
+                    >
+                      Nova categoria
+                    </button>
+                  </div>
                   <select class="form-select" id="categoriaLivro" required></select>
                 </div>
                 <div class="mb-3">
@@ -162,6 +171,43 @@
             ></button>
           </div>
           <div class="modal-body" id="detalheLivroConteudo"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalNovaCategoria" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form id="formNovaCategoria" novalidate>
+            <div class="modal-header">
+              <h2 class="modal-title h5">Nova categoria</h2>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div id="alertNovaCategoria"></div>
+              <label class="form-label" for="nomeNovaCategoria">Nome da categoria</label>
+              <input
+                class="form-control"
+                type="text"
+                id="nomeNovaCategoria"
+                minlength="2"
+                maxlength="100"
+                required
+              />
+              <div class="form-text">Use um nome claro, por exemplo: Fantasia Sombria.</div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button class="btn btn-primary" type="submit">Salvar categoria</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ Sistema web full stack acadêmico para gestão de Biblioteca Geek com Node.js, E
 
 O **Sistema Biblioteca Geek** controla livros de uma biblioteca com tema geek/nerd. O usuário autenticado pode cadastrar autores, categorias, livros com imagem de capa, empréstimos e itens de empréstimo.
 
-O projeto também possui pesquisa, importação/exportação JSON, logs em MongoDB, exportação XML, relatório PDF no frontend e gráfico com Chart.js. A tela de livros traz um modal de detalhes com capa, autor, categoria, ano, páginas, editora, ISBN, quantidade disponível e sinopse.
+O projeto também possui pesquisa, importação/exportação JSON, logs em MongoDB, exportação XML, relatório PDF no frontend e gráfico com Chart.js. A tela de livros traz um modal de detalhes com capa, título, sinopse em destaque, autor, categoria, ano, páginas, editora, ISBN e quantidade disponível.
 
 ## Funcionalidades
 
@@ -46,7 +46,8 @@ O projeto também possui pesquisa, importação/exportação JSON, logs em Mongo
 - Pesquisa de livros por título.
 - Upload e exibição de capa dos livros.
 - Modal de detalhes do livro.
-- Banco inicial com 20 livros famosos da cultura geek.
+- Atalho para cadastrar categoria pela tela de livros.
+- Banco inicial com 30 livros famosos da cultura geek.
 - Capas demonstrativas locais em SVG.
 - Importação e exportação JSON.
 - Logs no MongoDB para login, erro, acesso a rotas e operações de CRUD.

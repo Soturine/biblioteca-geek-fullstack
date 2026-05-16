@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="480" viewBox="0 0 320 480">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#020617" />
+      <stop offset="0.55" stop-color="#450a0a" />
+      <stop offset="1" stop-color="#991b1b" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="480" rx="18" fill="url(#bg)" />
+  <path d="M60 120c28 70 50 102 100 116 50-14 72-46 100-116" fill="none" stroke="#fecaca" stroke-width="4" opacity="0.35" />
+  <circle cx="160" cy="154" r="50" fill="#ef4444" />
+  <path d="M160 204c-4 34-4 60 0 86" stroke="#fca5a5" stroke-width="4" />
+  <path d="M106 260c38 24 70 24 108 0" fill="none" stroke="#fca5a5" stroke-width="5" stroke-linecap="round" />
+  <text x="160" y="326" text-anchor="middle" fill="#fee2e2" font-family="Georgia, serif" font-size="56" font-weight="700">It</text>
+  <text x="160" y="368" text-anchor="middle" fill="#fecaca" font-family="Georgia, serif" font-size="26" font-weight="700">A Coisa</text>
+  <text x="160" y="418" text-anchor="middle" fill="#fee2e2" font-family="Arial, sans-serif" font-size="18" font-weight="700">Stephen King</text>
+</svg>

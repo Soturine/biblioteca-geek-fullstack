@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="480" viewBox="0 0 320 480">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2dd4bf" />
+      <stop offset="0.55" stop-color="#1d4ed8" />
+      <stop offset="1" stop-color="#0f172a" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="34%" r="45%">
+      <stop offset="0" stop-color="#fef9c3" stop-opacity="0.75" />
+      <stop offset="1" stop-color="#fef9c3" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="320" height="480" rx="18" fill="url(#bg)" />
+  <rect x="18" y="18" width="284" height="444" rx="14" fill="none" stroke="#dffcff" stroke-opacity="0.45" stroke-width="2" />
+  <circle cx="160" cy="164" r="100" fill="url(#glow)" />
+  <g fill="none" stroke="#e0f2fe" stroke-width="4" stroke-linecap="round">
+    <path d="M82 192c32-54 124-54 156 0" />
+    <path d="M102 212c22-28 94-28 116 0" />
+    <path d="M160 82v174" />
+  </g>
+  <circle cx="160" cy="160" r="34" fill="#facc15" opacity="0.9" />
+  <circle cx="160" cy="160" r="15" fill="#1d4ed8" opacity="0.65" />
+  <text x="160" y="292" text-anchor="middle" fill="#fff" font-family="Georgia, serif" font-size="28" font-weight="700">
+    <tspan x="160">Admirável</tspan>
+    <tspan x="160" dy="34">Mundo Novo</tspan>
+  </text>
+  <text x="160" y="392" text-anchor="middle" fill="#dbeafe" font-family="Arial, sans-serif" font-size="18" font-weight="700">Aldous Huxley</text>
+  <text x="160" y="424" text-anchor="middle" fill="#99f6e4" font-family="Arial, sans-serif" font-size="13">distopia • controle • conforto</text>
+</svg>

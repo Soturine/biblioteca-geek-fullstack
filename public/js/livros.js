@@ -113,10 +113,12 @@ function editarLivro(id) {
 }
 
 function detalheLinha(rotulo, valor) {
+  const texto = valor === 0 ? 0 : valor || 'Não informado';
+
   return `
     <div class="detail-item">
       <span>${rotulo}</span>
-      <strong>${escapeHtml(valor || 'Não informado')}</strong>
+      <strong>${escapeHtml(texto)}</strong>
     </div>
   `;
 }
@@ -137,6 +139,7 @@ function abrirDetalhesLivro(id) {
       <div>${capa}</div>
       <div>
         <h3>${escapeHtml(livro.titulo)}</h3>
+        <p class="detail-synopsis">${escapeHtml(livro.sinopse || 'Sinopse não informada.')}</p>
         <div class="detail-grid">
           ${detalheLinha('Autor', livro.autor_nome)}
           ${detalheLinha('Categoria', livro.categoria_nome)}
@@ -146,13 +149,49 @@ function abrirDetalhesLivro(id) {
           ${detalheLinha('ISBN', livro.isbn)}
           ${detalheLinha('Disponível', livro.quantidade)}
         </div>
-        <h4 class="h6 mt-3">Sinopse</h4>
-        <p class="mb-0">${escapeHtml(livro.sinopse || 'Sinopse não informada.')}</p>
       </div>
     </div>
   `;
 
   bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDetalhesLivro')).show();
+}
+
+function abrirModalNovaCategoria() {
+  const form = document.getElementById('formNovaCategoria');
+  form.reset();
+  form.classList.remove('was-validated');
+  document.getElementById('alertNovaCategoria').innerHTML = '';
+  bootstrap.Modal.getOrCreateInstance(document.getElementById('modalNovaCategoria')).show();
+}
+
+async function salvarNovaCategoria(event) {
+  event.preventDefault();
+
+  if (!validarFormulario(event.target, 'alertNovaCategoria', 'Informe o nome da nova categoria.')) {
+    return;
+  }
+
+  const nome = document.getElementById('nomeNovaCategoria').value.trim();
+
+  try {
+    const resposta = await apiFetch('/categorias', {
+      method: 'POST',
+      body: JSON.stringify({ nome }),
+    });
+
+    await carregarCombosLivro();
+    const categoriaCriada =
+      resposta?.data || categoriasLivro.find((categoria) => categoria.nome === nome);
+
+    if (categoriaCriada?.id_categoria) {
+      document.getElementById('categoriaLivro').value = categoriaCriada.id_categoria;
+    }
+
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('modalNovaCategoria')).hide();
+    showAlert('alertLivros', 'Categoria cadastrada com sucesso.');
+  } catch (error) {
+    showAlert('alertNovaCategoria', error.message, 'danger');
+  }
 }
 
 function validarArquivoImagem(input) {
@@ -233,6 +272,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   limparLivro();
 
   document.getElementById('btnLimparLivro').addEventListener('click', limparLivro);
+  document.getElementById('btnNovaCategoria').addEventListener('click', abrirModalNovaCategoria);
+  document.getElementById('formNovaCategoria').addEventListener('submit', salvarNovaCategoria);
 
   document.getElementById('imagemLivro').addEventListener('change', (event) => {
     const input = event.target;

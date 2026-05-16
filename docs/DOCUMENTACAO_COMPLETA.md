@@ -187,11 +187,11 @@ Os prints duplicados da etapa anterior foram removidos da entrega para manter ap
 
 ## Capas demonstrativas locais
 
-Os 20 livros iniciais usam capas autorais em SVG dentro de `public/uploads/capas-demo/`. O acervo foi ajustado para obras fortes de cultura geek, ficção científica, distopia, fantasia, cyberpunk, HQ e terror, com gradientes, símbolos abstratos e títulos com acentos corretos.
+Os 30 livros iniciais usam capas autorais em SVG dentro de `public/uploads/capas-demo/`. O acervo foi ajustado para obras fortes de cultura geek, ficção científica, distopia, fantasia, fantasia sombria, cyberpunk, HQ e terror, com gradientes, símbolos abstratos e títulos com acentos corretos.
 
 ## Modal de detalhes do livro
 
-A tela `public/livros.html` mantém a tabela simples e usa um modal Bootstrap para exibir capa maior, título, autor, categoria, ano, páginas, editora, ISBN, quantidade disponível e sinopse.
+A tela `public/livros.html` mantém a tabela simples e usa um modal Bootstrap para exibir capa maior, título, sinopse em destaque, autor, categoria, ano, páginas, editora, ISBN e quantidade disponível. A tela também possui o botão **Nova categoria**, que abre um modal simples, cadastra a categoria pela API e atualiza o select usado no cadastro de livros.
 
 ## Gráfico
 

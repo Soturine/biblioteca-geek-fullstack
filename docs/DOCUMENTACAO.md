@@ -113,11 +113,11 @@ O dashboard usa Chart.js. Os dados chegam de `/api/v1/graficos/livros-por-catego
 
 ## Capas demonstrativas
 
-Os dados iniciais em `database/inserts.sql` possuem 20 livros de ficção científica, distopia, fantasia, cyberpunk, HQ e terror geek. Eles apontam para capas SVG autorais em `public/uploads/capas-demo/`, criadas localmente para apresentação acadêmica.
+Os dados iniciais em `database/inserts.sql` possuem 30 livros de ficção científica, distopia, fantasia, fantasia sombria, cyberpunk, HQ e terror geek. Eles apontam para capas SVG autorais em `public/uploads/capas-demo/`, criadas localmente para apresentação acadêmica.
 
 ## Modal de detalhes
 
-A tela de livros mantém a listagem simples e usa um modal Bootstrap para exibir capa maior, título, autor, categoria, ano, páginas, editora, ISBN, quantidade disponível e sinopse.
+A tela de livros mantém a listagem simples e usa um modal Bootstrap para exibir capa maior, título, sinopse em destaque, autor, categoria, ano, páginas, editora, ISBN e quantidade disponível. A mesma tela possui o atalho **Nova categoria**, que cadastra uma categoria pela API e atualiza o select sem recarregar a página.
 
 ## Licença
 
