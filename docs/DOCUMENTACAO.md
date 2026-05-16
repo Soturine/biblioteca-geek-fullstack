@@ -125,7 +125,7 @@ O projeto usa licença MIT, disponível no arquivo `LICENSE`.
 
 ## Screenshots
 
-Os screenshots principais ficam em `docs/assets/screenshots/`. As evidências coletadas antes das melhorias finais estão em `docs/assets/screenshots/estado-atual/`.
+Os screenshots principais da entrega ficam em `docs/assets/screenshots/`, usando apenas os prints finais exibidos no README.
 
 ## Endpoints
 

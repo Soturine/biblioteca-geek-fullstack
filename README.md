@@ -88,6 +88,8 @@ View -> Router -> Middleware -> Controller -> Service -> DAO -> Model -> Banco d
 
 ## DER
 
+O DER representa as tabelas principais do MySQL e seus relacionamentos 1:N e N:N.
+
 ```mermaid
 erDiagram
     USUARIOS ||--o{ EMPRESTIMOS : realiza
@@ -147,9 +149,9 @@ erDiagram
     }
 ```
 
-![DER do sistema](docs/DER.png)
-
 [Ver DER em Markdown](docs/DER.md)
+
+<img src="docs/DER.png" width="760" alt="DER do sistema Biblioteca Geek">
 
 Relacionamentos principais:
 
@@ -160,45 +162,45 @@ Relacionamentos principais:
 
 ## Demonstração rápida
 
-![Demonstração do sistema](docs/assets/gifs/demo-biblioteca-geek.gif)
+<img src="docs/assets/gifs/demo-biblioteca-geek.gif" width="760" alt="Demonstração rápida do sistema">
 
 ## Screenshots
 
 ### Login
 
-![Tela de login](docs/assets/screenshots/01-login.png)
+<img src="docs/assets/screenshots/01-login.png" width="760" alt="Tela de login">
 
 ### Dashboard
 
-![Dashboard com gráfico e logs](docs/assets/screenshots/02-dashboard.png)
+<img src="docs/assets/screenshots/02-dashboard.png" width="760" alt="Dashboard">
 
 ### Livros
 
-![Tela de livros](docs/assets/screenshots/03-livros.png)
+<img src="docs/assets/screenshots/03-livros.png" width="760" alt="Tela de livros com detalhes e capas">
 
 ### Autores
 
-![Tela de autores](docs/assets/screenshots/04-autores.png)
+<img src="docs/assets/screenshots/04-autores.png" width="760" alt="Tela de autores">
 
 ### Categorias
 
-![Tela de categorias](docs/assets/screenshots/05-categorias.png)
+<img src="docs/assets/screenshots/05-categorias.png" width="760" alt="Tela de categorias">
 
 ### Empréstimos
 
-![Tela de empréstimos](docs/assets/screenshots/06-emprestimos.png)
+<img src="docs/assets/screenshots/06-emprestimos.png" width="760" alt="Tela de empréstimos">
 
-### Importação e exportação JSON
+### JSON
 
-![Tela de JSON](docs/assets/screenshots/07-importacao-exportacao-json.png)
+<img src="docs/assets/screenshots/07-importacao-exportacao-json.png" width="760" alt="Importação e exportação JSON">
 
 ### Logs XML
 
-![Tela de exportação XML](docs/assets/screenshots/08-logs-xml.png)
+<img src="docs/assets/screenshots/08-logs-xml.png" width="760" alt="Logs XML">
 
 ### Relatório PDF
 
-![Tela de relatório PDF](docs/assets/screenshots/09-relatorio-pdf.png)
+<img src="docs/assets/screenshots/09-relatorio-pdf.png" width="760" alt="Relatório PDF">
 
 ## Pré-requisitos
 

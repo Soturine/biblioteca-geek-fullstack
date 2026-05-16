@@ -24,10 +24,14 @@
     "mvc",
     "dao",
     "service-layer",
+    "router",
+    "middleware",
+    "biblioteca",
+    "crud",
     "academic-project",
     "programacao-para-internet"
   ],
-  "author": "Rafael",
+  "author": "Rafael Ryan Ramos de Souza",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",

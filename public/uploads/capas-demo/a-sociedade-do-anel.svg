@@ -1,12 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="440" viewBox="0 0 300 440">
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="540" viewBox="0 0 360 540" role="img" aria-label="Capa demonstrativa de A Sociedade do Anel">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#111827"/></linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="0.58" stop-color="#1d4ed8"/>
+      <stop offset="1" stop-color="#93c5fd"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="16%" r="70%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="300" height="440" rx="18" fill="url(#g)"/>
-  <rect x="18" y="18" width="264" height="404" rx="14" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="3"/>
-  <g opacity=".92"><circle cx="145" cy="160" r="54" fill="none" stroke="rgba(255,255,255,.88)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="145" cy="160" r="30" fill="none" stroke="rgba(255,255,255,.88)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
-  <text x="150" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="800" fill="#fff">A Sociedade do</text>
-<text x="150" y="318" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="800" fill="#fff">Anel</text>
-  <text x="150" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="rgba(255,255,255,.9)">J. R. R. Tolkien</text>
-  <text x="150" y="414" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,.7)">Capa demonstrativa local</text>
+  <rect width="360" height="540" rx="22" fill="url(#bg)"/>
+  <rect width="360" height="540" rx="22" fill="url(#glow)"/>
+  <path d="M-40 430C70 350 130 510 250 430s160-20 190 40v100H-40z" fill="#ffffff" opacity=".08"/>
+  <rect x="22" y="22" width="316" height="496" rx="18" fill="none" stroke="#ffffff" stroke-opacity=".36" stroke-width="3"/>
+  <rect x="42" y="42" width="276" height="142" rx="18" fill="#000000" opacity=".26"/>
+  <text x="180" y="66" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#fff">A Sociedade</text>
+  <text x="180" y="98" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="900" fill="#fff">do Anel</text>
+  <g opacity=".95"><circle cx="180" cy="276" r="76" fill="none" stroke="#fff" stroke-width="6"/><circle cx="180" cy="276" r="45" fill="none" stroke="#fff" stroke-width="3" opacity=".75"/><path d="M119 344h122" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".65"/></g>
+  <rect x="58" y="436" width="244" height="58" rx="14" fill="#000000" opacity=".34"/>
+  <text x="180" y="468" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#fff" fill-opacity=".94">J. R. R. Tolkien</text>
 </svg>

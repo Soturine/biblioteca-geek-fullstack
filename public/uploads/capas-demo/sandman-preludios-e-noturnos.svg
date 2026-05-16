@@ -1,12 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="440" viewBox="0 0 300 440">
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="540" viewBox="0 0 360 540" role="img" aria-label="Capa demonstrativa de Sandman: Prelúdios e Noturnos">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#581c87"/><stop offset="1" stop-color="#111827"/></linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e1b4b"/>
+      <stop offset="0.58" stop-color="#581c87"/>
+      <stop offset="1" stop-color="#c084fc"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="16%" r="70%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="300" height="440" rx="18" fill="url(#g)"/>
-  <rect x="18" y="18" width="264" height="404" rx="14" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="3"/>
-  <g opacity=".92"><path fill="rgba(255,255,255,.84)" d="M174 78c-36 13-58 48-52 86 6 40 40 69 78 70-15 12-35 18-56 15-52-8-88-56-80-108 8-50 56-86 110-63z"/></g>
-  <text x="150" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="800" fill="#fff">Sandman: Prel?dios</text>
-<text x="150" y="318" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="800" fill="#fff">e Noturnos</text>
-  <text x="150" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="rgba(255,255,255,.9)">Neil Gaiman</text>
-  <text x="150" y="414" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,.7)">Capa demonstrativa local</text>
+  <rect width="360" height="540" rx="22" fill="url(#bg)"/>
+  <rect width="360" height="540" rx="22" fill="url(#glow)"/>
+  <path d="M-40 430C70 350 130 510 250 430s160-20 190 40v100H-40z" fill="#ffffff" opacity=".08"/>
+  <rect x="22" y="22" width="316" height="496" rx="18" fill="none" stroke="#ffffff" stroke-opacity=".36" stroke-width="3"/>
+  <rect x="42" y="42" width="276" height="142" rx="18" fill="#000000" opacity=".26"/>
+  <text x="180" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="900" fill="#fff">Sandman:</text>
+  <text x="180" y="86" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="900" fill="#fff">Prelúdios e</text>
+  <text x="180" y="114" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="900" fill="#fff">Noturnos</text>
+  <g opacity=".95"><path d="M214 196c-54 12-82 58-62 108 14 34 50 54 88 44-36 42-104 26-126-30-24-62 12-126 100-122z" fill="#fff" opacity=".9"/><circle cx="244" cy="222" r="7" fill="#fff"/><circle cx="104" cy="250" r="4" fill="#fff" opacity=".8"/><circle cx="126" cy="196" r="5" fill="#fff" opacity=".8"/></g>
+  <rect x="58" y="436" width="244" height="58" rx="14" fill="#000000" opacity=".34"/>
+  <text x="180" y="468" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#fff" fill-opacity=".94">Neil Gaiman</text>
 </svg>

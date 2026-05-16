@@ -105,7 +105,7 @@ Tabelas:
 - Autor 1:N Livros.
 - Categoria 1:N Livros.
 - Empréstimo N:N Livros por `itens_emprestimo`.
-- `itens_emprestimo` e a tabela intermediária que guarda quantidade por livro.
+- `itens_emprestimo` é a tabela intermediária que guarda a quantidade por livro.
 - A migration `database/migrations/001_add_detalhes_livros.sql` adiciona os campos de detalhes em bancos já criados.
 
 ## MongoDB e estrutura dos logs
@@ -158,15 +158,15 @@ O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB e gera:
 
 O backend retorna dados em JSON por `/api/v1/relatorios/livros`. O frontend gera o PDF com jsPDF e AutoTable, contendo:
 
-- titulo
+- título
 - data/hora
-- usuario logado
+- usuário logado
 - filtro por categoria
 - tabela organizada
 - total de livros
 - total de exemplares
 - total de páginas
-- rodape do sistema
+- rodapé do sistema
 
 ## Telas principais
 
@@ -182,11 +182,11 @@ Os screenshots finais estão em `docs/assets/screenshots/`:
 - `08-logs-xml.png`: exportação XML.
 - `09-relatorio-pdf.png`: tela de relatório PDF.
 
-As evidências anteriores às melhorias finais foram preservadas em `docs/assets/screenshots/estado-atual/`.
+Os prints duplicados da etapa anterior foram removidos da entrega para manter apenas as evidências finais usadas no README.
 
 ## Capas demonstrativas locais
 
-Os 20 livros iniciais usam capas autorais simples em SVG dentro de `public/uploads/capas-demo/`. Elas são usadas apenas para demonstração e não dependem de API externa nem de imagens protegidas baixadas da internet.
+Os 20 livros iniciais usam capas autorais em SVG dentro de `public/uploads/capas-demo/`. As capas têm gradientes, símbolos abstratos e títulos com acentos corretos, sem depender de API externa nem de imagens protegidas baixadas da internet.
 
 ## Modal de detalhes do livro
 
