@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="520" viewBox="0 0 360 520" role="img" aria-label="Capa demonstrativa Fundacao">
+  <rect width="360" height="520" fill="#172554"/>
+  <rect x="40" y="40" width="280" height="440" rx="16" fill="#1d4ed8"/>
+  <circle cx="180" cy="168" r="82" fill="#93c5fd" opacity="0.22"/>
+  <circle cx="180" cy="168" r="48" fill="#bfdbfe" opacity="0.55"/>
+  <path d="M88 246h184M112 272h136M136 298h88" stroke="#eff6ff" stroke-width="8" stroke-linecap="round"/>
+  <text x="180" y="365" font-family="Georgia, serif" font-size="42" font-weight="700" text-anchor="middle" fill="#ffffff">FUNDACAO</text>
+  <text x="180" y="412" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#dbeafe">Isaac Asimov</text>
+  <text x="180" y="462" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#bfdbfe">Capa demonstrativa</text>
+</svg>

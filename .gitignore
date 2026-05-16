@@ -6,6 +6,8 @@ yarn-error.log*
 
 public/uploads/*
 !public/uploads/.gitkeep
+!public/uploads/capas-demo/
+!public/uploads/capas-demo/**
 
 .DS_Store
 Thumbs.db

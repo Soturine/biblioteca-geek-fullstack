@@ -1,14 +1,18 @@
 {
   "name": "biblioteca-geek-fullstack",
   "version": "1.0.0",
-  "description": "Sistema Biblioteca Geek - projeto full stack academico com Node.js, Express, MySQL, MongoDB e frontend Bootstrap.",
+  "description": "Sistema Biblioteca Geek - projeto full stack acadêmico com Node.js, Express, MySQL, MongoDB e frontend Bootstrap.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "format": "prettier --write .",
     "check:js": "node scripts/check-js.js",
-    "docs:pdf": "node scripts/gerar_documentacao_pdf.js"
+    "check:mongo": "node scripts/check-mongo.js",
+    "docs:pdf": "node scripts/gerar_documentacao_pdf.js",
+    "open": "node scripts/open-browser.js",
+    "dev:open": "node scripts/start-and-open.js",
+    "screenshots": "node scripts/gerar_screenshots.js"
   },
   "keywords": [
     "nodejs",
@@ -23,6 +27,7 @@
     "mvc",
     "dao",
     "service-layer",
+    "academic-project",
     "programacao-para-internet"
   ],
   "author": "Rafael",
@@ -39,6 +44,7 @@
   },
   "devDependencies": {
     "pdfkit": "^0.18.0",
+    "playwright": "^1.60.0",
     "prettier": "^3.8.3"
   }
 }

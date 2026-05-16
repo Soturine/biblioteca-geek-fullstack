@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('formLogin').addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    if (!validarFormulario(event.target, 'alertAuth', 'Informe email e senha para entrar.')) {
+    if (!validarFormulario(event.target, 'alertAuth', 'Informe e-mail e senha para entrar.')) {
       return;
     }
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       !validarFormulario(
         event.target,
         'alertAuth',
-        'Informe nome, email e senha com minimo de 6 caracteres.',
+        'Informe nome, e-mail e senha com mínimo de 6 caracteres.',
       )
     ) {
       return;
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({ nome, email, senha }),
       });
 
-      showAlert('alertAuth', 'Conta criada. Entre com seu email e senha.', 'success');
+      showAlert('alertAuth', 'Conta criada. Entre com seu e-mail e senha.', 'success');
       event.target.reset();
       bootstrap.Tab.getOrCreateInstance(document.getElementById('login-tab')).show();
     } catch (error) {

@@ -1,4 +1,4 @@
-# Endpoints
+﻿# Endpoints
 
 Prefixo base: `/api/v1`
 
@@ -42,7 +42,7 @@ Prefixo base: `/api/v1`
 | DELETE | `/livros/:id`         | Exclui livro                     |
 | POST   | `/livros/:id/imagem`  | Envia capa usando campo `imagem` |
 
-## Emprestimos
+## Empréstimos
 
 | Metodo | Rota               |
 | ------ | ------------------ |
@@ -52,16 +52,16 @@ Prefixo base: `/api/v1`
 | PUT    | `/emprestimos/:id` |
 | DELETE | `/emprestimos/:id` |
 
-## JSON, Logs, Relatorios e Graficos
+## JSON, Logs, Relatórios e Gráficos
 
 | Metodo | Rota                                                          | Descricao                                          |
 | ------ | ------------------------------------------------------------- | -------------------------------------------------- |
-| GET    | `/json/exportar/:entidade`                                    | Exporta autores, categorias, livros ou emprestimos |
+| GET    | `/json/exportar/:entidade`                                    | Exporta autores, categorias, livros ou empréstimos |
 | POST   | `/json/importar/:entidade`                                    | Importa autores, categorias ou livros              |
-| GET    | `/logs`                                                       | Lista ultimos logs para o dashboard                |
+| GET    | `/logs`                                                       | Lista últimos logs para o dashboard                |
 | GET    | `/logs/exportar/xml`                                          | Exporta logs em XML                                |
 | GET    | `/logs/exportar/xml?usuario=admin`                            | Filtra por usuario                                 |
 | GET    | `/logs/exportar/xml?dataInicio=2026-01-01&dataFim=2026-12-31` | Filtra por periodo                                 |
-| GET    | `/relatorios/livros`                                          | Dados do relatorio de livros                       |
-| GET    | `/relatorios/livros?categoria=1`                              | Relatorio filtrado                                 |
+| GET    | `/relatorios/livros`                                          | Dados do relatório de livros                       |
+| GET    | `/relatorios/livros?categoria=1`                              | Relatório filtrado                                 |
 | GET    | `/graficos/livros-por-categoria`                              | Dados para Chart.js                                |

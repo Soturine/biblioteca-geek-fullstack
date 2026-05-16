@@ -44,7 +44,7 @@ async function excluirCategoria(id) {
 
   try {
     await apiFetch(`/categorias/${id}`, { method: 'DELETE' });
-    showAlert('alertCategorias', 'Categoria excluida com sucesso.');
+    showAlert('alertCategorias', 'Categoria excluída com sucesso.');
     await carregarCategorias();
   } catch (error) {
     showAlert('alertCategorias', error.message, 'danger');

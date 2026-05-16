@@ -1,196 +1,94 @@
 # Biblioteca Geek Fullstack
 
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933)
-![MySQL](https://img.shields.io/badge/MySQL-Relacional-4479A1)
+![MySQL](https://img.shields.io/badge/MySQL-XAMPP-4479A1)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Logs-47A248)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3)
 ![JWT](https://img.shields.io/badge/JWT-Autenticação-000000)
 ![Chart.js](https://img.shields.io/badge/Chart.js-Gráficos-FF6384)
 ![jsPDF](https://img.shields.io/badge/jsPDF-Relatórios-red)
 
-Sistema web full stack acadêmico para gestão de uma **Biblioteca Geek**, desenvolvido para a disciplina de **Programação para Internet**.
-
-O projeto utiliza **Node.js + Express** no backend, **HTML5, CSS3, JavaScript puro e Bootstrap 5** no frontend, **MySQL** como banco relacional principal e **MongoDB** para registro de logs do sistema.
-
----
+Sistema web full stack acadêmico para gestão de Biblioteca Geek com Node.js, Express, MySQL, MongoDB, JWT, MVC, Service Layer, Router e Middleware.
 
 ## Sumário
 
 - [Sobre o projeto](#sobre-o-projeto)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
-- [Arquitetura do sistema](#arquitetura-do-sistema)
-- [Screenshots](#screenshots)
+- [Arquitetura usada](#arquitetura-usada)
 - [DER](#der)
+- [Screenshots](#screenshots)
 - [Pré-requisitos](#pré-requisitos)
 - [Configuração do ambiente](#configuração-do-ambiente)
 - [Como rodar do jeito fácil](#como-rodar-do-jeito-fácil)
 - [Como rodar manualmente](#como-rodar-manualmente)
-- [Login de teste](#login-de-teste)
 - [MySQL com XAMPP](#mysql-com-xampp)
 - [MongoDB e logs](#mongodb-e-logs)
-- [JSON](#json)
 - [Relatório PDF](#relatório-pdf)
+- [JSON](#json)
 - [Upload de imagens](#upload-de-imagens)
-- [Erros comuns](#erros-comuns)
 - [Documentação](#documentação)
 - [GitHub Pages](#github-pages)
+- [Release](#release)
+- [Erros comuns](#erros-comuns)
+- [About/Topics do GitHub](#abouttopics-do-github)
 - [Checklist resumido](#checklist-resumido)
-- [GitHub e vídeo](#github-e-vídeo)
-
----
 
 ## Sobre o projeto
 
-O tema escolhido foi **Sistema Biblioteca Geek**.
+O **Sistema Biblioteca Geek** controla livros de uma biblioteca com tema geek/nerd. O usuário autenticado pode cadastrar autores, categorias, livros com imagem de capa, empréstimos e itens de empréstimo. O sistema também possui pesquisa, importação/exportação JSON, logs em MongoDB, exportação XML, relatório PDF no frontend e gráfico com Chart.js.
 
-A aplicação permite autenticar usuários, cadastrar autores, categorias, livros com capa, empréstimos com itens, pesquisar livros, importar e exportar dados em JSON, registrar logs no MongoDB, exportar logs em XML, gerar relatório PDF no frontend e visualizar gráficos com Chart.js.
+O projeto foi feito como uma aplicação acadêmica simples, mantendo a organização em camadas conforme o padrão visto em aula.
 
-O sistema foi desenvolvido seguindo a organização trabalhada em aula:
+## Funcionalidades
+
+- Login, cadastro e logout com JWT.
+- Rotas públicas e privadas.
+- CRUD de autores, categorias, livros e empréstimos.
+- Pesquisa de livros por título.
+- Upload e exibição de capa dos livros.
+- Capas demonstrativas locais para os dados iniciais.
+- Importação e exportação JSON.
+- Logs no MongoDB para login, erro, acesso a rotas e operações de CRUD.
+- Exportação XML dos logs.
+- Relatório PDF com jsPDF e AutoTable.
+- Dashboard com cards, últimos logs e gráfico Chart.js.
+- Documentação, DER, roteiro de vídeo, screenshots e release final.
+
+## Tecnologias utilizadas
+
+- Node.js + Express.
+- CommonJS com `require` e `module.exports`.
+- MySQL com `mysql2/promise`.
+- MongoDB com driver oficial `mongodb`.
+- JWT com `jsonwebtoken`.
+- Senhas com `bcryptjs`.
+- Upload com `multer`.
+- HTML5, CSS3, JavaScript puro e Bootstrap 5 via CDN.
+- Chart.js.
+- jsPDF + jsPDF AutoTable via CDN.
+- Prettier, PDFKit e Playwright para apoio à documentação.
+
+## Arquitetura usada
+
+O projeto segue o fluxo:
 
 ```text
 View → Router → Middleware → Controller → Service → DAO → Model → Banco de Dados
 ```
 
----
-
-## Funcionalidades
-
-- Login com autenticação JWT.
-- CRUD de autores.
-- CRUD de categorias.
-- CRUD de livros.
-- Cadastro de empréstimos com itens.
-- Pesquisa de livros por título.
-- Upload de imagem da capa dos livros.
-- Dashboard com cards e gráfico.
-- Registro de logs no MongoDB.
-- Exportação de logs em XML.
-- Importação e exportação de dados em JSON.
-- Relatório PDF gerado no frontend.
-- Documentação do projeto.
-- DER do banco de dados.
-- Scripts SQL para criação e povoamento do banco.
-
----
-
-## Tecnologias utilizadas
-
-- Node.js
-- Express
-- CommonJS com `require` e `module.exports`
-- MySQL
-- `mysql2/promise`
-- MongoDB
-- Driver oficial `mongodb`
-- JWT com `jsonwebtoken`
-- Senhas com `bcryptjs`
-- Upload com `multer`
-- HTML5
-- CSS3
-- JavaScript puro
-- Bootstrap 5 via CDN
-- Chart.js
-- jsPDF
-- jsPDF AutoTable
-- Prettier
-
----
-
-## Arquitetura do sistema
-
-O projeto segue a separação em camadas vista nas aulas:
-
-| Camada | Função |
-|---|---|
-| View | Telas HTML, CSS e JavaScript que o usuário utiliza |
-| Router | Define as rotas da API e direciona para os controllers |
-| Middleware | Faz autenticação, validação, logs, upload e tratamento de erros |
-| Controller | Recebe a requisição e chama os services |
-| Service | Concentra as regras de negócio |
-| DAO | Faz o acesso ao banco de dados |
-| Model | Representa as entidades do sistema |
-| Banco de Dados | MySQL para dados principais e MongoDB para logs |
-
-Estrutura principal:
-
-```text
-biblioteca-geek-fullstack/
-  src/
-    app.js
-    server.js
-    config/
-    interfaces/
-    model/
-    dao/
-    service/
-    controller/
-    router/
-    middleware/
-    utils/
-  public/
-    css/
-    js/
-    uploads/
-  database/
-    schema.sql
-    inserts.sql
-    der.md
-  docs/
-  scripts/
-```
-
----
-
-## Screenshots
-
-> Os prints abaixo estão na pasta `docs/assets/screenshots/estado-atual/`.
-
-### Dashboard
-
-![Dashboard](docs/assets/screenshots/estado-atual/01-dashboard-atual.png)
-
-### Livros
-
-![Tela de livros](docs/assets/screenshots/estado-atual/02-livros-atual.png)
-
-### Empréstimos
-
-![Tela de empréstimos](docs/assets/screenshots/estado-atual/03-emprestimos-atual.png)
-
-### Importação e exportação JSON
-
-![Tela de importação e exportação JSON](docs/assets/screenshots/estado-atual/04-json-atual.png)
-
-### Logs XML
-
-![Tela de exportação de logs XML](docs/assets/screenshots/estado-atual/05-logs-xml-atual.png)
-
-### Relatório
-
-![Tela de relatório](docs/assets/screenshots/estado-atual/06-relatorio-atual.png)
-
-### MongoDB Compass
-
-![MongoDB Compass com logs](docs/assets/screenshots/estado-atual/07-mongodb-compass-atual.png)
-
-### XML exportado
-
-![XML exportado](docs/assets/screenshots/estado-atual/08-xml-baixado-atual.png)
-
-### PDF exportado
-
-![PDF exportado](docs/assets/screenshots/estado-atual/09-pdf-baixado-atual.png)
-
----
+- **View**: telas HTML em `public/`.
+- **Router**: classes em `src/router/`, separadas por recurso.
+- **Middleware**: autenticação, logs, validação, upload e erros globais.
+- **Controller**: recebe requisição, chama o service e retorna JSON padronizado.
+- **Service**: concentra regras de negócio.
+- **DAO**: concentra SQL/MySQL ou acesso ao MongoDB.
+- **Model**: validações simples dos dados.
+- **Interfaces/contratos**: `IDAO`, `IController` e `IService`.
 
 ## DER
 
-O projeto possui um banco relacional em MySQL com tabelas relacionadas.
-
 ![DER do sistema](docs/DER.png)
-
-Também é possível visualizar a versão em Markdown/Mermaid:
 
 [Ver DER em Markdown](docs/DER.md)
 
@@ -199,21 +97,57 @@ Relacionamentos principais:
 - Usuário 1:N Empréstimos.
 - Autor 1:N Livros.
 - Categoria 1:N Livros.
-- Empréstimos N:N Livros por meio da tabela `itens_emprestimo`.
+- Empréstimos N:N Livros por `itens_emprestimo`.
 
----
+## Screenshots
+
+### Login
+
+![Tela de login](docs/assets/screenshots/01-login.png)
+
+### Dashboard
+
+![Dashboard com gráfico e logs](docs/assets/screenshots/02-dashboard.png)
+
+### Livros
+
+![Tela de livros](docs/assets/screenshots/03-livros.png)
+
+### Autores
+
+![Tela de autores](docs/assets/screenshots/04-autores.png)
+
+### Categorias
+
+![Tela de categorias](docs/assets/screenshots/05-categorias.png)
+
+### Empréstimos
+
+![Tela de empréstimos](docs/assets/screenshots/06-emprestimos.png)
+
+### Importação e exportação JSON
+
+![Tela de JSON](docs/assets/screenshots/07-importacao-exportacao-json.png)
+
+### Logs XML
+
+![Tela de exportação XML](docs/assets/screenshots/08-logs-xml.png)
+
+### Relatório PDF
+
+![Tela de relatório PDF](docs/assets/screenshots/09-relatorio-pdf.png)
+
+### MongoDB Compass
+
+O print do MongoDB Compass deve ser adicionado manualmente, se necessário, em `docs/assets/screenshots/10-mongodb-compass-logs.png`. Como evidência automatizada, o projeto também possui prints do estado atual em `docs/assets/screenshots/estado-atual/`.
 
 ## Pré-requisitos
 
 - Node.js instalado.
-- XAMPP instalado para utilizar o MySQL.
-- MongoDB instalado separadamente.
-- MongoDB Compass instalado para visualizar os logs.
-- Git instalado.
-
-Importante: o **MongoDB não vem no XAMPP**. O XAMPP será usado apenas para o MySQL.
-
----
+- XAMPP com MySQL na porta `3306`.
+- MongoDB Community Server instalado.
+- Navegador atualizado.
+- Git e GitHub CLI, se quiser publicar release pelo terminal.
 
 ## Configuração do ambiente
 
@@ -226,7 +160,6 @@ Copy-Item .env.example .env
 Configuração padrão para XAMPP + MySQL:
 
 ```env
-PORT=3000
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
 MYSQL_USER=root
@@ -234,67 +167,63 @@ MYSQL_PASSWORD=
 MYSQL_DATABASE=biblioteca_geek
 MONGO_URI=mongodb://127.0.0.1:27017
 MONGO_DATABASE=biblioteca_geek_logs
-JWT_SECRET=troque_este_segredo_biblioteca_geek
+PORT=3000
+JWT_SECRET=biblioteca_geek_seguro
 JWT_EXPIRES_IN=2h
 UPLOAD_DIR=public/uploads
 ```
 
----
-
 ## Como rodar do jeito fácil
 
-1. Abra o **XAMPP Control Panel**.
-2. Clique em **Start** no MySQL.
-3. Execute o arquivo:
+1. Abra o XAMPP Control Panel.
+2. Ligue o **MySQL**.
+3. Dê dois cliques em:
 
 ```text
 scripts/windows/iniciar_tudo.bat
 ```
 
-4. Aguarde o MongoDB iniciar.
-5. Aguarde o sistema Node.js iniciar.
-6. O navegador deverá abrir automaticamente em:
+4. Aguarde o MongoDB e o sistema Node.js abrirem em janelas separadas.
+5. O navegador deve abrir em:
 
 ```text
 http://localhost:3000
 ```
 
-7. Faça login com:
+Login de teste:
 
 ```text
 email: admin@admin.com
 senha: 123456
 ```
 
----
-
 ## Como rodar manualmente
 
-### 1. Iniciar o MySQL
+Crie o `.env`:
 
-Abra o XAMPP e clique em **Start** no MySQL.
+```powershell
+Copy-Item .env.example .env
+```
 
-### 2. Iniciar o MongoDB
+Ligue o MySQL no XAMPP e importe o banco:
 
-No terminal, rode:
+```powershell
+mysql -u root -p < database/schema.sql
+mysql -u root -p biblioteca_geek < database/inserts.sql
+```
+
+Ou importe `schema.sql` e `inserts.sql` pelo phpMyAdmin.
+
+Inicie o MongoDB:
 
 ```powershell
 "C:\Program Files\MongoDB\Server\8.0\bin\mongod.exe" --dbpath C:\data\db
 ```
 
-Deixe essa janela aberta durante a execução do sistema.
-
-### 3. Instalar dependências
-
-Na pasta do projeto:
+Instale e rode o sistema:
 
 ```powershell
 npm install
-```
-
-### 4. Rodar o sistema
-
-```powershell
 npm start
 ```
 
@@ -304,342 +233,123 @@ Acesse:
 http://localhost:3000
 ```
 
----
-
 ## MySQL com XAMPP
 
-### Rodar MySQL
-
-1. Abra o XAMPP Control Panel.
-2. Clique em **Start** no MySQL.
-3. Confirme que a porta é `3306`.
-4. Acesse:
-
-```text
-http://localhost/phpmyadmin
-```
-
----
-
-## Importar banco pelo terminal
-
-Na pasta do projeto:
+Pelo terminal:
 
 ```powershell
 mysql -u root -p < database/schema.sql
 mysql -u root -p biblioteca_geek < database/inserts.sql
 ```
 
-Se o usuário `root` estiver sem senha no XAMPP, pressione Enter quando pedir a senha.
+Se o usuário `root` estiver sem senha, pressione Enter quando pedir a senha.
 
----
+Pelo phpMyAdmin:
 
-## Importar banco pelo phpMyAdmin
-
-1. Acesse:
-
-```text
-http://localhost/phpmyadmin
-```
-
+1. Abra `http://localhost/phpmyadmin`.
 2. Clique em **Importar**.
-3. Escolha o arquivo:
-
-```text
-database/schema.sql
-```
-
-4. Execute.
-5. Selecione o banco:
-
-```text
-biblioteca_geek
-```
-
-6. Clique novamente em **Importar**.
-7. Escolha o arquivo:
-
-```text
-database/inserts.sql
-```
-
-8. Execute.
-
----
+3. Importe `database/schema.sql`.
+4. Depois importe `database/inserts.sql`.
 
 ## MongoDB e logs
 
-O MongoDB é usado para armazenar logs do sistema.
+O XAMPP só liga o MySQL. O MongoDB não vem no XAMPP e precisa ficar aberto durante a apresentação.
 
-Banco utilizado:
+- URI: `mongodb://127.0.0.1:27017`
+- Banco: `biblioteca_geek_logs`
+- Collection: `logs`
 
-```text
-biblioteca_geek_logs
-```
-
-Collection utilizada:
-
-```text
-logs
-```
-
-Conexão no MongoDB Compass:
-
-```text
-mongodb://127.0.0.1:27017
-```
-
-Eventos registrados:
-
-- Login com sucesso.
-- Tentativa de login com erro.
-- Acesso a rotas.
-- Cadastro de registros.
-- Alteração de registros.
-- Exclusão de registros.
-- Erros do sistema.
-
-Para testar a conexão com MongoDB:
+Para conferir pelo terminal:
 
 ```powershell
 npm run check:mongo
 ```
 
----
+Para conferir no MongoDB Compass:
 
-## Login de teste
+1. Abra o Compass.
+2. Conecte em `mongodb://127.0.0.1:27017`.
+3. Abra `biblioteca_geek_logs`.
+4. Abra a collection `logs`.
 
-```text
-email: admin@admin.com
-senha: 123456
-```
-
----
-
-## JSON
-
-A tela **JSON** permite exportar e importar dados.
-
-Entidades disponíveis:
-
-- Autores
-- Categorias
-- Livros
-- Empréstimos
-
-### Exemplo de JSON para autores
-
-```json
-[
-  {
-    "nome": "Neil Gaiman",
-    "nacionalidade": "Britânica"
-  }
-]
-```
-
-### Exemplo de JSON para categorias
-
-```json
-[
-  {
-    "nome": "Cyberpunk"
-  }
-]
-```
-
-### Exemplo de JSON para livros
-
-```json
-[
-  {
-    "titulo": "Neuromancer",
-    "ano": 1984,
-    "quantidade": 2,
-    "id_autor": 1,
-    "id_categoria": 2
-  }
-]
-```
-
----
+A exportação XML fica na tela **Logs XML**.
 
 ## Relatório PDF
 
-A tela **Relatório** permite gerar um PDF com os livros cadastrados.
+O endpoint `/api/v1/relatorios/livros` retorna os dados em JSON. O frontend gera o PDF com **jsPDF** e **jsPDF AutoTable**, incluindo usuário logado, data e hora, filtro por categoria, tabela, totais e rodapé.
 
-O relatório é gerado no frontend utilizando:
+## JSON
 
-- jsPDF
-- jsPDF AutoTable
+A tela **JSON** permite:
 
-O PDF contém:
-
-- Título.
-- Data e hora de geração.
-- Usuário logado.
-- Filtro aplicado.
-- Tabela de livros.
-- Total de livros cadastrados.
-- Rodapé do sistema.
-
----
+- Exportar autores, categorias, livros e empréstimos.
+- Importar autores, categorias e livros.
+- Validar estrutura.
+- Ignorar duplicidades.
+- Exibir quantidade de importados, duplicados e erros.
 
 ## Upload de imagens
 
-Na tela de livros, é possível enviar uma imagem de capa.
+O upload de capa aceita:
 
-Formatos aceitos:
+- PNG.
+- JPG.
+- JPEG.
+- WEBP.
+- Tamanho máximo de 2 MB.
 
-```text
-PNG, JPG, JPEG e WEBP
-```
-
-Tamanho máximo:
-
-```text
-2 MB
-```
-
----
-
-## Erros comuns
-
-### Porta 3000 ocupada
-
-Se aparecer erro de porta ocupada, o sistema provavelmente já está rodando.
-
-Para verificar:
-
-```powershell
-netstat -ano | findstr :3000
-```
-
-Para encerrar o processo:
-
-```powershell
-taskkill /PID NUMERO_DO_PID /F
-```
-
-Também é possível usar:
-
-```text
-scripts/windows/parar_porta_3000.bat
-```
-
-### MongoDB desligado
-
-Se o dashboard não mostrar logs ou a exportação XML falhar, verifique se o MongoDB está rodando.
-
-Rode:
-
-```powershell
-npm run check:mongo
-```
-
-### MySQL desligado
-
-Se o login não funcionar ou o sistema não carregar dados, confira se o MySQL está iniciado no XAMPP.
-
-### Banco não importado
-
-Se o login falhar, importe novamente:
-
-```text
-database/schema.sql
-database/inserts.sql
-```
-
-### Upload recusado
-
-Use apenas arquivos:
-
-```text
-PNG, JPG, JPEG ou WEBP até 2 MB
-```
-
----
+Os livros iniciais usam capas demonstrativas locais em `public/uploads/capas-demo/`, sem depender de API externa.
 
 ## Documentação
 
-- Checklist completo: [docs/CHECKLIST.md](docs/CHECKLIST.md)
-- Endpoints: [docs/ENDPOINTS.md](docs/ENDPOINTS.md)
-- Testes API: [docs/TESTES_API.md](docs/TESTES_API.md)
-- Roteiro do vídeo: [docs/ROTEIRO_VIDEO.md](docs/ROTEIRO_VIDEO.md)
-- Guia XAMPP + MongoDB: [docs/COMO_RODAR_XAMPP_MONGODB.md](docs/COMO_RODAR_XAMPP_MONGODB.md)
-- DER: [docs/DER.md](docs/DER.md)
-- Documentação completa: [docs/DOCUMENTACAO_COMPLETA.md](docs/DOCUMENTACAO_COMPLETA.md)
-- PDF da documentação: [docs/DOCUMENTACAO_COMPLETA.pdf](docs/DOCUMENTACAO_COMPLETA.pdf)
-
----
+- [Documentação completa em Markdown](docs/DOCUMENTACAO_COMPLETA.md)
+- [Documentação completa em PDF](docs/DOCUMENTACAO_COMPLETA.pdf)
+- [Checklist do trabalho](docs/CHECKLIST.md)
+- [Endpoints da API](docs/ENDPOINTS.md)
+- [Testes da API](docs/TESTES_API.md)
+- [Como rodar com XAMPP e MongoDB](docs/COMO_RODAR_XAMPP_MONGODB.md)
+- [Roteiro do vídeo](docs/ROTEIRO_VIDEO.md)
+- [Orientações de screenshots](docs/SCREENSHOTS.md)
 
 ## GitHub Pages
 
-O GitHub Pages pode ser usado como página estática de apresentação do projeto.
-
-Importante: o GitHub Pages **não roda Node.js, Express, MySQL ou MongoDB**. Ele serve apenas para mostrar uma apresentação visual do projeto.
-
-Para ativar:
-
-```text
-Settings > Pages > Deploy from a branch > main > /docs
-```
-
-URL esperada:
+Página estática de apresentação:
 
 ```text
 https://soturine.github.io/biblioteca-geek-fullstack/
 ```
 
----
+Para ativar:
 
-## Checklist resumido
+1. Acesse o repositório no GitHub.
+2. Vá em **Settings > Pages**.
+3. Em **Build and deployment**, escolha **Deploy from a branch**.
+4. Selecione branch `main` e pasta `/docs`.
 
-| Requisito | Status |
-|---|---|
-| Login com JWT | Implementado |
-| Rotas públicas e privadas | Implementado |
-| Middleware de autenticação | Implementado |
-| Middleware de logs | Implementado |
-| Middleware de erro | Implementado |
-| Middleware de validação | Implementado |
-| MVC + Service Layer | Implementado |
-| Router separado por recurso | Implementado |
-| Controller separado | Implementado |
-| Service com regra de negócio | Implementado |
-| DAO com acesso ao banco | Implementado |
-| Model com validações | Implementado |
-| MySQL com tabelas relacionadas | Implementado |
-| Relacionamento 1:N | Implementado |
-| Relacionamento N:N | Implementado |
-| MongoDB para logs | Implementado |
-| Exportação XML | Implementado |
-| Importação/exportação JSON | Implementado |
-| Relatório PDF | Implementado |
-| Gráfico com Chart.js | Implementado |
-| Upload de imagens | Implementado |
-| Documentação | Implementado |
-| DER | Implementado |
-| Scripts SQL | Implementado |
-| Screenshots no README | Implementado |
+Aviso: GitHub Pages não roda Node.js, Express, MySQL ou MongoDB. A página em `docs/` é apenas uma apresentação estática.
 
----
+## Release
 
-## GitHub e vídeo
-
-Repositório:
+Release final:
 
 ```text
-https://github.com/Soturine/biblioteca-geek-fullstack
+https://github.com/Soturine/biblioteca-geek-fullstack/releases/tag/v1.0.0
 ```
 
-Link futuro do vídeo:
+ZIP final:
 
 ```text
-Adicionar aqui.
+biblioteca-geek-fullstack-final.zip
 ```
 
----
+## Erros comuns
+
+- **Porta 3000 ocupada**: use `scripts/windows/parar_porta_3000.bat`.
+- **MongoDB desligado**: inicie `scripts/windows/iniciar_mongodb.bat` ou rode o comando `mongod`.
+- **MySQL desligado**: abra o XAMPP e clique em **Start** no MySQL.
+- **Banco não importado**: importe `database/schema.sql` e depois `database/inserts.sql`.
+- **Login falhando**: confirme se `inserts.sql` foi importado e use `admin@admin.com / 123456`.
+- **Upload recusado**: use PNG, JPG, JPEG ou WEBP até 2 MB.
 
 ## About/Topics do GitHub
 
@@ -660,3 +370,18 @@ Topics:
 ```text
 nodejs, express, mysql, mongodb, jwt, bootstrap, chartjs, jspdf, fullstack, mvc, dao, service-layer, academic-project, programacao-para-internet
 ```
+
+## Checklist resumido
+
+- Login JWT: implementado.
+- CRUD: autores, categorias, livros e empréstimos.
+- Pesquisa: livros por título.
+- MySQL: 6 tabelas relacionadas.
+- MongoDB: logs do sistema.
+- JSON: importação/exportação.
+- XML: exportação de logs.
+- PDF: relatório de livros no frontend.
+- Gráfico: Chart.js no dashboard.
+- Upload: capa dos livros.
+- GitHub Pages: página estática em `docs/index.html`.
+- Documentação, DER, screenshots, ZIP e release: incluídos.

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="520" viewBox="0 0 360 520" role="img" aria-label="Capa demonstrativa O Hobbit">
+  <rect width="360" height="520" fill="#2f7d4f"/>
+  <rect x="28" y="28" width="304" height="464" rx="18" fill="#f7e7b7" opacity="0.96"/>
+  <circle cx="180" cy="178" r="64" fill="#2f7d4f"/>
+  <path d="M120 250c34-46 86-46 120 0" fill="none" stroke="#8b5a2b" stroke-width="12" stroke-linecap="round"/>
+  <text x="180" y="335" font-family="Georgia, serif" font-size="42" font-weight="700" text-anchor="middle" fill="#2b2b2b">O HOBBIT</text>
+  <text x="180" y="382" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#4b5563">J. R. R. Tolkien</text>
+  <text x="180" y="448" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#6b7280">Capa demonstrativa</text>
+</svg>

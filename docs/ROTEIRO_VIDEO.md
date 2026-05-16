@@ -1,8 +1,8 @@
-# Roteiro do Video - Ate 10 Minutos
+﻿# Roteiro do Video - Ate 10 Minutos
 
 ## 1. Abertura
 
-Apresentar o tema: **Sistema Biblioteca Geek**. Explicar que o sistema gerencia autores, categorias, livros, emprestimos, relatorios e logs.
+Apresentar o tema: **Sistema Biblioteca Geek**. Explicar que o sistema gerencia autores, categorias, livros, empréstimos, relatórios e logs.
 
 ## 2. Estrutura de pastas
 
@@ -20,7 +20,7 @@ Mostrar a pasta `src` e explicar rapidamente:
 
 Explicar o fluxo:
 
-Router recebe a rota, Controller trata requisicao/resposta, Service aplica regras de negocio, DAO acessa MySQL ou MongoDB, Model valida dados simples.
+Router recebe a rota, Controller trata requisição/resposta, Service aplica regras de negócio, DAO acessa MySQL ou MongoDB, Model valida dados simples.
 
 ## 4. Interfaces
 
@@ -30,7 +30,7 @@ Mostrar:
 - `src/interfaces/IController.js`
 - `src/interfaces/IService.js`
 
-Explicar que sao contratos, ja que JavaScript nao tem interface nativa.
+Explicar que sao contratos, ja que JavaScript não tem interface nativa.
 
 ## 5. MySQL e DER
 
@@ -67,8 +67,8 @@ admin@admin.com
 Mostrar:
 
 - cards de totais
-- ultimos logs
-- grafico Chart.js
+- últimos logs
+- gráfico Chart.js
 
 ## 9. CRUD de livros
 
@@ -86,10 +86,10 @@ Exportar autores ou livros. Depois importar um JSON de autores/categorias/livros
 
 Acessar Logs XML, aplicar filtro opcional e baixar o XML.
 
-## 13. Relatorio PDF
+## 13. Relatório PDF
 
-Acessar Relatorio, filtrar por categoria e gerar PDF.
+Acessar Relatório, filtrar por categoria e gerar PDF.
 
 ## 14. Encerramento
 
-Mostrar o repositorio GitHub e finalizar explicando que o projeto cumpre MVC, Service Layer, Router, Middleware, MySQL, MongoDB, JWT, JSON, XML, PDF, grafico e upload.
+Mostrar o repositório GitHub e finalizar explicando que o projeto cumpre MVC, Service Layer, Router, Middleware, MySQL, MongoDB, JWT, JSON, XML, PDF, gráfico e upload.

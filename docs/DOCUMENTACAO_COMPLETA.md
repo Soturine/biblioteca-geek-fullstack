@@ -1,36 +1,36 @@
-# Documentacao Completa - Biblioteca Geek Fullstack
+﻿# Documentação Completa - Biblioteca Geek Fullstack
 
 ## Tema escolhido e objetivo
 
-O tema escolhido foi **Sistema Biblioteca Geek**. O objetivo e controlar uma biblioteca com autores, categorias, livros, capas, emprestimos e itens, usando uma arquitetura organizada no estilo MVC com Service Layer, Router e Middleware.
+O tema escolhido foi **Sistema Biblioteca Geek**. O objetivo é controlar uma biblioteca com autores, categorias, livros, capas, empréstimos e itens, usando uma arquitetura organizada no estilo MVC com Service Layer, Router e Middleware.
 
-## Regras de negocio principais
+## Regras de negócio principais
 
-- Usuario deve fazer login com JWT.
-- Senha deve ter no minimo 6 caracteres.
-- Email de usuario nao pode duplicar.
+- Usuário deve fazer login com JWT.
+- Senha deve ter no mínimo 6 caracteres.
+- E-mail de usuário não pode duplicar.
 - Autor deve ter nome com pelo menos 3 caracteres.
-- Categoria nao pode ser duplicada.
-- Livro precisa ter titulo, ano, quantidade, autor e categoria.
-- Emprestimo precisa ter nome do leitor e pelo menos um item.
-- A quantidade emprestada nao pode ser maior que o estoque.
-- Ao criar emprestimo, o estoque do livro diminui.
-- Ao excluir emprestimo, o estoque e devolvido.
-- Upload aceita apenas PNG, JPG, JPEG e WEBP ate 2 MB.
+- Categoria não pode ser duplicada.
+- Livro precisa ter título, ano, quantidade, autor e categoria.
+- Empréstimo precisa ter nome do leitor e pelo menos um item.
+- A quantidade emprestada não pode ser maior que o estoque.
+- Ao criar empréstimo, o estoque do livro diminui.
+- Ao excluir empréstimo, o estoque é devolvido.
+- Upload aceita apenas PNG, JPG, JPEG e WEBP até 2 MB.
 
 ## Estrutura MVC implementada
 
-O backend usa Node.js com Express e CommonJS. O fluxo principal e:
+O backend usa Node.js com Express e CommonJS. O fluxo principal é:
 
 1. Router define URL e middleware.
-2. Controller recebe a requisicao e retorna JSON.
-3. Service aplica regra de negocio.
+2. Controller recebe a requisição e retorna JSON.
+3. Service aplica regra de negócio.
 4. DAO acessa MySQL ou MongoDB.
-5. Model faz validacoes simples.
+5. Model faz validações simples.
 
 ## Interfaces IDAO, IController e IService
 
-Como JavaScript nao tem interface nativa, foram criadas classes de contrato:
+Como JavaScript não tem interface nativa, foram criadas classes de contrato:
 
 - `IDAO`: `create`, `findAll`, `findById`, `update`, `delete`.
 - `IController`: `index`, `show`, `store`, `update`, `destroy`.
@@ -56,8 +56,8 @@ Controllers:
 - `EmprestimoController`
 - `JsonController`
 - `LogController`
-- `RelatorioController`
-- `GraficoController`
+- `RelatórioController`
+- `GráficoController`
 
 Services:
 
@@ -71,17 +71,17 @@ Services:
 - `JsonService`
 - `RelatorioService`
 
-## Explicacao dos Services
+## Explicação dos Services
 
-- `AuthService`: autentica usuario, compara senha com bcrypt e gera JWT.
-- `UsuarioService`: cria usuarios e evita email duplicado.
+- `AuthService`: autentica usuário, compara senha com bcrypt e gera JWT.
+- `UsuarioService`: cria usuários e evita e-mail duplicado.
 - `AutorService`: valida autor e chama DAO.
 - `CategoriaService`: evita categoria duplicada.
-- `LivroService`: valida livro e existencia de autor/categoria.
+- `LivroService`: valida livro e existência de autor/categoria.
 - `EmprestimoService`: valida itens e estoque.
 - `LogService`: salva logs no MongoDB e exporta XML.
 - `JsonService`: importa/exporta JSON e trata duplicidades.
-- `RelatorioService`: gera dados para relatorio e grafico.
+- `RelatorioService`: gera dados para relatório e gráfico.
 
 ## Banco MySQL
 
@@ -98,11 +98,11 @@ Tabelas:
 
 ## Tabelas e relacionamentos
 
-- Usuario 1:N Emprestimos.
+- Usuário 1:N Empréstimos.
 - Autor 1:N Livros.
 - Categoria 1:N Livros.
-- Emprestimo N:N Livros por `itens_emprestimo`.
-- `itens_emprestimo` e a tabela intermediaria que guarda quantidade por livro.
+- Empréstimo N:N Livros por `itens_emprestimo`.
+- `itens_emprestimo` e a tabela intermediária que guarda quantidade por livro.
 
 ## MongoDB e estrutura dos logs
 
@@ -129,7 +129,7 @@ Campos:
 }
 ```
 
-## Exportacao XML
+## Exportação XML
 
 O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB e gera:
 
@@ -150,7 +150,7 @@ O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB e gera:
 </logs>
 ```
 
-## Relatorio PDF
+## Relatório PDF
 
 O backend retorna dados em JSON por `/api/v1/relatorios/livros`. O frontend gera o PDF com jsPDF e AutoTable, contendo:
 
@@ -163,7 +163,27 @@ O backend retorna dados em JSON por `/api/v1/relatorios/livros`. O frontend gera
 - total de exemplares
 - rodape do sistema
 
-## Grafico
+## Telas principais
+
+Os screenshots finais estão em `docs/assets/screenshots/`:
+
+- `01-login.png`: tela de login.
+- `02-dashboard.png`: dashboard com cards, logs e gráfico.
+- `03-livros.png`: CRUD de livros com capas.
+- `04-autores.png`: CRUD de autores.
+- `05-categorias.png`: CRUD de categorias.
+- `06-empréstimos.png`: CRUD de empréstimos.
+- `07-importacao-exportacao-json.png`: importação e exportação JSON.
+- `08-logs-xml.png`: exportação XML.
+- `09-relatorio-pdf.png`: tela de relatório PDF.
+
+As evidências anteriores às melhorias finais foram preservadas em `docs/assets/screenshots/estado-atual/`.
+
+## Capas demonstrativas locais
+
+Os livros iniciais usam capas autorais simples em SVG dentro de `public/uploads/capas-demo/`. Elas são usadas apenas para demonstração e não dependem de API externa nem de imagens protegidas baixadas da internet.
+
+## Gráfico
 
 O Dashboard usa Chart.js e consome `/api/v1/graficos/livros-por-categoria`, que consulta o MySQL e agrupa livros por categoria.
 
@@ -182,6 +202,12 @@ npm start
 ```
 
 7. Acessar `http://localhost:3000`.
+
+Também é possível usar o modo fácil no Windows:
+
+```text
+scripts/windows/iniciar_tudo.bat
+```
 
 ## Endpoints principais
 

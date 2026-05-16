@@ -52,10 +52,10 @@ function gerarPdf() {
   );
 
   doc.setFontSize(16);
-  doc.text('Relatorio de livros - Biblioteca Geek', 14, 16);
+  doc.text('Relatório de livros - Biblioteca Geek', 14, 16);
   doc.setFontSize(10);
   doc.text(`Gerado em: ${agora}`, 14, 24);
-  doc.text(`Usuario: ${usuario ? usuario.nome : 'Nao identificado'}`, 14, 30);
+  doc.text(`Usuário: ${usuario ? usuario.nome : 'Não identificado'}`, 14, 30);
   doc.text(`Filtro de categoria: ${categoriaTexto}`, 14, 36);
 
   doc.autoTable({
@@ -74,8 +74,8 @@ function gerarPdf() {
 
   const finalY = doc.lastAutoTable.finalY + 10;
   doc.text(`Total de livros cadastrados: ${dadosRelatorio.length}`, 14, finalY);
-  doc.text(`Total de exemplares disponiveis: ${totalExemplares}`, 14, finalY + 6);
-  doc.text('Biblioteca Geek - Programacao para Internet', 14, 285);
+  doc.text(`Total de exemplares disponíveis: ${totalExemplares}`, 14, finalY + 6);
+  doc.text('Biblioteca Geek - Programação para Internet', 14, 285);
   doc.save('relatorio_livros_biblioteca_geek.pdf');
 }
 

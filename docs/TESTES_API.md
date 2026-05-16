@@ -1,4 +1,4 @@
-# Testes da API
+﻿# Testes da API
 
 Use a URL base:
 
@@ -58,7 +58,7 @@ Resposta esperada:
 }
 ```
 
-Nas proximas requisicoes use:
+Nas próximas requisições use:
 
 ```http
 Authorization: Bearer JWT_AQUI
@@ -77,7 +77,7 @@ Body:
 ```json
 {
   "nome": "Neil Gaiman",
-  "nacionalidade": "Britanica"
+  "nacionalidade": "Britânica"
 }
 ```
 
@@ -179,7 +179,7 @@ DELETE /livros/1
 Authorization: Bearer JWT_AQUI
 ```
 
-Resposta esperada: status `204`. Se o livro estiver vinculado a emprestimo, o MySQL pode bloquear por integridade referencial.
+Resposta esperada: status `204`. Se o livro estiver vinculado a empréstimo, o MySQL pode bloquear por integridade referencial.
 
 ## 11. Upload de imagem
 
@@ -265,7 +265,7 @@ GET /logs/exportar/xml?usuario=admin&dataInicio=2026-01-01&dataFim=2026-12-31
 
 Resposta esperada: arquivo XML.
 
-## 15. Relatorio de livros
+## 15. Relatório de livros
 
 ```http
 GET /relatorios/livros
@@ -280,7 +280,7 @@ GET /relatorios/livros?categoria=1
 
 Resposta esperada: status `200`, total e array de livros.
 
-## 16. Dados do grafico
+## 16. Dados do gráfico
 
 ```http
 GET /graficos/livros-por-categoria

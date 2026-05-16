@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         : '<tr><td colspan="3" class="text-secondary">Nenhum log encontrado</td></tr>';
     } catch (error) {
       document.getElementById('tbodyUltimosLogs').innerHTML =
-        '<tr><td colspan="3" class="text-secondary">MongoDB indisponivel para logs</td></tr>';
+        '<tr><td colspan="3" class="text-secondary">MongoDB indisponível para logs</td></tr>';
     }
 
     new Chart(document.getElementById('graficoCategorias'), {

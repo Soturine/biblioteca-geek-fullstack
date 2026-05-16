@@ -15,17 +15,17 @@ Esta pasta registra prints reais do sistema **Biblioteca Geek Fullstack** rodand
 
 ## Prints salvos
 
-| Arquivo | Evidência |
-|---|---|
-| `docs/assets/screenshots/estado-atual/00-login-atual.png` | Tela de login atual |
-| `docs/assets/screenshots/estado-atual/01-dashboard-atual.png` | Dashboard atual |
-| `docs/assets/screenshots/estado-atual/02-livros-atual.png` | Tela de livros atual |
-| `docs/assets/screenshots/estado-atual/03-emprestimos-atual.png` | Tela de empréstimos atual |
-| `docs/assets/screenshots/estado-atual/04-json-atual.png` | Tela de importação/exportação JSON atual |
-| `docs/assets/screenshots/estado-atual/05-logs-xml-atual.png` | Tela de logs XML atual |
-| `docs/assets/screenshots/estado-atual/06-relatorio-atual.png` | Tela de relatório atual |
-| `docs/assets/screenshots/estado-atual/07-mongodb-consulta-atual.png` | Consulta real ao MongoDB local |
-| `docs/assets/screenshots/estado-atual/08-xml-baixado-atual.png` | XML exportado e visualizado |
-| `docs/assets/screenshots/estado-atual/09-pdf-baixado-atual.png` | PDF gerado e aberto no navegador |
-| `docs/assets/screenshots/estado-atual/logs-atual.xml` | Arquivo XML baixado |
-| `docs/assets/screenshots/estado-atual/relatorio-atual.pdf` | Arquivo PDF baixado |
+| Arquivo                                                              | Evidência                                |
+| -------------------------------------------------------------------- | ---------------------------------------- |
+| `docs/assets/screenshots/estado-atual/00-login-atual.png`            | Tela de login atual                      |
+| `docs/assets/screenshots/estado-atual/01-dashboard-atual.png`        | Dashboard atual                          |
+| `docs/assets/screenshots/estado-atual/02-livros-atual.png`           | Tela de livros atual                     |
+| `docs/assets/screenshots/estado-atual/03-emprestimos-atual.png`      | Tela de empréstimos atual                |
+| `docs/assets/screenshots/estado-atual/04-json-atual.png`             | Tela de importação/exportação JSON atual |
+| `docs/assets/screenshots/estado-atual/05-logs-xml-atual.png`         | Tela de logs XML atual                   |
+| `docs/assets/screenshots/estado-atual/06-relatorio-atual.png`        | Tela de relatório atual                  |
+| `docs/assets/screenshots/estado-atual/07-mongodb-consulta-atual.png` | Consulta real ao MongoDB local           |
+| `docs/assets/screenshots/estado-atual/08-xml-baixado-atual.png`      | XML exportado e visualizado              |
+| `docs/assets/screenshots/estado-atual/09-pdf-baixado-atual.png`      | PDF gerado e aberto no navegador         |
+| `docs/assets/screenshots/estado-atual/logs-atual.xml`                | Arquivo XML baixado                      |
+| `docs/assets/screenshots/estado-atual/relatorio-atual.pdf`           | Arquivo PDF baixado                      |

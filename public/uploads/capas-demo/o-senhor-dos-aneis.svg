@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="520" viewBox="0 0 360 520" role="img" aria-label="Capa demonstrativa O Senhor dos Aneis">
+  <rect width="360" height="520" fill="#1f2937"/>
+  <rect x="28" y="28" width="304" height="464" rx="18" fill="#111827" stroke="#d4af37" stroke-width="5"/>
+  <circle cx="180" cy="178" r="78" fill="none" stroke="#d4af37" stroke-width="16"/>
+  <circle cx="180" cy="178" r="38" fill="#d4af37" opacity="0.25"/>
+  <text x="180" y="318" font-family="Georgia, serif" font-size="29" font-weight="700" text-anchor="middle" fill="#f9fafb">O SENHOR</text>
+  <text x="180" y="358" font-family="Georgia, serif" font-size="28" font-weight="700" text-anchor="middle" fill="#f9fafb">DOS ANEIS</text>
+  <text x="180" y="405" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#d4af37">J. R. R. Tolkien</text>
+  <text x="180" y="460" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#9ca3af">Capa demonstrativa</text>
+</svg>

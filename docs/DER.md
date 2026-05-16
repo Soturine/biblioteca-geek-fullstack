@@ -57,10 +57,10 @@ erDiagram
 
 ## Relacionamentos
 
-| Relacionamento              | Tipo | Implementacao                           |
+| Relacionamento              | Tipo | Implementação                           |
 | --------------------------- | ---- | --------------------------------------- |
-| Usuario realiza emprestimos | 1:N  | `emprestimos.id_usuario`                |
+| Usuário realiza empréstimos | 1:N  | `emprestimos.id_usuario`                |
 | Autor possui livros         | 1:N  | `livros.id_autor`                       |
 | Categoria possui livros     | 1:N  | `livros.id_categoria`                   |
-| Emprestimo possui itens     | 1:N  | `itens_emprestimo.id_emprestimo`        |
-| Emprestimos e livros        | N:N  | tabela intermediaria `itens_emprestimo` |
+| Empréstimo possui itens     | 1:N  | `itens_emprestimo.id_emprestimo`        |
+| Empréstimos e livros        | N:N  | tabela intermediária `itens_emprestimo` |

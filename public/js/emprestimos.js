@@ -123,7 +123,7 @@ function adicionarItem() {
   const quantidade = Number(document.getElementById('quantidadeItem').value);
 
   if (!idLivro || quantidade <= 0) {
-    showAlert('alertEmprestimos', 'Selecione um livro e uma quantidade valida.', 'warning');
+    showAlert('alertEmprestimos', 'Selecione um livro e uma quantidade válida.', 'warning');
     return;
   }
 
@@ -152,14 +152,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       !validarFormulario(
         event.target,
         'alertEmprestimos',
-        'Informe o leitor e os dados obrigatorios.',
+        'Informe o leitor e os dados obrigatórios.',
       )
     ) {
       return;
     }
 
     if (!itensEmprestimo.length) {
-      showAlert('alertEmprestimos', 'Adicione pelo menos um livro ao emprestimo.', 'warning');
+      showAlert('alertEmprestimos', 'Adicione pelo menos um livro ao empréstimo.', 'warning');
       return;
     }
 

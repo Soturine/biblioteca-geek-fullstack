@@ -47,7 +47,7 @@ async function excluirAutor(id) {
 
   try {
     await apiFetch(`/autores/${id}`, { method: 'DELETE' });
-    showAlert('alertAutores', 'Autor excluido com sucesso.');
+    showAlert('alertAutores', 'Autor excluído com sucesso.');
     await carregarAutores();
   } catch (error) {
     showAlert('alertAutores', error.message, 'danger');

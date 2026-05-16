@@ -14,11 +14,11 @@ INSERT INTO categorias (nome) VALUES
 ('HQ e Graphic Novel');
 
 INSERT INTO livros (titulo, ano, quantidade, imagem, id_autor, id_categoria) VALUES
-('O Hobbit', 1937, 3, NULL, 1, 1),
-('O Senhor dos Aneis', 1954, 3, NULL, 1, 1),
-('Fundacao', 1951, 4, NULL, 2, 2),
-('Eu, Robo', 1950, 2, NULL, 2, 2),
-('A Mao Esquerda da Escuridao', 1969, 2, NULL, 3, 2);
+('O Hobbit', 1937, 3, '/uploads/capas-demo/o-hobbit.svg', 1, 1),
+('O Senhor dos Aneis', 1954, 3, '/uploads/capas-demo/o-senhor-dos-aneis.svg', 1, 1),
+('Fundacao', 1951, 4, '/uploads/capas-demo/fundacao.svg', 2, 2),
+('Eu, Robo', 1950, 2, '/uploads/capas-demo/eu-robo.svg', 2, 2),
+('A Mao Esquerda da Escuridao', 1969, 2, '/uploads/capas-demo/mao-esquerda-escuridao.svg', 3, 2);
 
 INSERT INTO emprestimos (id_usuario, nome_leitor, data_emprestimo, data_devolucao, status) VALUES
 (1, 'Peter Parker', '2026-05-01', '2026-05-15', 'aberto'),

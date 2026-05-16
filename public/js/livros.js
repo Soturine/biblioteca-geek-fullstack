@@ -117,7 +117,7 @@ function validarArquivoImagem(input) {
   }
 
   if (arquivo.size > 2 * 1024 * 1024) {
-    showAlert('alertLivros', 'A capa deve ter no maximo 2 MB.', 'warning');
+    showAlert('alertLivros', 'A capa deve ter no máximo 2 MB.', 'warning');
     input.value = '';
     document.getElementById('previewImagemLivro').classList.add('d-none');
     return false;
@@ -147,7 +147,7 @@ async function excluirLivro(id) {
 
   try {
     await apiFetch(`/livros/${id}`, { method: 'DELETE' });
-    showAlert('alertLivros', 'Livro excluido com sucesso.');
+    showAlert('alertLivros', 'Livro excluído com sucesso.');
     await carregarLivros(document.getElementById('buscaLivro').value);
   } catch (error) {
     showAlert('alertLivros', error.message, 'danger');
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       !validarFormulario(
         event.target,
         'alertLivros',
-        'Informe titulo, ano, quantidade, autor e categoria.',
+        'Informe título, ano, quantidade, autor e categoria.',
       )
     ) {
       return;

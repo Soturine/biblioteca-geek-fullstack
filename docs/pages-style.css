@@ -1,0 +1,39 @@
+body {
+  background: #eef3f8;
+  color: #1f2937;
+}
+
+.hero {
+  background:
+    linear-gradient(135deg, rgba(16, 24, 39, 0.88), rgba(49, 87, 213, 0.82)),
+    url('assets/screenshots/02-dashboard.png') center/cover;
+  color: #fff;
+  min-height: 74vh;
+  display: flex;
+  align-items: end;
+  padding: 64px 0;
+}
+
+.hero h1 {
+  font-weight: 800;
+}
+
+.section {
+  padding: 56px 0;
+}
+
+.shot {
+  border-radius: 10px;
+  border: 1px solid #d8dee9;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
+}
+
+.tech-badge {
+  background: #fff;
+  border: 1px solid #d8dee9;
+  border-radius: 999px;
+  display: inline-block;
+  font-weight: 700;
+  margin: 4px;
+  padding: 8px 14px;
+}

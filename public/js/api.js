@@ -93,7 +93,7 @@ function showAlert(containerId, message, type = 'success') {
   `;
 }
 
-function validarFormulario(form, alertContainerId, mensagem = 'Preencha os campos obrigatorios.') {
+function validarFormulario(form, alertContainerId, mensagem = 'Preencha os campos obrigatórios.') {
   if (!form.checkValidity()) {
     form.classList.add('was-validated');
     showAlert(alertContainerId, mensagem, 'warning');
