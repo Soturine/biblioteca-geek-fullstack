@@ -39,6 +39,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         '<tr><td colspan="3" class="text-secondary">MongoDB indisponível para logs</td></tr>';
     }
 
+    const coresGrafico = [
+      '#3157d5',
+      '#1f9d8a',
+      '#d28a16',
+      '#7c3aed',
+      '#dc2626',
+      '#0f766e',
+      '#9333ea',
+      '#ea580c',
+      '#0891b2',
+      '#4f46e5',
+    ];
+
     new Chart(document.getElementById('graficoCategorias'), {
       type: 'bar',
       data: {
@@ -47,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           {
             label: 'Livros',
             data: dados.map((item) => item.quantidade_livros),
-            backgroundColor: ['#3157d5', '#1f9d8a', '#d28a16', '#7c3aed', '#dc2626', '#0f766e'],
+            backgroundColor: dados.map((_, index) => coresGrafico[index % coresGrafico.length]),
           },
         ],
       },
