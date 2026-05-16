@@ -31,7 +31,7 @@ class AuthService extends IService {
       id: usuario.id_usuario,
       nome: usuario.nome,
       email: usuario.email,
-      perfil: usuario.perfil
+      perfil: usuario.perfil,
     };
 
     const token = jwt.sign(payload, env.jwt.secret, { expiresIn: env.jwt.expiresIn });

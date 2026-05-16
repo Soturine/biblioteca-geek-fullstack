@@ -3,9 +3,13 @@ let autoresLivro = [];
 let categoriasLivro = [];
 
 function options(lista, idCampo, textoCampo) {
-  return `<option value="">Selecione</option>${lista.map((item) => `
+  return `<option value="">Selecione</option>${lista
+    .map(
+      (item) => `
     <option value="${item[idCampo]}">${escapeHtml(item[textoCampo])}</option>
-  `).join('')}`;
+  `,
+    )
+    .join('')}`;
 }
 
 function limparLivro() {
@@ -16,19 +20,26 @@ function limparLivro() {
   document.getElementById('autorLivro').value = '';
   document.getElementById('categoriaLivro').value = '';
   document.getElementById('imagemLivro').value = '';
+  document.getElementById('previewImagemLivro').classList.add('d-none');
+  document.getElementById('previewImagemLivro').removeAttribute('src');
   document.getElementById('tituloFormLivro').textContent = 'Novo livro';
+  document.getElementById('formLivro').classList.remove('was-validated');
 }
 
 async function carregarCombosLivro() {
   const [autoresResp, categoriasResp] = await Promise.all([
     apiFetch('/autores'),
-    apiFetch('/categorias')
+    apiFetch('/categorias'),
   ]);
 
   autoresLivro = autoresResp.data;
   categoriasLivro = categoriasResp.data;
   document.getElementById('autorLivro').innerHTML = options(autoresLivro, 'id_autor', 'nome');
-  document.getElementById('categoriaLivro').innerHTML = options(categoriasLivro, 'id_categoria', 'nome');
+  document.getElementById('categoriaLivro').innerHTML = options(
+    categoriasLivro,
+    'id_categoria',
+    'nome',
+  );
 }
 
 async function carregarLivros(busca = '') {
@@ -37,12 +48,13 @@ async function carregarLivros(busca = '') {
   livros = resposta.data;
   const tbody = document.getElementById('tbodyLivros');
 
-  tbody.innerHTML = livros.map((livro) => {
-    const capa = livro.imagem
-      ? `<img class="cover-thumb" src="${escapeHtml(livro.imagem)}" alt="Capa de ${escapeHtml(livro.titulo)}">`
-      : '<span class="empty-cover">Sem capa</span>';
+  tbody.innerHTML = livros
+    .map((livro) => {
+      const capa = livro.imagem
+        ? `<img class="cover-thumb" src="${escapeHtml(livro.imagem)}" alt="Capa de ${escapeHtml(livro.titulo)}">`
+        : '<span class="empty-cover">Sem capa</span>';
 
-    return `
+      return `
       <tr>
         <td>${capa}</td>
         <td>
@@ -58,7 +70,8 @@ async function carregarLivros(busca = '') {
         </td>
       </tr>
     `;
-  }).join('');
+    })
+    .join('');
 }
 
 function editarLivro(id) {
@@ -74,7 +87,43 @@ function editarLivro(id) {
   document.getElementById('autorLivro').value = livro.id_autor;
   document.getElementById('categoriaLivro').value = livro.id_categoria;
   document.getElementById('imagemLivro').value = '';
+
+  if (livro.imagem) {
+    document.getElementById('previewImagemLivro').src = livro.imagem;
+    document.getElementById('previewImagemLivro').classList.remove('d-none');
+  } else {
+    document.getElementById('previewImagemLivro').classList.add('d-none');
+    document.getElementById('previewImagemLivro').removeAttribute('src');
+  }
+
   document.getElementById('tituloFormLivro').textContent = 'Editar livro';
+}
+
+function validarArquivoImagem(input) {
+  if (!input.files.length) {
+    return true;
+  }
+
+  const arquivo = input.files[0];
+  const extensoes = ['png', 'jpg', 'jpeg', 'webp'];
+  const mimetypes = ['image/png', 'image/jpeg', 'image/webp'];
+  const extensao = arquivo.name.split('.').pop().toLowerCase();
+
+  if (!extensoes.includes(extensao) || !mimetypes.includes(arquivo.type)) {
+    showAlert('alertLivros', 'A capa deve ser PNG, JPG, JPEG ou WEBP.', 'warning');
+    input.value = '';
+    document.getElementById('previewImagemLivro').classList.add('d-none');
+    return false;
+  }
+
+  if (arquivo.size > 2 * 1024 * 1024) {
+    showAlert('alertLivros', 'A capa deve ter no maximo 2 MB.', 'warning');
+    input.value = '';
+    document.getElementById('previewImagemLivro').classList.add('d-none');
+    return false;
+  }
+
+  return true;
 }
 
 async function enviarImagemLivro(id) {
@@ -87,7 +136,7 @@ async function enviarImagemLivro(id) {
   formData.append('imagem', input.files[0]);
   await apiFetch(`/livros/${id}/imagem`, {
     method: 'POST',
-    body: formData
+    body: formData,
   });
 }
 
@@ -112,6 +161,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('btnLimparLivro').addEventListener('click', limparLivro);
 
+  document.getElementById('imagemLivro').addEventListener('change', (event) => {
+    const input = event.target;
+    if (!validarArquivoImagem(input) || !input.files.length) {
+      return;
+    }
+
+    const preview = document.getElementById('previewImagemLivro');
+    preview.src = URL.createObjectURL(input.files[0]);
+    preview.classList.remove('d-none');
+  });
+
   document.getElementById('formBuscaLivro').addEventListener('submit', async (event) => {
     event.preventDefault();
     try {
@@ -124,24 +184,41 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('formLivro').addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    if (
+      !validarFormulario(
+        event.target,
+        'alertLivros',
+        'Informe titulo, ano, quantidade, autor e categoria.',
+      )
+    ) {
+      return;
+    }
+
+    if (!validarArquivoImagem(document.getElementById('imagemLivro'))) {
+      return;
+    }
+
     const id = document.getElementById('idLivro').value;
     const payload = {
       titulo: document.getElementById('tituloLivro').value,
       ano: Number(document.getElementById('anoLivro').value),
       quantidade: Number(document.getElementById('quantidadeLivro').value),
       id_autor: Number(document.getElementById('autorLivro').value),
-      id_categoria: Number(document.getElementById('categoriaLivro').value)
+      id_categoria: Number(document.getElementById('categoriaLivro').value),
     };
 
     try {
       const resposta = await apiFetch(id ? `/livros/${id}` : '/livros', {
         method: id ? 'PUT' : 'POST',
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       const idSalvo = id || resposta.data.id_livro;
       await enviarImagemLivro(idSalvo);
-      showAlert('alertLivros', id ? 'Livro atualizado com sucesso.' : 'Livro cadastrado com sucesso.');
+      showAlert(
+        'alertLivros',
+        id ? 'Livro atualizado com sucesso.' : 'Livro cadastrado com sucesso.',
+      );
       limparLivro();
       await carregarLivros(document.getElementById('buscaLivro').value);
     } catch (error) {

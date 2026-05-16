@@ -11,7 +11,7 @@ class RelatorioService extends IService {
     const livros = await this.livroDAO.relatorio(filtros);
     return {
       total: livros.length,
-      livros
+      livros,
     };
   }
 

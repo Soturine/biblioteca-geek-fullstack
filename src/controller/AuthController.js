@@ -18,10 +18,18 @@ class AuthController extends IController {
         tabela: 'usuarios',
         registro_id: resultado.usuario.id_usuario,
         detalhes: 'Login realizado com sucesso',
-        status_code: 200
+        status_code: 200,
       }).catch(() => {});
       return successResponse(res, 200, 'Login realizado com sucesso', resultado);
     } catch (error) {
+      LogService.registrarAcao(req, {
+        usuario: req.body && req.body.email ? req.body.email : 'anonimo',
+        acao: 'LOGIN_ERRO',
+        tabela: 'usuarios',
+        registro_id: null,
+        detalhes: `Falha no login: ${error.message}`,
+        status_code: error.statusCode || 401,
+      }).catch(() => {});
       next(error);
     }
   }
@@ -33,7 +41,7 @@ class AuthController extends IController {
         tabela: 'usuarios',
         registro_id: req.usuario.id_usuario,
         detalhes: 'Logout realizado',
-        status_code: 200
+        status_code: 200,
       }).catch(() => {});
       return successResponse(res, 200, 'Logout realizado com sucesso');
     } catch (error) {
@@ -50,7 +58,7 @@ class AuthController extends IController {
         tabela: 'usuarios',
         registro_id: usuario.id_usuario,
         detalhes: 'Usuario cadastrado',
-        status_code: 201
+        status_code: 201,
       }).catch(() => {});
       return successResponse(res, 201, 'Usuario cadastrado com sucesso', usuario);
     } catch (error) {

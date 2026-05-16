@@ -10,15 +10,19 @@ function renderItens() {
     return;
   }
 
-  lista.innerHTML = itensEmprestimo.map((item, index) => {
-    const livro = livrosEmprestimo.find((livroItem) => Number(livroItem.id_livro) === Number(item.id_livro));
-    return `
+  lista.innerHTML = itensEmprestimo
+    .map((item, index) => {
+      const livro = livrosEmprestimo.find(
+        (livroItem) => Number(livroItem.id_livro) === Number(item.id_livro),
+      );
+      return `
       <div class="d-flex justify-content-between align-items-center border-bottom py-1">
         <span>${escapeHtml(livro ? livro.titulo : item.livro_titulo)} <strong>x${item.quantidade}</strong></span>
         <button class="btn btn-sm btn-outline-danger" type="button" onclick="removerItem(${index})">Remover</button>
       </div>
     `;
-  }).join('');
+    })
+    .join('');
 }
 
 function removerItem(index) {
@@ -42,9 +46,13 @@ async function carregarLivrosEmprestimo() {
   livrosEmprestimo = resposta.data;
   document.getElementById('livroItem').innerHTML = `
     <option value="">Selecione</option>
-    ${livrosEmprestimo.map((livro) => `
+    ${livrosEmprestimo
+      .map(
+        (livro) => `
       <option value="${livro.id_livro}">${escapeHtml(livro.titulo)} (${livro.quantidade})</option>
-    `).join('')}
+    `,
+      )
+      .join('')}
   `;
 }
 
@@ -53,7 +61,9 @@ async function carregarEmprestimos() {
   emprestimos = resposta.data;
   const tbody = document.getElementById('tbodyEmprestimos');
 
-  tbody.innerHTML = emprestimos.map((emprestimo) => `
+  tbody.innerHTML = emprestimos
+    .map(
+      (emprestimo) => `
     <tr>
       <td>${escapeHtml(emprestimo.nome_leitor)}</td>
       <td>${formatDate(emprestimo.data_emprestimo)}</td>
@@ -64,7 +74,9 @@ async function carregarEmprestimos() {
         <button class="btn btn-sm btn-outline-danger" onclick="excluirEmprestimo(${emprestimo.id_emprestimo})">Excluir</button>
       </td>
     </tr>
-  `).join('');
+  `,
+    )
+    .join('');
 }
 
 async function editarEmprestimo(id) {
@@ -81,7 +93,7 @@ async function editarEmprestimo(id) {
     itensEmprestimo = emprestimo.itens.map((item) => ({
       id_livro: Number(item.id_livro),
       quantidade: Number(item.quantidade),
-      livro_titulo: item.livro_titulo
+      livro_titulo: item.livro_titulo,
     }));
     document.getElementById('tituloFormEmprestimo').textContent = 'Editar empréstimo';
     renderItens();
@@ -136,6 +148,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('formEmprestimo').addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    if (
+      !validarFormulario(
+        event.target,
+        'alertEmprestimos',
+        'Informe o leitor e os dados obrigatorios.',
+      )
+    ) {
+      return;
+    }
+
+    if (!itensEmprestimo.length) {
+      showAlert('alertEmprestimos', 'Adicione pelo menos um livro ao emprestimo.', 'warning');
+      return;
+    }
+
     const usuario = usuarioAtual();
     const id = document.getElementById('idEmprestimo').value;
     const payload = {
@@ -143,16 +170,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       nome_leitor: document.getElementById('nomeLeitor').value,
       data_devolucao: document.getElementById('dataDevolucao').value || null,
       status: document.getElementById('statusEmprestimo').value,
-      itens: itensEmprestimo
+      itens: itensEmprestimo,
     };
 
     try {
       await apiFetch(id ? `/emprestimos/${id}` : '/emprestimos', {
         method: id ? 'PUT' : 'POST',
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
-      showAlert('alertEmprestimos', id ? 'Empréstimo atualizado com sucesso.' : 'Empréstimo cadastrado com sucesso.');
+      showAlert(
+        'alertEmprestimos',
+        id ? 'Empréstimo atualizado com sucesso.' : 'Empréstimo cadastrado com sucesso.',
+      );
       limparEmprestimo();
       await carregarLivrosEmprestimo();
       await carregarEmprestimos();

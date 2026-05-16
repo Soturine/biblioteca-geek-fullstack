@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const response = await fetch(`${API_BASE}/logs/exportar/xml?${params.toString()}`, {
-        headers: authHeaders()
+        headers: authHeaders(),
       });
 
       if (!response.ok) {

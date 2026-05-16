@@ -12,7 +12,7 @@ class EmprestimoController extends IController {
   prepararBody(req) {
     return {
       ...req.body,
-      id_usuario: req.body.id_usuario || req.usuario.id_usuario
+      id_usuario: req.body.id_usuario || req.usuario.id_usuario,
     };
   }
 
@@ -42,7 +42,7 @@ class EmprestimoController extends IController {
         tabela: 'emprestimos',
         registro_id: emprestimo.id_emprestimo,
         detalhes: `Emprestimo criado para ${emprestimo.nome_leitor}`,
-        status_code: 201
+        status_code: 201,
       }).catch(() => {});
       return successResponse(res, 201, 'Emprestimo cadastrado com sucesso', emprestimo);
     } catch (error) {
@@ -57,7 +57,7 @@ class EmprestimoController extends IController {
         acao: 'ALTERACAO',
         tabela: 'emprestimos',
         registro_id: emprestimo.id_emprestimo,
-        detalhes: `Emprestimo ${emprestimo.id_emprestimo} atualizado`
+        detalhes: `Emprestimo ${emprestimo.id_emprestimo} atualizado`,
       }).catch(() => {});
       return successResponse(res, 200, 'Emprestimo atualizado com sucesso', emprestimo);
     } catch (error) {
@@ -73,7 +73,7 @@ class EmprestimoController extends IController {
         tabela: 'emprestimos',
         registro_id: req.params.id,
         detalhes: 'Emprestimo excluido e livros devolvidos ao estoque',
-        status_code: 204
+        status_code: 204,
       }).catch(() => {});
       return noContentResponse(res);
     } catch (error) {

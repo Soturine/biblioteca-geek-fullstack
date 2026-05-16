@@ -4,7 +4,7 @@ const ErrorResponse = require('../utils/ErrorResponse');
 
 const rotasPublicas = [
   { metodo: 'POST', caminho: '/api/v1/auth/login' },
-  { metodo: 'POST', caminho: '/api/v1/auth/register' }
+  { metodo: 'POST', caminho: '/api/v1/auth/register' },
 ];
 
 function rotaPublica(req) {
@@ -34,7 +34,7 @@ function authMiddleware(req, res, next) {
       id_usuario: payload.id,
       nome: payload.nome,
       email: payload.email,
-      perfil: payload.perfil
+      perfil: payload.perfil,
     };
     return next();
   } catch (error) {

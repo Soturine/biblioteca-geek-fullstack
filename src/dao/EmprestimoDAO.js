@@ -18,8 +18,8 @@ class EmprestimoDAO extends IDAO {
           emprestimo.nome_leitor,
           emprestimo.data_emprestimo || null,
           emprestimo.data_devolucao || null,
-          emprestimo.status || 'aberto'
-        ]
+          emprestimo.status || 'aberto',
+        ],
       );
 
       const idEmprestimo = result.insertId;
@@ -41,7 +41,7 @@ class EmprestimoDAO extends IDAO {
 
       const [livros] = await conn.execute(
         'SELECT id_livro, quantidade FROM livros WHERE id_livro = ? FOR UPDATE',
-        [idLivro]
+        [idLivro],
       );
 
       if (!livros[0]) {
@@ -52,15 +52,15 @@ class EmprestimoDAO extends IDAO {
         throw new ErrorResponse(`Quantidade indisponivel para o livro ${idLivro}`, 400);
       }
 
-      await conn.execute(
-        'UPDATE livros SET quantidade = quantidade - ? WHERE id_livro = ?',
-        [quantidade, idLivro]
-      );
+      await conn.execute('UPDATE livros SET quantidade = quantidade - ? WHERE id_livro = ?', [
+        quantidade,
+        idLivro,
+      ]);
 
       await conn.execute(
         `INSERT INTO itens_emprestimo (id_emprestimo, id_livro, quantidade)
          VALUES (?, ?, ?)`,
-        [idEmprestimo, idLivro, quantidade]
+        [idEmprestimo, idLivro, quantidade],
       );
     }
   }
@@ -68,14 +68,14 @@ class EmprestimoDAO extends IDAO {
   async devolverItens(conn, idEmprestimo) {
     const [itens] = await conn.execute(
       'SELECT id_livro, quantidade FROM itens_emprestimo WHERE id_emprestimo = ?',
-      [idEmprestimo]
+      [idEmprestimo],
     );
 
     for (const item of itens) {
-      await conn.execute(
-        'UPDATE livros SET quantidade = quantidade + ? WHERE id_livro = ?',
-        [Number(item.quantidade), Number(item.id_livro)]
-      );
+      await conn.execute('UPDATE livros SET quantidade = quantidade + ? WHERE id_livro = ?', [
+        Number(item.quantidade),
+        Number(item.id_livro),
+      ]);
     }
 
     return itens;
@@ -88,7 +88,7 @@ class EmprestimoDAO extends IDAO {
        INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
        LEFT JOIN itens_emprestimo i ON i.id_emprestimo = e.id_emprestimo
        GROUP BY e.id_emprestimo, u.nome
-       ORDER BY e.id_emprestimo DESC`
+       ORDER BY e.id_emprestimo DESC`,
     );
 
     return rows;
@@ -100,7 +100,7 @@ class EmprestimoDAO extends IDAO {
        FROM emprestimos e
        INNER JOIN usuarios u ON u.id_usuario = e.id_usuario
        WHERE e.id_emprestimo = ?`,
-      [id]
+      [id],
     );
 
     if (!emprestimos[0]) {
@@ -113,12 +113,12 @@ class EmprestimoDAO extends IDAO {
        INNER JOIN livros l ON l.id_livro = i.id_livro
        WHERE i.id_emprestimo = ?
        ORDER BY i.id_item`,
-      [id]
+      [id],
     );
 
     return {
       ...emprestimos[0],
-      itens
+      itens,
     };
   }
 
@@ -130,7 +130,7 @@ class EmprestimoDAO extends IDAO {
 
       const [existentes] = await conn.execute(
         'SELECT id_emprestimo FROM emprestimos WHERE id_emprestimo = ? FOR UPDATE',
-        [id]
+        [id],
       );
 
       if (!existentes[0]) {
@@ -147,8 +147,8 @@ class EmprestimoDAO extends IDAO {
           emprestimo.nome_leitor,
           emprestimo.data_devolucao || null,
           emprestimo.status || 'aberto',
-          id
-        ]
+          id,
+        ],
       );
 
       await this.inserirItens(conn, id, emprestimo.itens);
@@ -170,7 +170,7 @@ class EmprestimoDAO extends IDAO {
 
       const [existentes] = await conn.execute(
         'SELECT id_emprestimo FROM emprestimos WHERE id_emprestimo = ? FOR UPDATE',
-        [id]
+        [id],
       );
 
       if (!existentes[0]) {

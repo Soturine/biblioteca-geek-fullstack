@@ -22,8 +22,8 @@ class EmprestimoService extends IService {
       status: dados.status || 'aberto',
       itens: dados.itens.map((item) => ({
         id_livro: Number(item.id_livro),
-        quantidade: Number(item.quantidade)
-      }))
+        quantidade: Number(item.quantidade),
+      })),
     };
   }
 
@@ -43,7 +43,10 @@ class EmprestimoService extends IService {
       }
 
       if (Number(item.quantidade) > Number(livro.quantidade)) {
-        throw new ErrorResponse(`Quantidade emprestada maior que disponivel para "${livro.titulo}"`, 400);
+        throw new ErrorResponse(
+          `Quantidade emprestada maior que disponivel para "${livro.titulo}"`,
+          400,
+        );
       }
     }
   }

@@ -7,7 +7,9 @@ async function iniciarServidor() {
     await connectMongo();
     console.log('MongoDB conectado para logs');
   } catch (error) {
-    console.warn('MongoDB indisponivel no momento. A API continuara executando sem persistir logs.');
+    console.warn(
+      'MongoDB indisponivel no momento. A API continuara executando sem persistir logs.',
+    );
     console.warn(error.message);
   }
 

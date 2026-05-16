@@ -26,13 +26,13 @@ class LogService extends IService {
       metodo: dados.metodo,
       status_code: dados.status_code,
       tempo_resposta: dados.tempo_resposta,
-      stack_trace: dados.stack_trace
+      stack_trace: dados.stack_trace,
     });
   }
 
   async registrarAcao(req, dados) {
     return this.registrar({
-      usuario: req.usuario ? req.usuario.email : (dados.usuario || 'anonimo'),
+      usuario: req.usuario ? req.usuario.email : dados.usuario || 'anonimo',
       acao: dados.acao,
       tabela: dados.tabela,
       registro_id: dados.registro_id,
@@ -42,7 +42,7 @@ class LogService extends IService {
       endpoint: req.originalUrl,
       metodo: req.method,
       status_code: dados.status_code || 200,
-      tempo_resposta: null
+      tempo_resposta: null,
     });
   }
 

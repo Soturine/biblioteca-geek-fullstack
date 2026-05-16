@@ -1,42 +1,44 @@
-# Checklist
+# Checklist Final
 
-| Requisito | Status | Onde foi implementado |
-|---|---|---|
-| Node.js + Express | OK | `src/app.js`, `src/server.js` |
-| CommonJS com require/module.exports | OK | Arquivos em `src/` |
-| MVC + Router + Service + DAO + Model | OK | `src/controller`, `src/router`, `src/service`, `src/dao`, `src/model` |
-| Interfaces IDAO, IController e IService | OK | `src/interfaces` |
-| MySQL com mysql2/promise | OK | `src/config/mysql_database.js`, `src/dao` |
-| MongoDB para logs | OK | `src/config/mongo_database.js`, `src/dao/LogDAO.js` |
-| JWT | OK | `src/service/AuthService.js`, `src/middleware/auth_middleware.js` |
-| bcryptjs | OK | `src/service/AuthService.js`, `src/service/UsuarioService.js` |
-| Upload com multer | OK | `src/middleware/upload_middleware.js`, `src/router/LivroRouter.js` |
-| Status HTTP 200, 201, 204, 400, 401, 404, 500 | OK | Controllers, services e `src/middleware/error_middleware.js` |
-| JSON padronizado | OK | `src/utils/response_helper.js`, `src/middleware/error_middleware.js` |
-| CRUD autores | OK | `AutorRouter`, `AutorController`, `AutorService`, `AutorDAO`, `public/autores.html` |
-| CRUD categorias | OK | `CategoriaRouter`, `CategoriaController`, `CategoriaService`, `CategoriaDAO`, `public/categorias.html` |
-| CRUD livros | OK | `LivroRouter`, `LivroController`, `LivroService`, `LivroDAO`, `public/livros.html` |
-| Pesquisa de livros | OK | `LivroDAO.findAll`, `public/js/livros.js` |
-| CRUD emprestimos e itens | OK | `EmprestimoRouter`, `EmprestimoController`, `EmprestimoService`, `EmprestimoDAO`, `public/emprestimos.html` |
-| Regra de estoque ao emprestar/devolver | OK | `src/service/EmprestimoService.js`, `src/dao/EmprestimoDAO.js` |
-| Categoria duplicada bloqueada | OK | `src/service/CategoriaService.js` |
-| Usuario duplicado bloqueado | OK | `src/service/UsuarioService.js` |
-| Senha minima de 6 caracteres | OK | `src/model/Usuario.js` |
-| Importacao/exportacao JSON | OK | `src/service/JsonService.js`, `public/import_export.html` |
-| Logs de login/logout | OK | `src/controller/AuthController.js` |
-| Logs de inclusao, alteracao e exclusao | OK | Controllers de CRUD |
-| Logs de acesso a rotas | OK | `src/middleware/log_middleware.js` |
-| Logs de erros/excecoes | OK | `src/middleware/error_middleware.js` |
-| Exportacao XML dos logs | OK | `src/service/LogService.js`, `src/utils/xml_helper.js`, `public/logs.html` |
-| Relatorio JSON no backend | OK | `src/controller/RelatorioController.js` |
-| PDF no frontend com jsPDF e AutoTable | OK | `public/relatorio.html`, `public/js/relatorio.js` |
-| Grafico Chart.js | OK | `public/dashboard.html`, `public/js/dashboard.js` |
-| Frontend Bootstrap 5 via CDN | OK | HTML em `public/` |
-| Guardar JWT no localStorage | OK | `public/js/api.js`, `public/js/auth.js` |
-| Proteger telas privadas | OK | `protegerPagina()` em `public/js/api.js` |
-| Banco schema.sql | OK | `database/schema.sql` |
-| Dados de teste inserts.sql | OK | `database/inserts.sql` |
-| DER | OK | `database/der.md` |
-| README | OK | `README.md` |
-| Documentacao | OK | `docs/DOCUMENTACAO.md` |
-| Endpoints | OK | `docs/ENDPOINTS.md` |
+| Requisito                  | Status       | Arquivos                                                                                                    | Como testar                                               |
+| -------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Node.js + Express          | Implementado | `src/app.js`, `src/server.js`                                                                               | Rodar `npm start` e acessar `/api/v1/health`              |
+| CommonJS                   | Implementado | Todos os arquivos em `src/`                                                                                 | Conferir `require` e `module.exports`                     |
+| Classes para Router        | Implementado | `src/router/*.js`                                                                                           | Abrir routers e conferir classes com `getRouter()`        |
+| Classes para Controller    | Implementado | `src/controller/*.js`                                                                                       | Conferir controllers estendendo `IController`             |
+| Classes para Service       | Implementado | `src/service/*.js`                                                                                          | Conferir services estendendo `IService`                   |
+| Classes para DAO           | Implementado | `src/dao/*.js`                                                                                              | Conferir DAOs estendendo `IDAO`                           |
+| Models com validacoes      | Implementado | `src/model/*.js`                                                                                            | Enviar dados invalidos e ver erro 400                     |
+| Interfaces/contratos       | Implementado | `src/interfaces/*.js`                                                                                       | Abrir `IDAO`, `IController`, `IService`                   |
+| Login com JWT              | Implementado | `AuthService`, `AuthController`, `auth_middleware`                                                          | POST `/api/v1/auth/login`                                 |
+| Rotas publicas e privadas  | Implementado | `src/middleware/auth_middleware.js`                                                                         | Login funciona sem token; `/livros` retorna 401 sem token |
+| Middleware de autenticacao | Implementado | `src/middleware/auth_middleware.js`                                                                         | Enviar `Authorization: Bearer TOKEN`                      |
+| Middleware de log          | Implementado | `src/middleware/log_middleware.js`, `LogService`, `LogDAO`                                                  | Conferir collection `logs` no MongoDB                     |
+| Middleware de erro global  | Implementado | `src/middleware/error_middleware.js`                                                                        | Acessar rota inexistente `/api/teste`                     |
+| Middleware de validacao    | Implementado | `src/middleware/validation_middleware.js`                                                                   | Criar autor com nome menor que 3                          |
+| JSON padronizado           | Implementado | `src/utils/response_helper.js`, `error_middleware`                                                          | Ver respostas com `success`, `message`, `data`            |
+| CRUD autores               | Implementado | `AutorRouter`, `AutorController`, `AutorService`, `AutorDAO`, `public/autores.html`                         | Tela Autores ou API                                       |
+| CRUD categorias            | Implementado | `CategoriaRouter`, `CategoriaController`, `CategoriaService`, `CategoriaDAO`, `public/categorias.html`      | Tela Categorias ou API                                    |
+| CRUD livros                | Implementado | `LivroRouter`, `LivroController`, `LivroService`, `LivroDAO`, `public/livros.html`                          | Tela Livros ou API                                        |
+| CRUD emprestimos           | Implementado | `EmprestimoRouter`, `EmprestimoController`, `EmprestimoService`, `EmprestimoDAO`, `public/emprestimos.html` | Tela Emprestimos ou API                                   |
+| Pesquisa/filtro            | Implementado | `LivroDAO.findAll`, `public/js/livros.js`                                                                   | GET `/livros?busca=Hobbit`                                |
+| MySQL com 6 tabelas        | Implementado | `database/schema.sql`                                                                                       | Importar schema no XAMPP                                  |
+| Relacionamento 1:N         | Implementado | `livros.id_autor`, `livros.id_categoria`, `emprestimos.id_usuario`                                          | Conferir DER e FKs                                        |
+| Relacionamento N:N         | Implementado | `itens_emprestimo`                                                                                          | Conferir emprestimos com varios livros                    |
+| Regras de estoque          | Implementado | `EmprestimoService`, `EmprestimoDAO`                                                                        | Criar/excluir emprestimo e ver quantidade mudar           |
+| Importacao JSON            | Implementado | `JsonService`, `JsonController`, `public/import_export.html`                                                | Enviar arquivo JSON                                       |
+| Exportacao JSON            | Implementado | `JsonRouter`, `JsonController`                                                                              | GET `/json/exportar/livros`                               |
+| Duplicidade na importacao  | Implementado | `JsonService`, DAOs                                                                                         | Importar mesmo JSON duas vezes                            |
+| Logs no MongoDB            | Implementado | `LogDAO`, `LogService`                                                                                      | Conferir MongoDB Compass                                  |
+| Exportacao XML             | Implementado | `LogController`, `xml_helper`, `public/logs.html`                                                           | GET `/logs/exportar/xml`                                  |
+| Relatorio PDF              | Implementado | `public/relatorio.html`, `public/js/relatorio.js`                                                           | Clicar em gerar PDF                                       |
+| Grafico Chart.js           | Implementado | `GraficoController`, `public/dashboard.html`                                                                | Abrir Dashboard                                           |
+| Upload de imagem           | Implementado | `upload_middleware`, `LivroController`, `public/livros.html`                                                | Enviar PNG/JPG/JPEG/WEBP ate 2 MB                         |
+| Preview da capa            | Implementado | `public/js/livros.js`                                                                                       | Selecionar arquivo no formulario de livros                |
+| Validacoes frontend        | Implementado | `public/js/*.js`                                                                                            | Tentar enviar formularios vazios                          |
+| Navegacao e breadcrumb     | Implementado | HTML em `public/` e `api.js`                                                                                | Navegar pelo menu                                         |
+| Documentacao               | Implementado | `README.md`, `docs/*.md`                                                                                    | Abrir arquivos de docs                                    |
+| Scripts SQL                | Implementado | `database/schema.sql`, `database/inserts.sql`                                                               | Importar pelo MySQL/phpMyAdmin                            |
+| DER                        | Implementado | `docs/DER.md`, `docs/DER.png`, `database/der.md`                                                            | Abrir arquivos                                            |
+| Endpoints documentados     | Implementado | `docs/ENDPOINTS.md`, `docs/TESTES_API.md`                                                                   | Conferir exemplos                                         |
+| Projeto commitado          | Implementado | Git local e GitHub                                                                                          | Rodar `git log --oneline`                                 |

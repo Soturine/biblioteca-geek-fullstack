@@ -5,14 +5,25 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "dev": "node --watch src/server.js",
+    "format": "prettier --write .",
+    "check:js": "node scripts/check-js.js",
+    "docs:pdf": "node scripts/gerar_documentacao_pdf.js"
   },
   "keywords": [
-    "node",
+    "nodejs",
     "express",
     "mysql",
     "mongodb",
-    "biblioteca"
+    "jwt",
+    "bootstrap",
+    "chartjs",
+    "jspdf",
+    "fullstack",
+    "mvc",
+    "dao",
+    "service-layer",
+    "programacao-para-internet"
   ],
   "author": "Rafael",
   "license": "MIT",
@@ -25,5 +36,9 @@
     "mongodb": "^6.12.0",
     "multer": "^2.1.1",
     "mysql2": "^3.12.0"
+  },
+  "devDependencies": {
+    "pdfkit": "^0.18.0",
+    "prettier": "^3.8.3"
   }
 }

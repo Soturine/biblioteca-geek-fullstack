@@ -36,7 +36,7 @@ class LivroController extends IController {
         tabela: 'livros',
         registro_id: livro.id_livro,
         detalhes: `Livro ${livro.titulo} cadastrado`,
-        status_code: 201
+        status_code: 201,
       }).catch(() => {});
       return successResponse(res, 201, 'Livro cadastrado com sucesso', livro);
     } catch (error) {
@@ -51,7 +51,7 @@ class LivroController extends IController {
         acao: 'ALTERACAO',
         tabela: 'livros',
         registro_id: livro.id_livro,
-        detalhes: `Livro ${livro.titulo} atualizado`
+        detalhes: `Livro ${livro.titulo} atualizado`,
       }).catch(() => {});
       return successResponse(res, 200, 'Livro atualizado com sucesso', livro);
     } catch (error) {
@@ -67,7 +67,7 @@ class LivroController extends IController {
         tabela: 'livros',
         registro_id: req.params.id,
         detalhes: 'Livro excluido',
-        status_code: 204
+        status_code: 204,
       }).catch(() => {});
       return noContentResponse(res);
     } catch (error) {
@@ -87,7 +87,7 @@ class LivroController extends IController {
         acao: 'ALTERACAO',
         tabela: 'livros',
         registro_id: livro.id_livro,
-        detalhes: `Imagem de capa atualizada para ${livro.titulo}`
+        detalhes: `Imagem de capa atualizada para ${livro.titulo}`,
       }).catch(() => {});
       return successResponse(res, 200, 'Imagem enviada com sucesso', livro);
     } catch (error) {

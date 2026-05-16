@@ -67,5 +67,5 @@ module.exports = {
   validarAutor,
   validarCategoria,
   validarLivro,
-  validarEmprestimo
+  validarEmprestimo,
 };

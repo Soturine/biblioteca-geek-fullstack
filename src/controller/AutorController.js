@@ -35,7 +35,7 @@ class AutorController extends IController {
         tabela: 'autores',
         registro_id: autor.id_autor,
         detalhes: `Autor ${autor.nome} cadastrado`,
-        status_code: 201
+        status_code: 201,
       }).catch(() => {});
       return successResponse(res, 201, 'Autor cadastrado com sucesso', autor);
     } catch (error) {
@@ -50,7 +50,7 @@ class AutorController extends IController {
         acao: 'ALTERACAO',
         tabela: 'autores',
         registro_id: autor.id_autor,
-        detalhes: `Autor ${autor.nome} atualizado`
+        detalhes: `Autor ${autor.nome} atualizado`,
       }).catch(() => {});
       return successResponse(res, 200, 'Autor atualizado com sucesso', autor);
     } catch (error) {
@@ -66,7 +66,7 @@ class AutorController extends IController {
         tabela: 'autores',
         registro_id: req.params.id,
         detalhes: 'Autor excluido',
-        status_code: 204
+        status_code: 204,
       }).catch(() => {});
       return noContentResponse(res);
     } catch (error) {

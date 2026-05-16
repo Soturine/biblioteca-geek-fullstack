@@ -5,6 +5,7 @@ const authMiddleware = require('./middleware/auth_middleware');
 const logMiddleware = require('./middleware/log_middleware');
 const errorMiddleware = require('./middleware/error_middleware');
 const ErrorResponse = require('./utils/ErrorResponse');
+const { successResponse } = require('./utils/response_helper');
 
 const AuthRouter = require('./router/AuthRouter');
 const AutorRouter = require('./router/AutorRouter');
@@ -28,7 +29,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(logMiddleware);
 
 app.get('/api/v1/health', (req, res) => {
-  res.json({ success: true, message: 'API Biblioteca Geek online' });
+  return successResponse(res, 200, 'API Biblioteca Geek online', {
+    status: 'online',
+  });
 });
 
 app.use(authMiddleware);

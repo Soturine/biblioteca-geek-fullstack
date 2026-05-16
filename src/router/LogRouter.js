@@ -1,10 +1,21 @@
 const express = require('express');
 const LogController = require('../controller/LogController');
 
-const router = express.Router();
-const controller = new LogController();
+class LogRouter {
+  constructor() {
+    this.router = express.Router();
+    this.controller = new LogController();
+    this.configurarRotas();
+  }
 
-router.get('/', controller.index.bind(controller));
-router.get('/exportar/xml', controller.exportarXml.bind(controller));
+  configurarRotas() {
+    this.router.get('/', this.controller.index.bind(this.controller));
+    this.router.get('/exportar/xml', this.controller.exportarXml.bind(this.controller));
+  }
 
-module.exports = router;
+  getRouter() {
+    return this.router;
+  }
+}
+
+module.exports = new LogRouter().getRouter();

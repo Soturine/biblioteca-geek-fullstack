@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btnImportarJson').addEventListener('click', async () => {
     const entidade = document.getElementById('entidadeImportar').value;
     const input = document.getElementById('arquivoJson');
+    const detalhes = document.getElementById('detalhesImportacaoJson');
+    detalhes.classList.add('d-none');
+    detalhes.textContent = '';
 
     if (!input.files.length) {
       showAlert('alertJson', 'Selecione um arquivo JSON.', 'warning');
@@ -29,10 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const resposta = await apiFetch(`/json/importar/${entidade}`, {
         method: 'POST',
-        body: formData
+        body: formData,
       });
 
-      showAlert('alertJson', `Importados: ${resposta.data.importados}. Erros: ${resposta.data.erros.length}.`);
+      const resumo = resposta.data;
+      showAlert(
+        'alertJson',
+        `Processados: ${resumo.total_processados}. Importados: ${resumo.importados}. Ignorados por duplicidade: ${resumo.ignorados_duplicidade}. Erros: ${resumo.erros_quantidade}.`,
+      );
+
+      if (resumo.erros.length || resumo.duplicidades.length) {
+        detalhes.textContent = JSON.stringify(
+          {
+            duplicidades: resumo.duplicidades,
+            erros: resumo.erros,
+          },
+          null,
+          2,
+        );
+        detalhes.classList.remove('d-none');
+      }
+
       input.value = '';
     } catch (error) {
       showAlert('alertJson', error.message, 'danger');

@@ -12,7 +12,9 @@ async function carregarAutores() {
   autores = resposta.data;
   const tbody = document.getElementById('tbodyAutores');
 
-  tbody.innerHTML = autores.map((autor) => `
+  tbody.innerHTML = autores
+    .map(
+      (autor) => `
     <tr>
       <td>${escapeHtml(autor.nome)}</td>
       <td>${escapeHtml(autor.nacionalidade || '')}</td>
@@ -21,7 +23,9 @@ async function carregarAutores() {
         <button class="btn btn-sm btn-outline-danger" onclick="excluirAutor(${autor.id_autor})">Excluir</button>
       </td>
     </tr>
-  `).join('');
+  `,
+    )
+    .join('');
 }
 
 function editarAutor(id) {
@@ -59,19 +63,32 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('formAutor').addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    if (
+      !validarFormulario(
+        event.target,
+        'alertAutores',
+        'Informe o nome do autor com pelo menos 3 caracteres.',
+      )
+    ) {
+      return;
+    }
+
     const id = document.getElementById('idAutor').value;
     const payload = {
       nome: document.getElementById('nomeAutor').value,
-      nacionalidade: document.getElementById('nacionalidadeAutor').value
+      nacionalidade: document.getElementById('nacionalidadeAutor').value,
     };
 
     try {
       await apiFetch(id ? `/autores/${id}` : '/autores', {
         method: id ? 'PUT' : 'POST',
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
-      showAlert('alertAutores', id ? 'Autor atualizado com sucesso.' : 'Autor cadastrado com sucesso.');
+      showAlert(
+        'alertAutores',
+        id ? 'Autor atualizado com sucesso.' : 'Autor cadastrado com sucesso.',
+      );
       limparAutor();
       await carregarAutores();
     } catch (error) {

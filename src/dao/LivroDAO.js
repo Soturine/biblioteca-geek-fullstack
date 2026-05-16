@@ -12,8 +12,8 @@ class LivroDAO extends IDAO {
         Number(livro.quantidade),
         livro.imagem || null,
         Number(livro.id_autor),
-        Number(livro.id_categoria)
-      ]
+        Number(livro.id_categoria),
+      ],
     );
 
     return this.findById(result.insertId);
@@ -35,7 +35,7 @@ class LivroDAO extends IDAO {
        INNER JOIN categorias c ON c.id_categoria = l.id_categoria
        ${where}
        ORDER BY l.titulo`,
-      params
+      params,
     );
 
     return rows;
@@ -48,7 +48,20 @@ class LivroDAO extends IDAO {
        INNER JOIN autores a ON a.id_autor = l.id_autor
        INNER JOIN categorias c ON c.id_categoria = l.id_categoria
        WHERE l.id_livro = ?`,
-      [id]
+      [id],
+    );
+
+    return rows[0] || null;
+  }
+
+  async findDuplicado(titulo, idAutor, idCategoria) {
+    const [rows] = await pool.execute(
+      `SELECT *
+       FROM livros
+       WHERE LOWER(titulo) = LOWER(?)
+         AND id_autor = ?
+         AND id_categoria = ?`,
+      [titulo, Number(idAutor), Number(idCategoria)],
     );
 
     return rows[0] || null;
@@ -67,8 +80,8 @@ class LivroDAO extends IDAO {
         livro.imagem || null,
         Number(livro.id_autor),
         Number(livro.id_categoria),
-        id
-      ]
+        id,
+      ],
     );
 
     return this.findById(id);
@@ -101,7 +114,7 @@ class LivroDAO extends IDAO {
        INNER JOIN categorias c ON c.id_categoria = l.id_categoria
        ${where}
        ORDER BY c.nome, l.titulo`,
-      params
+      params,
     );
 
     return rows;
@@ -115,7 +128,7 @@ class LivroDAO extends IDAO {
        FROM categorias c
        LEFT JOIN livros l ON l.id_categoria = c.id_categoria
        GROUP BY c.id_categoria, c.nome
-       ORDER BY c.nome`
+       ORDER BY c.nome`,
     );
 
     return rows;

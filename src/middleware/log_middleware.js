@@ -17,7 +17,7 @@ function logMiddleware(req, res, next) {
       endpoint: req.originalUrl,
       metodo: req.method,
       status_code: res.statusCode,
-      tempo_resposta: tempo
+      tempo_resposta: tempo,
     }).catch(() => {});
   });
 

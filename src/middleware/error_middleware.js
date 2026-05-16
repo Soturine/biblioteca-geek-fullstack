@@ -5,14 +5,22 @@ function errorMiddleware(err, req, res, next) {
     return next(err);
   }
 
-  const statusCode = err.statusCode || 500;
+  let statusCode = err.statusCode || 500;
+  let message = err.message || 'Erro interno do servidor';
+
+  if (err.code === 'LIMIT_FILE_SIZE') {
+    statusCode = 400;
+    message = 'Arquivo maior que o limite permitido';
+  }
+
   const body = {
     success: false,
-    message: err.message || 'Erro interno do servidor',
+    message,
+    data: null,
     error: {
       name: err.name || 'Error',
-      details: err.errors || null
-    }
+      details: err.errors || null,
+    },
   };
 
   LogService.registrar({
@@ -22,7 +30,7 @@ function errorMiddleware(err, req, res, next) {
     registro_id: null,
     detalhes: {
       mensagem: err.message,
-      stack_trace: err.stack
+      stack_trace: err.stack,
     },
     ip: req.ip,
     user_agent: req.get('user-agent'),
@@ -30,7 +38,7 @@ function errorMiddleware(err, req, res, next) {
     metodo: req.method,
     status_code: statusCode,
     tempo_resposta: null,
-    stack_trace: err.stack
+    stack_trace: err.stack,
   }).catch(() => {});
 
   return res.status(statusCode).json(body);

@@ -13,7 +13,7 @@ class AutorService extends IService {
     Autor.validar(dados);
     return this.autorDAO.create({
       nome: dados.nome.trim(),
-      nacionalidade: dados.nacionalidade ? dados.nacionalidade.trim() : null
+      nacionalidade: dados.nacionalidade ? dados.nacionalidade.trim() : null,
     });
   }
 
@@ -34,7 +34,7 @@ class AutorService extends IService {
     Autor.validar(dados);
     return this.autorDAO.update(id, {
       nome: dados.nome.trim(),
-      nacionalidade: dados.nacionalidade ? dados.nacionalidade.trim() : null
+      nacionalidade: dados.nacionalidade ? dados.nacionalidade.trim() : null,
     });
   }
 

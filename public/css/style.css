@@ -123,6 +123,11 @@ body {
   font-size: 1.8rem;
 }
 
+.stat-card {
+  border-left: 4px solid var(--brand) !important;
+  border-radius: 8px;
+}
+
 .login-view {
   min-height: 100vh;
   display: grid;
@@ -130,7 +135,8 @@ body {
   padding: 24px;
   background:
     linear-gradient(135deg, rgba(49, 87, 213, 0.92), rgba(31, 157, 138, 0.85)),
-    url('https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=1600&q=80') center/cover;
+    url('https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=1600&q=80')
+      center/cover;
 }
 
 .login-card {

@@ -3,10 +3,10 @@ const pool = require('../config/mysql_database');
 
 class AutorDAO extends IDAO {
   async create(autor) {
-    const [result] = await pool.execute(
-      'INSERT INTO autores (nome, nacionalidade) VALUES (?, ?)',
-      [autor.nome, autor.nacionalidade || null]
-    );
+    const [result] = await pool.execute('INSERT INTO autores (nome, nacionalidade) VALUES (?, ?)', [
+      autor.nome,
+      autor.nacionalidade || null,
+    ]);
 
     return this.findById(result.insertId);
   }
@@ -21,11 +21,17 @@ class AutorDAO extends IDAO {
     return rows[0] || null;
   }
 
+  async findByNome(nome) {
+    const [rows] = await pool.execute('SELECT * FROM autores WHERE LOWER(nome) = LOWER(?)', [nome]);
+    return rows[0] || null;
+  }
+
   async update(id, autor) {
-    await pool.execute(
-      'UPDATE autores SET nome = ?, nacionalidade = ? WHERE id_autor = ?',
-      [autor.nome, autor.nacionalidade || null, id]
-    );
+    await pool.execute('UPDATE autores SET nome = ?, nacionalidade = ? WHERE id_autor = ?', [
+      autor.nome,
+      autor.nacionalidade || null,
+      id,
+    ]);
     return this.findById(id);
   }
 

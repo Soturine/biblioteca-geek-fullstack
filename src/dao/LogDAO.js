@@ -18,7 +18,7 @@ class LogDAO extends IDAO {
       metodo: log.metodo || null,
       status_code: log.status_code || null,
       tempo_resposta: log.tempo_resposta || null,
-      stack_trace: log.stack_trace || null
+      stack_trace: log.stack_trace || null,
     };
 
     const result = await collection.insertOne(documento);

@@ -2,13 +2,24 @@ const express = require('express');
 const EmprestimoController = require('../controller/EmprestimoController');
 const { validarEmprestimo } = require('../middleware/validation_middleware');
 
-const router = express.Router();
-const controller = new EmprestimoController();
+class EmprestimoRouter {
+  constructor() {
+    this.router = express.Router();
+    this.controller = new EmprestimoController();
+    this.configurarRotas();
+  }
 
-router.get('/', controller.index.bind(controller));
-router.get('/:id', controller.show.bind(controller));
-router.post('/', validarEmprestimo, controller.store.bind(controller));
-router.put('/:id', validarEmprestimo, controller.update.bind(controller));
-router.delete('/:id', controller.destroy.bind(controller));
+  configurarRotas() {
+    this.router.get('/', this.controller.index.bind(this.controller));
+    this.router.get('/:id', this.controller.show.bind(this.controller));
+    this.router.post('/', validarEmprestimo, this.controller.store.bind(this.controller));
+    this.router.put('/:id', validarEmprestimo, this.controller.update.bind(this.controller));
+    this.router.delete('/:id', this.controller.destroy.bind(this.controller));
+  }
 
-module.exports = router;
+  getRouter() {
+    return this.router;
+  }
+}
+
+module.exports = new EmprestimoRouter().getRouter();

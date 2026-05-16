@@ -11,7 +11,9 @@ async function carregarCategorias() {
   categorias = resposta.data;
   const tbody = document.getElementById('tbodyCategorias');
 
-  tbody.innerHTML = categorias.map((categoria) => `
+  tbody.innerHTML = categorias
+    .map(
+      (categoria) => `
     <tr>
       <td>${escapeHtml(categoria.nome)}</td>
       <td class="text-end">
@@ -19,7 +21,9 @@ async function carregarCategorias() {
         <button class="btn btn-sm btn-outline-danger" onclick="excluirCategoria(${categoria.id_categoria})">Excluir</button>
       </td>
     </tr>
-  `).join('');
+  `,
+    )
+    .join('');
 }
 
 function editarCategoria(id) {
@@ -56,18 +60,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('formCategoria').addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    if (!validarFormulario(event.target, 'alertCategorias', 'Informe o nome da categoria.')) {
+      return;
+    }
+
     const id = document.getElementById('idCategoria').value;
     const payload = {
-      nome: document.getElementById('nomeCategoria').value
+      nome: document.getElementById('nomeCategoria').value,
     };
 
     try {
       await apiFetch(id ? `/categorias/${id}` : '/categorias', {
         method: id ? 'PUT' : 'POST',
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
-      showAlert('alertCategorias', id ? 'Categoria atualizada com sucesso.' : 'Categoria cadastrada com sucesso.');
+      showAlert(
+        'alertCategorias',
+        id ? 'Categoria atualizada com sucesso.' : 'Categoria cadastrada com sucesso.',
+      );
       limparCategoria();
       await carregarCategorias();
     } catch (error) {

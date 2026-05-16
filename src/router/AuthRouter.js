@@ -2,11 +2,22 @@ const express = require('express');
 const AuthController = require('../controller/AuthController');
 const { validarLogin, validarRegistro } = require('../middleware/validation_middleware');
 
-const router = express.Router();
-const controller = new AuthController();
+class AuthRouter {
+  constructor() {
+    this.router = express.Router();
+    this.controller = new AuthController();
+    this.configurarRotas();
+  }
 
-router.post('/login', validarLogin, controller.login.bind(controller));
-router.post('/logout', controller.logout.bind(controller));
-router.post('/register', validarRegistro, controller.register.bind(controller));
+  configurarRotas() {
+    this.router.post('/login', validarLogin, this.controller.login.bind(this.controller));
+    this.router.post('/logout', this.controller.logout.bind(this.controller));
+    this.router.post('/register', validarRegistro, this.controller.register.bind(this.controller));
+  }
 
-module.exports = router;
+  getRouter() {
+    return this.router;
+  }
+}
+
+module.exports = new AuthRouter().getRouter();

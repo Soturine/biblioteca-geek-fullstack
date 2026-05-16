@@ -2,13 +2,24 @@ const express = require('express');
 const AutorController = require('../controller/AutorController');
 const { validarAutor } = require('../middleware/validation_middleware');
 
-const router = express.Router();
-const controller = new AutorController();
+class AutorRouter {
+  constructor() {
+    this.router = express.Router();
+    this.controller = new AutorController();
+    this.configurarRotas();
+  }
 
-router.get('/', controller.index.bind(controller));
-router.get('/:id', controller.show.bind(controller));
-router.post('/', validarAutor, controller.store.bind(controller));
-router.put('/:id', validarAutor, controller.update.bind(controller));
-router.delete('/:id', controller.destroy.bind(controller));
+  configurarRotas() {
+    this.router.get('/', this.controller.index.bind(this.controller));
+    this.router.get('/:id', this.controller.show.bind(this.controller));
+    this.router.post('/', validarAutor, this.controller.store.bind(this.controller));
+    this.router.put('/:id', validarAutor, this.controller.update.bind(this.controller));
+    this.router.delete('/:id', this.controller.destroy.bind(this.controller));
+  }
 
-module.exports = router;
+  getRouter() {
+    return this.router;
+  }
+}
+
+module.exports = new AutorRouter().getRouter();

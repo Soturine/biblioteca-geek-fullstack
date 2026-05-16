@@ -35,7 +35,7 @@ class CategoriaController extends IController {
         tabela: 'categorias',
         registro_id: categoria.id_categoria,
         detalhes: `Categoria ${categoria.nome} cadastrada`,
-        status_code: 201
+        status_code: 201,
       }).catch(() => {});
       return successResponse(res, 201, 'Categoria cadastrada com sucesso', categoria);
     } catch (error) {
@@ -50,7 +50,7 @@ class CategoriaController extends IController {
         acao: 'ALTERACAO',
         tabela: 'categorias',
         registro_id: categoria.id_categoria,
-        detalhes: `Categoria ${categoria.nome} atualizada`
+        detalhes: `Categoria ${categoria.nome} atualizada`,
       }).catch(() => {});
       return successResponse(res, 200, 'Categoria atualizada com sucesso', categoria);
     } catch (error) {
@@ -66,7 +66,7 @@ class CategoriaController extends IController {
         tabela: 'categorias',
         registro_id: req.params.id,
         detalhes: 'Categoria excluida',
-        status_code: 204
+        status_code: 204,
       }).catch(() => {});
       return noContentResponse(res);
     } catch (error) {

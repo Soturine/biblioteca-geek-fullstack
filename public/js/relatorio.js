@@ -3,9 +3,15 @@ let dadosRelatorio = [];
 async function carregarCategoriasRelatorio() {
   const resposta = await apiFetch('/categorias');
   const select = document.getElementById('categoriaRelatorio');
-  select.innerHTML = '<option value="">Todas</option>' + resposta.data.map((categoria) => `
+  select.innerHTML =
+    '<option value="">Todas</option>' +
+    resposta.data
+      .map(
+        (categoria) => `
     <option value="${categoria.id_categoria}">${escapeHtml(categoria.nome)}</option>
-  `).join('');
+  `,
+      )
+      .join('');
 }
 
 async function carregarRelatorio() {
@@ -14,7 +20,9 @@ async function carregarRelatorio() {
   const resposta = await apiFetch(`/relatorios/livros${query}`);
   dadosRelatorio = resposta.data.livros;
 
-  document.getElementById('tbodyRelatorio').innerHTML = dadosRelatorio.map((livro) => `
+  document.getElementById('tbodyRelatorio').innerHTML = dadosRelatorio
+    .map(
+      (livro) => `
     <tr>
       <td>${escapeHtml(livro.titulo)}</td>
       <td>${escapeHtml(livro.autor)}</td>
@@ -22,7 +30,9 @@ async function carregarRelatorio() {
       <td>${escapeHtml(livro.ano)}</td>
       <td>${escapeHtml(livro.quantidade)}</td>
     </tr>
-  `).join('');
+  `,
+    )
+    .join('');
 
   document.getElementById('totalRelatorio').textContent = resposta.data.total;
 }
@@ -32,30 +42,40 @@ function gerarPdf() {
   const doc = new jsPDF();
   const usuario = usuarioAtual();
   const agora = new Date().toLocaleString('pt-BR');
+  const categoriaSelect = document.getElementById('categoriaRelatorio');
+  const categoriaTexto = categoriaSelect.value
+    ? categoriaSelect.options[categoriaSelect.selectedIndex].text
+    : 'Todas';
+  const totalExemplares = dadosRelatorio.reduce(
+    (total, livro) => total + Number(livro.quantidade),
+    0,
+  );
 
   doc.setFontSize(16);
-  doc.text('Relatório de livros - Biblioteca Geek', 14, 16);
+  doc.text('Relatorio de livros - Biblioteca Geek', 14, 16);
   doc.setFontSize(10);
   doc.text(`Gerado em: ${agora}`, 14, 24);
-  doc.text(`Usuário: ${usuario ? usuario.nome : 'Nao identificado'}`, 14, 30);
+  doc.text(`Usuario: ${usuario ? usuario.nome : 'Nao identificado'}`, 14, 30);
+  doc.text(`Filtro de categoria: ${categoriaTexto}`, 14, 36);
 
   doc.autoTable({
-    startY: 38,
+    startY: 44,
     head: [['Livro', 'Autor', 'Categoria', 'Ano', 'Quantidade']],
     body: dadosRelatorio.map((livro) => [
       livro.titulo,
       livro.autor,
       livro.categoria,
       livro.ano,
-      livro.quantidade
+      livro.quantidade,
     ]),
     styles: { fontSize: 9 },
-    headStyles: { fillColor: [49, 87, 213] }
+    headStyles: { fillColor: [49, 87, 213] },
   });
 
   const finalY = doc.lastAutoTable.finalY + 10;
   doc.text(`Total de livros cadastrados: ${dadosRelatorio.length}`, 14, finalY);
-  doc.text('Biblioteca Geek - Programação para Internet', 14, 285);
+  doc.text(`Total de exemplares disponiveis: ${totalExemplares}`, 14, finalY + 6);
+  doc.text('Biblioteca Geek - Programacao para Internet', 14, 285);
   doc.save('relatorio_livros_biblioteca_geek.pdf');
 }
 

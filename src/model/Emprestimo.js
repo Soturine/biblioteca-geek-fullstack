@@ -9,7 +9,7 @@ class Emprestimo {
     data_emprestimo,
     data_devolucao,
     status = 'aberto',
-    itens = []
+    itens = [],
   }) {
     this.id_emprestimo = id_emprestimo;
     this.id_usuario = id_usuario;

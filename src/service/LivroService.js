@@ -32,7 +32,7 @@ class LivroService extends IService {
       quantidade: Number(dados.quantidade),
       imagem: dados.imagem || null,
       id_autor: Number(dados.id_autor),
-      id_categoria: Number(dados.id_categoria)
+      id_categoria: Number(dados.id_categoria),
     };
   }
 

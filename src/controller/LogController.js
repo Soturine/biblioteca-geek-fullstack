@@ -8,13 +8,13 @@ class LogController extends IController {
       const xml = await LogService.exportarXml({
         usuario: req.query.usuario,
         dataInicio: req.query.dataInicio,
-        dataFim: req.query.dataFim
+        dataFim: req.query.dataFim,
       });
 
       LogService.registrarAcao(req, {
         acao: 'EXPORTACAO_XML',
         tabela: 'logs',
-        detalhes: 'Exportacao XML de logs'
+        detalhes: 'Exportacao XML de logs',
       }).catch(() => {});
 
       res.setHeader('Content-Type', 'application/xml; charset=utf-8');

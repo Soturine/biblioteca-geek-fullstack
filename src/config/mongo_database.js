@@ -10,7 +10,7 @@ async function connectMongo() {
   }
 
   client = new MongoClient(env.mongo.uri, {
-    serverSelectionTimeoutMS: 1500
+    serverSelectionTimeoutMS: 1500,
   });
   await client.connect();
   database = client.db(env.mongo.database);
@@ -35,5 +35,5 @@ async function closeMongo() {
 module.exports = {
   connectMongo,
   getLogsCollection,
-  closeMongo
+  closeMongo,
 };

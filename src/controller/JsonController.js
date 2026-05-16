@@ -16,7 +16,7 @@ class JsonController extends IController {
       LogService.registrarAcao(req, {
         acao: 'EXPORTACAO_JSON',
         tabela: req.params.entidade,
-        detalhes: `Exportacao JSON de ${req.params.entidade}`
+        detalhes: `Exportacao JSON de ${req.params.entidade}`,
       }).catch(() => {});
       return successResponse(res, 200, 'JSON exportado com sucesso', dados);
     } catch (error) {
@@ -36,7 +36,7 @@ class JsonController extends IController {
         acao: 'IMPORTACAO_JSON',
         tabela: req.params.entidade,
         detalhes: resultado,
-        status_code: 201
+        status_code: 201,
       }).catch(() => {});
       return successResponse(res, 201, 'JSON importado com sucesso', resultado);
     } catch (error) {

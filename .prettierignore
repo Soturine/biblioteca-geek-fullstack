@@ -1,0 +1,9 @@
+node_modules
+.git
+.env
+public/uploads/*
+!public/uploads/.gitkeep
+*.zip
+*.pdf
+*.png
+package-lock.json

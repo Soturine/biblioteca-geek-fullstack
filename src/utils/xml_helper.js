@@ -13,9 +13,7 @@ function escapeXml(value) {
 
 function buildLogsXml(logs) {
   const eventos = logs.map((log, index) => {
-    const detalhes = typeof log.detalhes === 'object'
-      ? JSON.stringify(log.detalhes)
-      : log.detalhes;
+    const detalhes = typeof log.detalhes === 'object' ? JSON.stringify(log.detalhes) : log.detalhes;
 
     return [
       `  <evento id="${index + 1}">`,
@@ -29,7 +27,7 @@ function buildLogsXml(logs) {
       `      <tabela>${escapeXml(log.tabela || '')}</tabela>`,
       `      <registro_id>${escapeXml(log.registro_id || '')}</registro_id>`,
       '    </dados_vinculados>',
-      '  </evento>'
+      '  </evento>',
     ].join('\n');
   });
 
@@ -38,5 +36,5 @@ function buildLogsXml(logs) {
 
 module.exports = {
   escapeXml,
-  buildLogsXml
+  buildLogsXml,
 };

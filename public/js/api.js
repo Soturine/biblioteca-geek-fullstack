@@ -93,6 +93,17 @@ function showAlert(containerId, message, type = 'success') {
   `;
 }
 
+function validarFormulario(form, alertContainerId, mensagem = 'Preencha os campos obrigatorios.') {
+  if (!form.checkValidity()) {
+    form.classList.add('was-validated');
+    showAlert(alertContainerId, mensagem, 'warning');
+    return false;
+  }
+
+  form.classList.remove('was-validated');
+  return true;
+}
+
 function formatDate(value) {
   if (!value) {
     return '';
@@ -114,7 +125,7 @@ function montarNavbar(active = '') {
     ['emprestimos.html', 'Empréstimos', 'emprestimos'],
     ['import_export.html', 'JSON', 'json'],
     ['logs.html', 'Logs XML', 'logs'],
-    ['relatorio.html', 'Relatório', 'relatorio']
+    ['relatorio.html', 'Relatório', 'relatorio'],
   ];
 
   alvo.innerHTML = `
@@ -126,11 +137,15 @@ function montarNavbar(active = '') {
         </button>
         <div class="collapse navbar-collapse" id="menuPrincipal">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            ${links.map(([href, label, key]) => `
+            ${links
+              .map(
+                ([href, label, key]) => `
               <li class="nav-item">
                 <a class="nav-link ${active === key ? 'active' : ''}" href="${href}">${label}</a>
               </li>
-            `).join('')}
+            `,
+              )
+              .join('')}
           </ul>
           <span class="navbar-text me-3">${escapeHtml(usuarioAtual()?.nome || '')}</span>
           <button class="btn btn-outline-light btn-sm" id="btnLogout">Sair</button>

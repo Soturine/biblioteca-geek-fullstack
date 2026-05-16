@@ -1,12 +1,9 @@
 function successResponse(res, statusCode, message, data = undefined, meta = undefined) {
   const body = {
     success: true,
-    message
+    message,
+    data: data === undefined ? null : data,
   };
-
-  if (data !== undefined) {
-    body.data = data;
-  }
 
   if (meta !== undefined) {
     body.meta = meta;
@@ -21,5 +18,5 @@ function noContentResponse(res) {
 
 module.exports = {
   successResponse,
-  noContentResponse
+  noContentResponse,
 };

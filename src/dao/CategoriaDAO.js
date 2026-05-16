@@ -3,10 +3,9 @@ const pool = require('../config/mysql_database');
 
 class CategoriaDAO extends IDAO {
   async create(categoria) {
-    const [result] = await pool.execute(
-      'INSERT INTO categorias (nome) VALUES (?)',
-      [categoria.nome]
-    );
+    const [result] = await pool.execute('INSERT INTO categorias (nome) VALUES (?)', [
+      categoria.nome,
+    ]);
 
     return this.findById(result.insertId);
   }
@@ -22,18 +21,17 @@ class CategoriaDAO extends IDAO {
   }
 
   async findByNome(nome) {
-    const [rows] = await pool.execute(
-      'SELECT * FROM categorias WHERE LOWER(nome) = LOWER(?)',
-      [nome]
-    );
+    const [rows] = await pool.execute('SELECT * FROM categorias WHERE LOWER(nome) = LOWER(?)', [
+      nome,
+    ]);
     return rows[0] || null;
   }
 
   async update(id, categoria) {
-    await pool.execute(
-      'UPDATE categorias SET nome = ? WHERE id_categoria = ?',
-      [categoria.nome, id]
-    );
+    await pool.execute('UPDATE categorias SET nome = ? WHERE id_categoria = ?', [
+      categoria.nome,
+      id,
+    ]);
     return this.findById(id);
   }
 

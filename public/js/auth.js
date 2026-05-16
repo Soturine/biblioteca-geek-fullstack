@@ -7,12 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('formLogin').addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    if (!validarFormulario(event.target, 'alertAuth', 'Informe email e senha para entrar.')) {
+      return;
+    }
+
     try {
       const email = document.getElementById('loginEmail').value;
       const senha = document.getElementById('loginSenha').value;
       const resposta = await apiFetch('/auth/login', {
         method: 'POST',
-        body: JSON.stringify({ email, senha })
+        body: JSON.stringify({ email, senha }),
       });
 
       setToken(resposta.data.token);
@@ -25,13 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('formRegister').addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    if (
+      !validarFormulario(
+        event.target,
+        'alertAuth',
+        'Informe nome, email e senha com minimo de 6 caracteres.',
+      )
+    ) {
+      return;
+    }
+
     try {
       const nome = document.getElementById('registerNome').value;
       const email = document.getElementById('registerEmail').value;
       const senha = document.getElementById('registerSenha').value;
       await apiFetch('/auth/register', {
         method: 'POST',
-        body: JSON.stringify({ nome, email, senha })
+        body: JSON.stringify({ nome, email, senha }),
       });
 
       showAlert('alertAuth', 'Conta criada. Entre com seu email e senha.', 'success');

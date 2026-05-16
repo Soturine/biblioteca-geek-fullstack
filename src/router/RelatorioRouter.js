@@ -1,9 +1,20 @@
 const express = require('express');
 const RelatorioController = require('../controller/RelatorioController');
 
-const router = express.Router();
-const controller = new RelatorioController();
+class RelatorioRouter {
+  constructor() {
+    this.router = express.Router();
+    this.controller = new RelatorioController();
+    this.configurarRotas();
+  }
 
-router.get('/livros', controller.livros.bind(controller));
+  configurarRotas() {
+    this.router.get('/livros', this.controller.livros.bind(this.controller));
+  }
 
-module.exports = router;
+  getRouter() {
+    return this.router;
+  }
+}
+
+module.exports = new RelatorioRouter().getRouter();

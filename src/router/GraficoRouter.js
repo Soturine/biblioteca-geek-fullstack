@@ -1,9 +1,23 @@
 const express = require('express');
 const GraficoController = require('../controller/GraficoController');
 
-const router = express.Router();
-const controller = new GraficoController();
+class GraficoRouter {
+  constructor() {
+    this.router = express.Router();
+    this.controller = new GraficoController();
+    this.configurarRotas();
+  }
 
-router.get('/livros-por-categoria', controller.livrosPorCategoria.bind(controller));
+  configurarRotas() {
+    this.router.get(
+      '/livros-por-categoria',
+      this.controller.livrosPorCategoria.bind(this.controller),
+    );
+  }
 
-module.exports = router;
+  getRouter() {
+    return this.router;
+  }
+}
+
+module.exports = new GraficoRouter().getRouter();
