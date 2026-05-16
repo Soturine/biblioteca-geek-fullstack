@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="360" height="540" viewBox="0 0 360 540" role="img" aria-label="Capa demonstrativa de A Mão Esquerda da Escuridão">
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="540" viewBox="0 0 360 540" role="img" aria-label="Capa demonstrativa de Flores para Algernon">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0f172a"/>
-      <stop offset="0.52" stop-color="#64748b"/>
-      <stop offset="1" stop-color="#dbeafe"/>
+      <stop offset="0.52" stop-color="#4f46e5"/>
+      <stop offset="1" stop-color="#f9a8d4"/>
     </linearGradient>
     <radialGradient id="shine" cx="72%" cy="14%" r="80%">
       <stop offset="0" stop-color="#ffffff" stop-opacity=".34"/>
@@ -19,9 +19,9 @@
   <path d="M-30 440C58 386 132 468 218 424c70-36 116-54 172-12v138H-30z" fill="#000" opacity=".16"/>
   <rect x="20" y="20" width="320" height="500" rx="14" fill="none" stroke="#fff" stroke-opacity=".36" stroke-width="2.5"/>
   <rect x="38" y="36" width="284" height="94" rx="12" fill="#000" opacity=".30"/>
-  <text x="180" y="62" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="800" fill="#fff">A Mão Esquerda</text>
-  <text x="180" y="97" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="800" fill="#fff">da Escuridão</text>
-  <g><path d="M180 160v220M104 236l152 88M256 236l-152 88M92 280h176" stroke="#eff6ff" stroke-width="5" stroke-linecap="round"/><circle cx="180" cy="280" r="82" fill="none" stroke="#bfdbfe" stroke-width="4" opacity=".7"/><path d="M34 98h292M34 444h292" stroke="#e0f2fe" stroke-width="5" opacity=".35"/></g>
+  <text x="180" y="62" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="800" fill="#fff">Flores para</text>
+  <text x="180" y="97" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="800" fill="#fff">Algernon</text>
+  <g><path d="M180 344V214" stroke="#e0e7ff" stroke-width="6"/><path d="M180 236c-70-74-118-2-48 42-70 44-22 116 48 42 70 74 118 2 48-42 70-44 22-116-48-42z" fill="none" stroke="#f9a8d4" stroke-width="6"/><path d="M70 390c72-28 148-28 220 0" stroke="#a5b4fc" stroke-width="5" opacity=".7"/><path d="M76 126h208M76 154h160" stroke="#fff" stroke-width="3" opacity=".35"/></g>
   <rect x="48" y="448" width="264" height="48" rx="10" fill="#000" opacity=".42"/>
-  <text x="180" y="478" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#fff">Ursula K. Le Guin</text>
+  <text x="180" y="478" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#fff">Daniel Keyes</text>
 </svg>

@@ -17,9 +17,9 @@ Sistema web full stack acadêmico para gestão de Biblioteca Geek com Node.js, E
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Arquitetura usada](#arquitetura-usada)
-- [DER](#der)
 - [Demonstração rápida](#demonstração-rápida)
 - [Screenshots](#screenshots)
+- [DER](#der)
 - [Pré-requisitos](#pré-requisitos)
 - [Como rodar](#como-rodar)
 - [MongoDB e logs](#mongodb-e-logs)
@@ -86,83 +86,9 @@ View -> Router -> Middleware -> Controller -> Service -> DAO -> Model -> Banco d
 - **Model**: validações simples dos dados.
 - **Interfaces/contratos**: `IDAO`, `IController` e `IService`.
 
-## DER
-
-O DER representa as tabelas principais do MySQL e seus relacionamentos 1:N e N:N.
-
-```mermaid
-erDiagram
-    USUARIOS ||--o{ EMPRESTIMOS : realiza
-    AUTORES ||--o{ LIVROS : escreve
-    CATEGORIAS ||--o{ LIVROS : classifica
-    EMPRESTIMOS ||--o{ ITENS_EMPRESTIMO : possui
-    LIVROS ||--o{ ITENS_EMPRESTIMO : aparece_em
-
-    USUARIOS {
-        int id_usuario PK
-        string nome
-        string email UK
-        string senha_hash
-        string perfil
-        datetime criado_em
-    }
-
-    AUTORES {
-        int id_autor PK
-        string nome
-        string nacionalidade
-    }
-
-    CATEGORIAS {
-        int id_categoria PK
-        string nome UK
-    }
-
-    LIVROS {
-        int id_livro PK
-        string titulo
-        int ano
-        int quantidade
-        string imagem
-        int paginas
-        string editora
-        string isbn
-        text sinopse
-        int id_autor FK
-        int id_categoria FK
-    }
-
-    EMPRESTIMOS {
-        int id_emprestimo PK
-        int id_usuario FK
-        string nome_leitor
-        date data_emprestimo
-        date data_devolucao
-        string status
-    }
-
-    ITENS_EMPRESTIMO {
-        int id_item PK
-        int id_emprestimo FK
-        int id_livro FK
-        int quantidade
-    }
-```
-
-[Ver DER em Markdown](docs/DER.md)
-
-<img src="docs/DER.png" width="760" alt="DER do sistema Biblioteca Geek">
-
-Relacionamentos principais:
-
-- Usuário 1:N Empréstimos.
-- Autor 1:N Livros.
-- Categoria 1:N Livros.
-- Empréstimos N:N Livros por `itens_emprestimo`.
-
 ## Demonstração rápida
 
-<img src="docs/assets/gifs/demo-biblioteca-geek.gif" width="760" alt="Demonstração rápida do sistema">
+<img src="docs/assets/gifs/demo-biblioteca-geek.gif" width="760" alt="Demonstração do sistema Biblioteca Geek">
 
 ## Screenshots
 
@@ -176,31 +102,50 @@ Relacionamentos principais:
 
 ### Livros
 
-<img src="docs/assets/screenshots/03-livros.png" width="760" alt="Tela de livros com detalhes e capas">
+<img src="docs/assets/screenshots/03-livros.png" width="760" alt="Tela de livros">
+
+### Detalhes do livro
+
+<img src="docs/assets/screenshots/04-detalhes-livro.png" width="760" alt="Modal de detalhes do livro">
 
 ### Autores
 
-<img src="docs/assets/screenshots/04-autores.png" width="760" alt="Tela de autores">
+<img src="docs/assets/screenshots/05-autores.png" width="760" alt="Tela de autores">
 
 ### Categorias
 
-<img src="docs/assets/screenshots/05-categorias.png" width="760" alt="Tela de categorias">
+<img src="docs/assets/screenshots/06-categorias.png" width="760" alt="Tela de categorias">
 
 ### Empréstimos
 
-<img src="docs/assets/screenshots/06-emprestimos.png" width="760" alt="Tela de empréstimos">
+<img src="docs/assets/screenshots/07-emprestimos.png" width="760" alt="Tela de empréstimos">
 
 ### JSON
 
-<img src="docs/assets/screenshots/07-importacao-exportacao-json.png" width="760" alt="Importação e exportação JSON">
+<img src="docs/assets/screenshots/08-json.png" width="760" alt="Importação e exportação JSON">
 
 ### Logs XML
 
-<img src="docs/assets/screenshots/08-logs-xml.png" width="760" alt="Logs XML">
+<img src="docs/assets/screenshots/09-logs-xml.png" width="760" alt="Logs XML">
 
 ### Relatório PDF
 
-<img src="docs/assets/screenshots/09-relatorio-pdf.png" width="760" alt="Relatório PDF">
+<img src="docs/assets/screenshots/10-relatorio-pdf.png" width="760" alt="Relatório PDF">
+
+## DER
+
+O DER representa as tabelas principais do MySQL e seus relacionamentos 1:N e N:N.
+
+<img src="docs/DER.png" width="900" alt="DER do sistema Biblioteca Geek">
+
+[Ver DER em Markdown](docs/DER.md)
+
+Relacionamentos principais:
+
+- Usuário 1:N Empréstimos.
+- Autor 1:N Livros.
+- Categoria 1:N Livros.
+- Empréstimos N:N Livros por `itens_emprestimo`.
 
 ## Pré-requisitos
 
@@ -343,6 +288,6 @@ Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE).
 - Gráfico: Chart.js no dashboard.
 - Upload: capa dos livros.
 - Modal de detalhes: implementado na tela de livros.
-- DER: imagem e Mermaid atualizados.
+- DER: imagem PNG atualizada.
 - Licença MIT: incluída.
 - GitHub Pages: página estática em `docs/index.html`.

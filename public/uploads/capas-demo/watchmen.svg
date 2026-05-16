@@ -2,21 +2,25 @@
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#171717"/>
-      <stop offset="0.58" stop-color="#a16207"/>
+      <stop offset="0.52" stop-color="#ca8a04"/>
       <stop offset="1" stop-color="#fde047"/>
     </linearGradient>
-    <radialGradient id="glow" cx="72%" cy="16%" r="70%">
+    <radialGradient id="shine" cx="72%" cy="14%" r="80%">
       <stop offset="0" stop-color="#ffffff" stop-opacity=".34"/>
       <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
+    <pattern id="grain" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M0 18L18 0M-5 5L5-5M13 23l10-10" stroke="#fff" stroke-opacity=".05" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect width="360" height="540" rx="22" fill="url(#bg)"/>
-  <rect width="360" height="540" rx="22" fill="url(#glow)"/>
-  <path d="M-40 430C70 350 130 510 250 430s160-20 190 40v100H-40z" fill="#ffffff" opacity=".08"/>
-  <rect x="22" y="22" width="316" height="496" rx="18" fill="none" stroke="#ffffff" stroke-opacity=".36" stroke-width="3"/>
-  <rect x="42" y="42" width="276" height="142" rx="18" fill="#000000" opacity=".26"/>
-  <text x="180" y="74" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="900" fill="#fff">Watchmen</text>
-  <g opacity=".95"><circle cx="180" cy="274" r="72" fill="none" stroke="#fff" stroke-width="6"/><path d="M180 220v58l40 34" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M112 358h136" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".65"/><circle cx="220" cy="222" r="8" fill="#ef4444" opacity=".9"/></g>
-  <rect x="58" y="436" width="244" height="58" rx="14" fill="#000000" opacity=".34"/>
-  <text x="180" y="468" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#fff" fill-opacity=".94">Alan Moore</text>
+  <rect width="360" height="540" rx="16" fill="url(#bg)"/>
+  <rect width="360" height="540" rx="16" fill="url(#shine)"/>
+  <rect width="360" height="540" rx="16" fill="url(#grain)"/>
+  <path d="M-30 440C58 386 132 468 218 424c70-36 116-54 172-12v138H-30z" fill="#000" opacity=".16"/>
+  <rect x="20" y="20" width="320" height="500" rx="14" fill="none" stroke="#fff" stroke-opacity=".36" stroke-width="2.5"/>
+  <rect x="38" y="36" width="284" height="72" rx="12" fill="#000" opacity=".30"/>
+  <text x="180" y="72" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="35" font-weight="800" fill="#fff">Watchmen</text>
+  <g><rect x="0" y="0" width="360" height="540" fill="#facc15" opacity=".12"/><circle cx="180" cy="274" r="96" fill="#facc15"/><circle cx="180" cy="274" r="76" fill="#171717"/><path d="M180 214v70l46 46" stroke="#fde047" stroke-width="9" stroke-linecap="round"/><circle cx="242" cy="204" r="12" fill="#ef4444"/><path d="M92 390h176" stroke="#fde047" stroke-width="6" opacity=".8"/></g>
+  <rect x="48" y="448" width="264" height="48" rx="10" fill="#000" opacity=".42"/>
+  <text x="180" y="478" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#fff">Alan Moore</text>
 </svg>

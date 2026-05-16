@@ -1,5 +1,7 @@
 # DER - Biblioteca Geek
 
+O DER representa o banco MySQL principal do sistema. Os logs ficam separados no MongoDB, na collection `logs`.
+
 ```mermaid
 erDiagram
     USUARIOS ||--o{ EMPRESTIMOS : realiza
@@ -35,9 +37,9 @@ erDiagram
         int quantidade
         string imagem
         int paginas
+        text sinopse
         string editora
         string isbn
-        text sinopse
         int id_autor FK
         int id_categoria FK
     }
@@ -61,16 +63,11 @@ erDiagram
 
 ## Relacionamentos
 
-| Relacionamento              | Tipo | Implementação                           |
+| Relacionamento              | Tipo | Campo                                   |
 | --------------------------- | ---- | --------------------------------------- |
 | Usuário realiza empréstimos | 1:N  | `emprestimos.id_usuario`                |
 | Autor escreve livros        | 1:N  | `livros.id_autor`                       |
 | Categoria classifica livros | 1:N  | `livros.id_categoria`                   |
 | Empréstimo possui itens     | 1:N  | `itens_emprestimo.id_emprestimo`        |
-| Livros aparecem em itens    | 1:N  | `itens_emprestimo.id_livro`             |
+| Livro aparece em itens      | 1:N  | `itens_emprestimo.id_livro`             |
 | Empréstimos e livros        | N:N  | tabela intermediária `itens_emprestimo` |
-
-## Observação
-
-A tabela `livros` possui campos descritivos para melhorar a tela de detalhes e o relatório:
-`paginas`, `sinopse`, `editora` e `isbn`.

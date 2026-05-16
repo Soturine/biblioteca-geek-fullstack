@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="360" height="540" viewBox="0 0 360 540" role="img" aria-label="Capa demonstrativa de O Senhor dos Anéis">
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="540" viewBox="0 0 360 540" role="img" aria-label="Capa demonstrativa de Jogador Número 1">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#111827"/>
-      <stop offset="0.52" stop-color="#4c1d95"/>
-      <stop offset="1" stop-color="#d4af37"/>
+      <stop offset="0.52" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#f97316"/>
     </linearGradient>
     <radialGradient id="shine" cx="72%" cy="14%" r="80%">
       <stop offset="0" stop-color="#ffffff" stop-opacity=".34"/>
@@ -19,9 +19,9 @@
   <path d="M-30 440C58 386 132 468 218 424c70-36 116-54 172-12v138H-30z" fill="#000" opacity=".16"/>
   <rect x="20" y="20" width="320" height="500" rx="14" fill="none" stroke="#fff" stroke-opacity=".36" stroke-width="2.5"/>
   <rect x="38" y="36" width="284" height="94" rx="12" fill="#000" opacity=".30"/>
-  <text x="180" y="62" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="800" fill="#fff">O Senhor</text>
-  <text x="180" y="97" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="800" fill="#fff">dos Anéis</text>
-  <g><circle cx="180" cy="274" r="86" fill="none" stroke="#fef3c7" stroke-width="8"/><circle cx="180" cy="274" r="48" fill="none" stroke="#facc15" stroke-width="5"/><path d="M78 140c68 38 132 34 204-12M72 404c74-38 150-30 218 8" stroke="#c4b5fd" stroke-width="4" opacity=".5"/><path d="M96 358c48 18 120 18 168 0" stroke="#fff" stroke-width="4" opacity=".65"/></g>
+  <text x="180" y="62" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="800" fill="#fff">Jogador</text>
+  <text x="180" y="97" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="800" fill="#fff">Número 1</text>
+  <g><rect x="82" y="184" width="196" height="132" rx="22" fill="none" stroke="#fff" stroke-width="7"/><circle cx="226" cy="250" r="16" fill="#f97316"/><circle cx="264" cy="250" r="16" fill="#60a5fa"/><path d="M122 250h64M154 218v64" stroke="#fff" stroke-width="8" stroke-linecap="round"/><path d="M110 370h140l28 40H82z" fill="#111827" stroke="#f97316" stroke-width="5"/></g>
   <rect x="48" y="448" width="264" height="48" rx="10" fill="#000" opacity=".42"/>
-  <text x="180" y="478" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#fff">J. R. R. Tolkien</text>
+  <text x="180" y="478" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#fff">Ernest Cline</text>
 </svg>

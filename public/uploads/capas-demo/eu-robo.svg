@@ -2,21 +2,25 @@
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#042f2e"/>
-      <stop offset="0.58" stop-color="#0f766e"/>
-      <stop offset="1" stop-color="#99f6e4"/>
+      <stop offset="0.52" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#a7f3d0"/>
     </linearGradient>
-    <radialGradient id="glow" cx="72%" cy="16%" r="70%">
+    <radialGradient id="shine" cx="72%" cy="14%" r="80%">
       <stop offset="0" stop-color="#ffffff" stop-opacity=".34"/>
       <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
+    <pattern id="grain" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M0 18L18 0M-5 5L5-5M13 23l10-10" stroke="#fff" stroke-opacity=".05" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect width="360" height="540" rx="22" fill="url(#bg)"/>
-  <rect width="360" height="540" rx="22" fill="url(#glow)"/>
-  <path d="M-40 430C70 350 130 510 250 430s160-20 190 40v100H-40z" fill="#ffffff" opacity=".08"/>
-  <rect x="22" y="22" width="316" height="496" rx="18" fill="none" stroke="#ffffff" stroke-opacity=".36" stroke-width="3"/>
-  <rect x="42" y="42" width="276" height="142" rx="18" fill="#000000" opacity=".26"/>
-  <text x="180" y="74" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="900" fill="#fff">Eu, Robô</text>
-  <g opacity=".95"><rect x="128" y="222" width="104" height="92" rx="20" fill="none" stroke="#fff" stroke-width="6"/><circle cx="158" cy="262" r="7" fill="#fff"/><circle cx="202" cy="262" r="7" fill="#fff"/><path d="M152 294h56M180 222v-28M166 194h28" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M108 342h144" stroke="#fff" stroke-width="4" opacity=".65"/></g>
-  <rect x="58" y="436" width="244" height="58" rx="14" fill="#000000" opacity=".34"/>
-  <text x="180" y="468" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#fff" fill-opacity=".94">Isaac Asimov</text>
+  <rect width="360" height="540" rx="16" fill="url(#bg)"/>
+  <rect width="360" height="540" rx="16" fill="url(#shine)"/>
+  <rect width="360" height="540" rx="16" fill="url(#grain)"/>
+  <path d="M-30 440C58 386 132 468 218 424c70-36 116-54 172-12v138H-30z" fill="#000" opacity=".16"/>
+  <rect x="20" y="20" width="320" height="500" rx="14" fill="none" stroke="#fff" stroke-opacity=".36" stroke-width="2.5"/>
+  <rect x="38" y="36" width="284" height="72" rx="12" fill="#000" opacity=".30"/>
+  <text x="180" y="72" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="35" font-weight="800" fill="#fff">Eu, Robô</text>
+  <g><rect x="102" y="188" width="156" height="148" rx="26" fill="#d1fae5" opacity=".14" stroke="#d1fae5" stroke-width="6"/><rect x="130" y="226" width="100" height="74" rx="14" fill="none" stroke="#fff" stroke-width="6"/><circle cx="160" cy="262" r="8" fill="#fff"/><circle cx="200" cy="262" r="8" fill="#fff"/><path d="M150 296h60M180 226v-42M158 184h44M86 368h188" stroke="#fff" stroke-width="6" stroke-linecap="round"/></g>
+  <rect x="48" y="448" width="264" height="48" rx="10" fill="#000" opacity=".42"/>
+  <text x="180" y="478" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#fff">Isaac Asimov</text>
 </svg>

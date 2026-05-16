@@ -175,18 +175,19 @@ Os screenshots finais estão em `docs/assets/screenshots/`:
 - `01-login.png`: tela de login.
 - `02-dashboard.png`: dashboard com cards, logs e gráfico.
 - `03-livros.png`: CRUD de livros com capas e botão de detalhes.
-- `04-autores.png`: CRUD de autores.
-- `05-categorias.png`: CRUD de categorias.
-- `06-empréstimos.png`: CRUD de empréstimos.
-- `07-importacao-exportacao-json.png`: importação e exportação JSON.
-- `08-logs-xml.png`: exportação XML.
-- `09-relatorio-pdf.png`: tela de relatório PDF.
+- `04-detalhes-livro.png`: modal de detalhes do livro.
+- `05-autores.png`: CRUD de autores.
+- `06-categorias.png`: CRUD de categorias.
+- `07-emprestimos.png`: CRUD de empréstimos.
+- `08-json.png`: importação e exportação JSON.
+- `09-logs-xml.png`: exportação XML.
+- `10-relatorio-pdf.png`: tela de relatório PDF.
 
 Os prints duplicados da etapa anterior foram removidos da entrega para manter apenas as evidências finais usadas no README.
 
 ## Capas demonstrativas locais
 
-Os 20 livros iniciais usam capas autorais em SVG dentro de `public/uploads/capas-demo/`. As capas têm gradientes, símbolos abstratos e títulos com acentos corretos, sem depender de API externa nem de imagens protegidas baixadas da internet.
+Os 20 livros iniciais usam capas autorais em SVG dentro de `public/uploads/capas-demo/`. O acervo foi ajustado para obras fortes de cultura geek, ficção científica, distopia, fantasia, cyberpunk, HQ e terror, com gradientes, símbolos abstratos e títulos com acentos corretos.
 
 ## Modal de detalhes do livro
 

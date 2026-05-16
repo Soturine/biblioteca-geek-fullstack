@@ -113,7 +113,7 @@ O dashboard usa Chart.js. Os dados chegam de `/api/v1/graficos/livros-por-catego
 
 ## Capas demonstrativas
 
-Os dados iniciais em `database/inserts.sql` possuem 20 livros e apontam para capas SVG autorais em `public/uploads/capas-demo/`. Essas capas são locais, simples e feitas apenas para apresentação acadêmica.
+Os dados iniciais em `database/inserts.sql` possuem 20 livros de ficção científica, distopia, fantasia, cyberpunk, HQ e terror geek. Eles apontam para capas SVG autorais em `public/uploads/capas-demo/`, criadas localmente para apresentação acadêmica.
 
 ## Modal de detalhes
 

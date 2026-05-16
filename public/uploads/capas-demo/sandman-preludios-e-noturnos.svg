@@ -2,23 +2,27 @@
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#1e1b4b"/>
-      <stop offset="0.58" stop-color="#581c87"/>
+      <stop offset="0.52" stop-color="#581c87"/>
       <stop offset="1" stop-color="#c084fc"/>
     </linearGradient>
-    <radialGradient id="glow" cx="72%" cy="16%" r="70%">
+    <radialGradient id="shine" cx="72%" cy="14%" r="80%">
       <stop offset="0" stop-color="#ffffff" stop-opacity=".34"/>
       <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
     </radialGradient>
+    <pattern id="grain" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M0 18L18 0M-5 5L5-5M13 23l10-10" stroke="#fff" stroke-opacity=".05" stroke-width="1"/>
+    </pattern>
   </defs>
-  <rect width="360" height="540" rx="22" fill="url(#bg)"/>
-  <rect width="360" height="540" rx="22" fill="url(#glow)"/>
-  <path d="M-40 430C70 350 130 510 250 430s160-20 190 40v100H-40z" fill="#ffffff" opacity=".08"/>
-  <rect x="22" y="22" width="316" height="496" rx="18" fill="none" stroke="#ffffff" stroke-opacity=".36" stroke-width="3"/>
-  <rect x="42" y="42" width="276" height="142" rx="18" fill="#000000" opacity=".26"/>
-  <text x="180" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="900" fill="#fff">Sandman:</text>
-  <text x="180" y="86" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="900" fill="#fff">Prelúdios e</text>
-  <text x="180" y="114" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="900" fill="#fff">Noturnos</text>
-  <g opacity=".95"><path d="M214 196c-54 12-82 58-62 108 14 34 50 54 88 44-36 42-104 26-126-30-24-62 12-126 100-122z" fill="#fff" opacity=".9"/><circle cx="244" cy="222" r="7" fill="#fff"/><circle cx="104" cy="250" r="4" fill="#fff" opacity=".8"/><circle cx="126" cy="196" r="5" fill="#fff" opacity=".8"/></g>
-  <rect x="58" y="436" width="244" height="58" rx="14" fill="#000000" opacity=".34"/>
-  <text x="180" y="468" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#fff" fill-opacity=".94">Neil Gaiman</text>
+  <rect width="360" height="540" rx="16" fill="url(#bg)"/>
+  <rect width="360" height="540" rx="16" fill="url(#shine)"/>
+  <rect width="360" height="540" rx="16" fill="url(#grain)"/>
+  <path d="M-30 440C58 386 132 468 218 424c70-36 116-54 172-12v138H-30z" fill="#000" opacity=".16"/>
+  <rect x="20" y="20" width="320" height="500" rx="14" fill="none" stroke="#fff" stroke-opacity=".36" stroke-width="2.5"/>
+  <rect x="38" y="36" width="284" height="112" rx="12" fill="#000" opacity=".30"/>
+  <text x="180" y="54" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="800" fill="#fff">Sandman:</text>
+  <text x="180" y="83" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="800" fill="#fff">Prelúdios e</text>
+  <text x="180" y="112" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="800" fill="#fff">Noturnos</text>
+  <g><path d="M222 180c-70 14-108 76-82 144 19 48 70 76 128 62-54 64-150 38-182-42-34-88 20-178 136-164z" fill="#f5e8ff"/><circle cx="254" cy="226" r="7" fill="#fff"/><circle cx="108" cy="232" r="5" fill="#fff"/><circle cx="132" cy="176" r="6" fill="#fff"/><path d="M80 406c58-24 144-24 202 0" stroke="#e9d5ff" stroke-width="5" opacity=".7"/></g>
+  <rect x="48" y="448" width="264" height="48" rx="10" fill="#000" opacity=".42"/>
+  <text x="180" y="478" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#fff">Neil Gaiman</text>
 </svg>

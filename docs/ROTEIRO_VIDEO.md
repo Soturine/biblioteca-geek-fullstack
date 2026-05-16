@@ -43,7 +43,7 @@ Abrir `database/schema.sql` e mostrar as tabelas:
 - empréstimos
 - itens de empréstimo
 
-Mostrar `docs/DER.md`, o Mermaid no README e a imagem `docs/DER.png`.
+Mostrar `docs/DER.md` e a imagem `docs/DER.png` exibida no README.
 
 ## 6. MongoDB logs
 

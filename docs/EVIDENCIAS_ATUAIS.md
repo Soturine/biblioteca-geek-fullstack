@@ -15,14 +15,15 @@ Os prints duplicados de versões anteriores foram removidos para deixar a entreg
 
 ## Prints finais
 
-| Arquivo                                                     | Evidência                    |
-| ----------------------------------------------------------- | ---------------------------- |
-| `docs/assets/screenshots/01-login.png`                      | Tela de login                |
-| `docs/assets/screenshots/02-dashboard.png`                  | Dashboard com gráfico        |
-| `docs/assets/screenshots/03-livros.png`                     | Tela de livros com capas     |
-| `docs/assets/screenshots/04-autores.png`                    | Tela de autores              |
-| `docs/assets/screenshots/05-categorias.png`                 | Tela de categorias           |
-| `docs/assets/screenshots/06-emprestimos.png`                | Tela de empréstimos          |
-| `docs/assets/screenshots/07-importacao-exportacao-json.png` | Importação e exportação JSON |
-| `docs/assets/screenshots/08-logs-xml.png`                   | Exportação XML dos logs      |
-| `docs/assets/screenshots/09-relatorio-pdf.png`              | Relatório PDF                |
+| Arquivo                                         | Evidência                    |
+| ----------------------------------------------- | ---------------------------- |
+| `docs/assets/screenshots/01-login.png`          | Tela de login                |
+| `docs/assets/screenshots/02-dashboard.png`      | Dashboard com gráfico        |
+| `docs/assets/screenshots/03-livros.png`         | Tela de livros com capas     |
+| `docs/assets/screenshots/04-detalhes-livro.png` | Modal de detalhes do livro   |
+| `docs/assets/screenshots/05-autores.png`        | Tela de autores              |
+| `docs/assets/screenshots/06-categorias.png`     | Tela de categorias           |
+| `docs/assets/screenshots/07-emprestimos.png`    | Tela de empréstimos          |
+| `docs/assets/screenshots/08-json.png`           | Importação e exportação JSON |
+| `docs/assets/screenshots/09-logs-xml.png`       | Exportação XML dos logs      |
+| `docs/assets/screenshots/10-relatorio-pdf.png`  | Relatório PDF                |
