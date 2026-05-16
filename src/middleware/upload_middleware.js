@@ -7,6 +7,7 @@ const ErrorResponse = require('../utils/ErrorResponse');
 const uploadDir = path.join(__dirname, '..', '..', env.upload.dir);
 fs.mkdirSync(uploadDir, { recursive: true });
 
+// A validação combina extensão e mimetype para reduzir uploads indevidos.
 const imagensPermitidas = {
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
@@ -49,6 +50,7 @@ const uploadImagem = multer({
 });
 
 const uploadJson = multer({
+  // JSON é processado em memória porque o arquivo é pequeno e usado só na importação.
   storage: multer.memoryStorage(),
   fileFilter: filtroJson,
   limits: { fileSize: 1 * 1024 * 1024 },

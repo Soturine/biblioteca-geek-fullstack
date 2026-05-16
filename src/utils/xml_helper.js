@@ -13,6 +13,7 @@ function escapeXml(value) {
 
 function buildLogsXml(logs) {
   const eventos = logs.map((log, index) => {
+    // Todo valor passa por escapeXml para evitar XML quebrado com caracteres especiais.
     const detalhes = typeof log.detalhes === 'object' ? JSON.stringify(log.detalhes) : log.detalhes;
 
     return [

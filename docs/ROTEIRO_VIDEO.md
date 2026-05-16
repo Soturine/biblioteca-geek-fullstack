@@ -1,4 +1,4 @@
-﻿# Roteiro do Video - Ate 10 Minutos
+# Roteiro do Vídeo - Até 10 Minutos
 
 ## 1. Abertura
 
@@ -30,20 +30,20 @@ Mostrar:
 - `src/interfaces/IController.js`
 - `src/interfaces/IService.js`
 
-Explicar que sao contratos, ja que JavaScript não tem interface nativa.
+Explicar que são contratos, já que JavaScript não tem interface nativa.
 
 ## 5. MySQL e DER
 
 Abrir `database/schema.sql` e mostrar as tabelas:
 
-- usuarios
+- usuários
 - autores
 - categorias
-- livros
-- emprestimos
-- itens_emprestimo
+- livros, incluindo páginas, sinopse, editora e ISBN
+- empréstimos
+- itens de empréstimo
 
-Mostrar `docs/DER.md` ou `docs/DER.png`.
+Mostrar `docs/DER.md`, o Mermaid no README e a imagem `docs/DER.png`.
 
 ## 6. MongoDB logs
 
@@ -72,7 +72,7 @@ Mostrar:
 
 ## 9. CRUD de livros
 
-Cadastrar um livro, editar, pesquisar pelo titulo e excluir.
+Mostrar a listagem com capas, abrir o modal **Detalhes**, cadastrar um livro, editar, pesquisar pelo título e excluir.
 
 ## 10. Upload de imagem
 
@@ -92,4 +92,4 @@ Acessar Relatório, filtrar por categoria e gerar PDF.
 
 ## 14. Encerramento
 
-Mostrar o repositório GitHub e finalizar explicando que o projeto cumpre MVC, Service Layer, Router, Middleware, MySQL, MongoDB, JWT, JSON, XML, PDF, gráfico e upload.
+Mostrar o repositório GitHub, a licença MIT e finalizar explicando que o projeto cumpre MVC, Service Layer, Router, Middleware, MySQL, MongoDB, JWT, JSON, XML, PDF, gráfico e upload.

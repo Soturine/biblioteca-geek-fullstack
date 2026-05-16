@@ -9,10 +9,7 @@
     "format": "prettier --write .",
     "check:js": "node scripts/check-js.js",
     "check:mongo": "node scripts/check-mongo.js",
-    "docs:pdf": "node scripts/gerar_documentacao_pdf.js",
-    "open": "node scripts/open-browser.js",
-    "dev:open": "node scripts/start-and-open.js",
-    "screenshots": "node scripts/gerar_screenshots.js"
+    "docs:pdf": "node scripts/gerar_documentacao_pdf.js"
   },
   "keywords": [
     "nodejs",
@@ -44,7 +41,6 @@
   },
   "devDependencies": {
     "pdfkit": "^0.18.0",
-    "playwright": "^1.60.0",
     "prettier": "^3.8.3"
   }
 }

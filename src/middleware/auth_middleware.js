@@ -9,6 +9,7 @@ const rotasPublicas = [
 
 function rotaPublica(req) {
   if (!req.path.startsWith('/api/')) {
+    // Arquivos HTML/CSS/JS e imagens públicas não exigem JWT.
     return true;
   }
 
@@ -28,6 +29,7 @@ function authMiddleware(req, res, next) {
   }
 
   try {
+    // O payload validado fica disponível para Controllers, Services e logs.
     const payload = jwt.verify(token, env.jwt.secret);
     req.usuario = {
       id: payload.id,

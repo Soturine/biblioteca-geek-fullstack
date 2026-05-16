@@ -9,11 +9,13 @@ async function connectMongo() {
     return database;
   }
 
+  // A conexão é reaproveitada para todos os logs, evitando reconectar a cada rota.
   client = new MongoClient(env.mongo.uri, {
     serverSelectionTimeoutMS: 1500,
   });
   await client.connect();
   database = client.db(env.mongo.database);
+  // Índices simples ajudam nos filtros de data e usuário usados na exportação XML.
   await database.collection('logs').createIndex({ timestamp: -1 });
   await database.collection('logs').createIndex({ usuario: 1 });
   return database;

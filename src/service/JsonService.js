@@ -39,6 +39,7 @@ class JsonService extends IService {
   parseConteudo(conteudo) {
     try {
       const json = JSON.parse(conteudo);
+      // Aceita tanto um array direto quanto o formato padronizado { data: [...] }.
       const registros = Array.isArray(json) ? json : json.data;
 
       if (!Array.isArray(registros)) {
@@ -108,6 +109,7 @@ class JsonService extends IService {
       try {
         this.validarEstrutura(entidade, registro);
 
+        // A importação continua mesmo se uma linha for duplicada ou inválida.
         const duplicado = await this.buscarDuplicado(entidade, registro);
         if (duplicado) {
           resultado.ignorados_duplicidade += 1;

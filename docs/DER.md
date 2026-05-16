@@ -2,57 +2,61 @@
 
 ```mermaid
 erDiagram
-  usuarios ||--o{ emprestimos : "1:N realiza"
-  autores ||--o{ livros : "1:N escreve"
-  categorias ||--o{ livros : "1:N classifica"
-  emprestimos ||--o{ itens_emprestimo : "1:N possui"
-  livros ||--o{ itens_emprestimo : "1:N aparece"
+    USUARIOS ||--o{ EMPRESTIMOS : realiza
+    AUTORES ||--o{ LIVROS : escreve
+    CATEGORIAS ||--o{ LIVROS : classifica
+    EMPRESTIMOS ||--o{ ITENS_EMPRESTIMO : possui
+    LIVROS ||--o{ ITENS_EMPRESTIMO : aparece_em
 
-  usuarios {
-    int id_usuario PK
-    varchar nome
-    varchar email UK
-    varchar senha_hash
-    varchar perfil
-    timestamp criado_em
-  }
+    USUARIOS {
+        int id_usuario PK
+        string nome
+        string email UK
+        string senha_hash
+        string perfil
+        datetime criado_em
+    }
 
-  autores {
-    int id_autor PK
-    varchar nome
-    varchar nacionalidade
-  }
+    AUTORES {
+        int id_autor PK
+        string nome
+        string nacionalidade
+    }
 
-  categorias {
-    int id_categoria PK
-    varchar nome UK
-  }
+    CATEGORIAS {
+        int id_categoria PK
+        string nome UK
+    }
 
-  livros {
-    int id_livro PK
-    varchar titulo
-    int ano
-    int quantidade
-    varchar imagem
-    int id_autor FK
-    int id_categoria FK
-  }
+    LIVROS {
+        int id_livro PK
+        string titulo
+        int ano
+        int quantidade
+        string imagem
+        int paginas
+        string editora
+        string isbn
+        text sinopse
+        int id_autor FK
+        int id_categoria FK
+    }
 
-  emprestimos {
-    int id_emprestimo PK
-    int id_usuario FK
-    varchar nome_leitor
-    date data_emprestimo
-    date data_devolucao
-    varchar status
-  }
+    EMPRESTIMOS {
+        int id_emprestimo PK
+        int id_usuario FK
+        string nome_leitor
+        date data_emprestimo
+        date data_devolucao
+        string status
+    }
 
-  itens_emprestimo {
-    int id_item PK
-    int id_emprestimo FK
-    int id_livro FK
-    int quantidade
-  }
+    ITENS_EMPRESTIMO {
+        int id_item PK
+        int id_emprestimo FK
+        int id_livro FK
+        int quantidade
+    }
 ```
 
 ## Relacionamentos
@@ -60,7 +64,13 @@ erDiagram
 | Relacionamento              | Tipo | Implementação                           |
 | --------------------------- | ---- | --------------------------------------- |
 | Usuário realiza empréstimos | 1:N  | `emprestimos.id_usuario`                |
-| Autor possui livros         | 1:N  | `livros.id_autor`                       |
-| Categoria possui livros     | 1:N  | `livros.id_categoria`                   |
+| Autor escreve livros        | 1:N  | `livros.id_autor`                       |
+| Categoria classifica livros | 1:N  | `livros.id_categoria`                   |
 | Empréstimo possui itens     | 1:N  | `itens_emprestimo.id_emprestimo`        |
+| Livros aparecem em itens    | 1:N  | `itens_emprestimo.id_livro`             |
 | Empréstimos e livros        | N:N  | tabela intermediária `itens_emprestimo` |
+
+## Observação
+
+A tabela `livros` possui campos descritivos para melhorar a tela de detalhes e o relatório:
+`paginas`, `sinopse`, `editora` e `isbn`.

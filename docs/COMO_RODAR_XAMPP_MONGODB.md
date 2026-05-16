@@ -9,19 +9,7 @@ Este guia foi escrito para apresentação do projeto em Windows usando XAMPP par
 - O MongoDB precisa ficar aberto durante a apresentação para registrar logs e exportar XML.
 - O sistema abre em `http://localhost:3000`.
 
-## Modo fácil
-
-1. Abra o **XAMPP Control Panel**.
-2. Clique em **Start** no MySQL.
-3. Dê dois cliques em:
-
-```text
-scripts/windows/iniciar_tudo.bat
-```
-
-Esse script abre uma janela para o MongoDB, outra para o sistema Node.js e depois abre o navegador em `http://localhost:3000`.
-
-## Modo manual
+## Passo a passo
 
 ### 1. Iniciar MySQL pelo XAMPP
 
@@ -44,7 +32,7 @@ Esse script abre uma janela para o MongoDB, outra para o sistema Node.js e depoi
 
 Na pasta do projeto:
 
-```powershell
+```text
 mysql -u root -p < database/schema.sql
 mysql -u root -p biblioteca_geek < database/inserts.sql
 ```
@@ -55,40 +43,48 @@ No XAMPP, normalmente o usuário é `root` e a senha fica vazia.
 
 Crie a pasta de dados, se ela ainda não existir:
 
-```powershell
+```text
 mkdir C:\data\db
 ```
 
 Inicie o MongoDB:
 
-```powershell
+```text
 "C:\Program Files\MongoDB\Server\8.0\bin\mongod.exe" --dbpath C:\data\db
 ```
 
-Ou use:
+### 5. Configurar `.env`
 
-```text
-scripts/windows/iniciar_mongodb.bat
+Use os valores padrão:
+
+```env
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=
+MYSQL_DATABASE=biblioteca_geek
+MONGO_URI=mongodb://127.0.0.1:27017
+MONGO_DATABASE=biblioteca_geek_logs
+PORT=3000
+JWT_SECRET=biblioteca_geek_seguro
+JWT_EXPIRES_IN=2h
+UPLOAD_DIR=public/uploads
 ```
 
-### 5. Iniciar o sistema
+### 6. Iniciar o sistema
 
-```powershell
+```text
 npm install
 npm start
 ```
 
-Ou use:
-
-```text
-scripts/windows/iniciar_sistema.bat
-```
+Acesse `http://localhost:3000` e faça login com `admin@admin.com` / `123456`.
 
 ## Conferir MongoDB e logs
 
 Rode:
 
-```powershell
+```text
 npm run check:mongo
 ```
 
@@ -104,25 +100,7 @@ Quantidade de logs: ...
 ## Conferir no MongoDB Compass
 
 1. Abra o MongoDB Compass.
-2. Conecte em:
-
-```text
-mongodb://127.0.0.1:27017
-```
-
+2. Conecte em `mongodb://127.0.0.1:27017`.
 3. Abra o banco `biblioteca_geek_logs`.
 4. Abra a collection `logs`.
 5. Faça login no sistema e atualize o Compass para ver novos logs.
-
-## Valores corretos do `.env`
-
-```env
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=
-MYSQL_DATABASE=biblioteca_geek
-MONGO_URI=mongodb://127.0.0.1:27017
-MONGO_DATABASE=biblioteca_geek_logs
-PORT=3000
-```

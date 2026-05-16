@@ -116,6 +116,10 @@ Body:
   "titulo": "Neuromancer",
   "ano": 1984,
   "quantidade": 2,
+  "paginas": 336,
+  "editora": "Editora Matrix",
+  "isbn": "978-85-000-0010-3",
+  "sinopse": "Um hacker encara redes perigosas em um futuro dominado por tecnologia.",
   "id_autor": 1,
   "id_categoria": 2
 }
@@ -162,9 +166,13 @@ Body:
 
 ```json
 {
-  "titulo": "O Hobbit - Edicao Geek",
+  "titulo": "O Hobbit - Edição Geek",
   "ano": 1937,
   "quantidade": 3,
+  "paginas": 310,
+  "editora": "Editora Condado",
+  "isbn": "978-85-000-0001-1",
+  "sinopse": "Bilbo participa de uma jornada inesperada com anões, mapas e coragem.",
   "id_autor": 1,
   "id_categoria": 1
 }
@@ -278,7 +286,7 @@ Com filtro:
 GET /relatorios/livros?categoria=1
 ```
 
-Resposta esperada: status `200`, total e array de livros.
+Resposta esperada: status `200`, total, páginas e array de livros.
 
 ## 16. Dados do gráfico
 

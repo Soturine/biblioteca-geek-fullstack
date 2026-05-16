@@ -5,6 +5,7 @@ const { getLogsCollection } = require('../config/mongo_database');
 class LogDAO extends IDAO {
   async create(log) {
     const collection = await getLogsCollection();
+    // Documento flexível: MongoDB guarda tanto acessos simples quanto erros com stack_trace.
     const documento = {
       timestamp: log.timestamp || new Date(),
       usuario: log.usuario || 'anonimo',

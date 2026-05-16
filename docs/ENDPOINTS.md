@@ -4,15 +4,15 @@ Prefixo base: `/api/v1`
 
 ## Auth
 
-| Metodo | Rota             | Descricao                       |
+| Método | Rota             | Descrição                       |
 | ------ | ---------------- | ------------------------------- |
-| POST   | `/auth/login`    | Autentica usuario e retorna JWT |
+| POST   | `/auth/login`    | Autentica usuário e retorna JWT |
 | POST   | `/auth/logout`   | Registra logout                 |
-| POST   | `/auth/register` | Cadastra usuario                |
+| POST   | `/auth/register` | Cadastra usuário                |
 
 ## Autores
 
-| Metodo | Rota           |
+| Método | Rota           |
 | ------ | -------------- |
 | GET    | `/autores`     |
 | GET    | `/autores/:id` |
@@ -22,7 +22,7 @@ Prefixo base: `/api/v1`
 
 ## Categorias
 
-| Metodo | Rota              |
+| Método | Rota              |
 | ------ | ----------------- |
 | GET    | `/categorias`     |
 | GET    | `/categorias/:id` |
@@ -32,19 +32,19 @@ Prefixo base: `/api/v1`
 
 ## Livros
 
-| Metodo | Rota                  | Descricao                        |
-| ------ | --------------------- | -------------------------------- |
-| GET    | `/livros`             | Lista livros                     |
-| GET    | `/livros?busca=texto` | Pesquisa por titulo              |
-| GET    | `/livros/:id`         | Busca por id                     |
-| POST   | `/livros`             | Cria livro                       |
-| PUT    | `/livros/:id`         | Atualiza livro                   |
-| DELETE | `/livros/:id`         | Exclui livro                     |
-| POST   | `/livros/:id/imagem`  | Envia capa usando campo `imagem` |
+| Método | Rota                  | Descrição                                                |
+| ------ | --------------------- | -------------------------------------------------------- |
+| GET    | `/livros`             | Lista livros                                             |
+| GET    | `/livros?busca=texto` | Pesquisa por título                                      |
+| GET    | `/livros/:id`         | Busca por id, incluindo páginas, editora, ISBN e sinopse |
+| POST   | `/livros`             | Cria livro com dados básicos e detalhes                  |
+| PUT    | `/livros/:id`         | Atualiza livro e detalhes                                |
+| DELETE | `/livros/:id`         | Exclui livro                                             |
+| POST   | `/livros/:id/imagem`  | Envia capa usando campo `imagem`                         |
 
 ## Empréstimos
 
-| Metodo | Rota               |
+| Método | Rota               |
 | ------ | ------------------ |
 | GET    | `/emprestimos`     |
 | GET    | `/emprestimos/:id` |
@@ -54,14 +54,14 @@ Prefixo base: `/api/v1`
 
 ## JSON, Logs, Relatórios e Gráficos
 
-| Metodo | Rota                                                          | Descricao                                          |
+| Método | Rota                                                          | Descrição                                          |
 | ------ | ------------------------------------------------------------- | -------------------------------------------------- |
 | GET    | `/json/exportar/:entidade`                                    | Exporta autores, categorias, livros ou empréstimos |
 | POST   | `/json/importar/:entidade`                                    | Importa autores, categorias ou livros              |
 | GET    | `/logs`                                                       | Lista últimos logs para o dashboard                |
 | GET    | `/logs/exportar/xml`                                          | Exporta logs em XML                                |
-| GET    | `/logs/exportar/xml?usuario=admin`                            | Filtra por usuario                                 |
-| GET    | `/logs/exportar/xml?dataInicio=2026-01-01&dataFim=2026-12-31` | Filtra por periodo                                 |
-| GET    | `/relatorios/livros`                                          | Dados do relatório de livros                       |
+| GET    | `/logs/exportar/xml?usuario=admin`                            | Filtra por usuário                                 |
+| GET    | `/logs/exportar/xml?dataInicio=2026-01-01&dataFim=2026-12-31` | Filtra por período                                 |
+| GET    | `/relatorios/livros`                                          | Dados do relatório de livros, incluindo páginas    |
 | GET    | `/relatorios/livros?categoria=1`                              | Relatório filtrado                                 |
 | GET    | `/graficos/livros-por-categoria`                              | Dados para Chart.js                                |

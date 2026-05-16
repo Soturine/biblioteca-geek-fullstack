@@ -17,7 +17,7 @@
         <h1 class="display-4">Biblioteca Geek Fullstack</h1>
         <p class="lead col-lg-8">
           Sistema web para gestão de livros, autores, categorias, empréstimos, logs, XML, relatório
-          PDF, gráfico e upload de capas.
+          PDF, gráfico, upload de capas e modal de detalhes dos livros.
         </p>
         <p class="mb-0">
           Esta página é apenas uma apresentação estática. O sistema completo roda localmente com
@@ -45,6 +45,17 @@
       </section>
 
       <section class="section">
+        <div class="container">
+          <h2 class="mb-4">Demonstração rápida</h2>
+          <img
+            class="img-fluid shot"
+            src="assets/gifs/demo-biblioteca-geek.gif"
+            alt="Demonstração do sistema"
+          />
+        </div>
+      </section>
+
+      <section class="section bg-white">
         <div class="container">
           <h2 class="mb-4">Telas do sistema</h2>
           <div class="row g-4">
@@ -96,25 +107,25 @@
         </div>
       </section>
 
-      <section class="section bg-white">
+      <section class="section">
         <div class="container">
           <div class="row g-4 align-items-center">
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <h2>DER</h2>
               <p>
                 O banco MySQL possui usuários, autores, categorias, livros, empréstimos e itens de
-                empréstimo, incluindo relacionamentos 1:N e N:N.
+                empréstimo. A tabela de livros inclui páginas, sinopse, editora e ISBN.
               </p>
               <a class="btn btn-primary" href="DER.md">Ver DER em Markdown</a>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-7">
               <img class="img-fluid shot" src="DER.png" alt="DER do sistema" />
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section bg-white">
         <div class="container">
           <h2>Links úteis</h2>
           <div class="d-flex flex-wrap gap-2">
@@ -128,12 +139,14 @@
         </div>
       </section>
 
-      <section class="section bg-white">
+      <section class="section">
         <div class="container">
           <h2>Como rodar localmente</h2>
           <ol>
             <li>Ligue o MySQL no XAMPP.</li>
-            <li>Dê dois cliques em <code>scripts/windows/iniciar_tudo.bat</code>.</li>
+            <li>Inicie o MongoDB.</li>
+            <li>Importe <code>database/schema.sql</code> e <code>database/inserts.sql</code>.</li>
+            <li>Rode <code>npm install</code> e depois <code>npm start</code>.</li>
             <li>Acesse <code>http://localhost:3000</code>.</li>
             <li>Entre com <code>admin@admin.com</code> e senha <code>123456</code>.</li>
           </ol>
@@ -142,7 +155,7 @@
     </main>
 
     <footer class="py-4 bg-dark text-white">
-      <div class="container">Biblioteca Geek Fullstack - Programação para Internet</div>
+      <div class="container">Biblioteca Geek Fullstack - Programação para Internet - MIT</div>
     </footer>
   </body>
 </html>

@@ -19,6 +19,7 @@ const GraficoRouter = require('./router/GraficoRouter');
 
 const app = express();
 
+// Configuração principal do Express: JSON, formulário, uploads e telas estáticas.
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));

@@ -7,6 +7,9 @@ O Sistema Biblioteca Geek controla autores, categorias, livros com capa, emprés
 ## Regras de negócio
 
 - Livro não pode ter título vazio.
+- Livro pode ter páginas, editora, ISBN e sinopse.
+- Páginas deve ser número maior ou igual a zero.
+- Sinopse pode ser vazia, mas se preenchida deve ter pelo menos 10 caracteres.
 - Autor precisa ter nome com pelo menos 3 caracteres.
 - Categoria não pode ser duplicada.
 - Empréstimo precisa ter ao menos um item.
@@ -58,7 +61,7 @@ Tabelas:
 - `usuarios`
 - `autores`
 - `categorias`
-- `livros`
+- `livros`: possui também `paginas`, `sinopse`, `editora` e `isbn`.
 - `emprestimos`
 - `itens_emprestimo`
 
@@ -69,7 +72,7 @@ Relacionamentos:
 - Usuário 1:N Empréstimos.
 - Empréstimos N:N Livros por `itens_emprestimo`.
 
-Os scripts estao em `database/schema.sql` e `database/inserts.sql`.
+Os scripts estão em `database/schema.sql`, `database/inserts.sql` e `database/migrations/001_add_detalhes_livros.sql`.
 
 ## MongoDB
 
@@ -98,11 +101,11 @@ Campos principais:
 
 ## XML
 
-O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB, aplica filtros opcionais por usuario e periodo, e gera XML seguro usando escape de caracteres especiais.
+O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB, aplica filtros opcionais por usuário e período, e gera XML seguro usando escape de caracteres especiais.
 
 ## Relatório PDF
 
-O backend entrega dados em JSON pelo endpoint `/api/v1/relatorios/livros`. O frontend gera o PDF com jsPDF e jsPDF AutoTable, contendo título, data, usuário, tabela, total e rodapé.
+O backend entrega dados em JSON pelo endpoint `/api/v1/relatorios/livros`. O frontend gera o PDF com jsPDF e jsPDF AutoTable, contendo título, data, usuário, tabela, total de livros, total de exemplares, total de páginas e rodapé.
 
 ## Gráfico
 
@@ -110,7 +113,15 @@ O dashboard usa Chart.js. Os dados chegam de `/api/v1/graficos/livros-por-catego
 
 ## Capas demonstrativas
 
-Os dados iniciais em `database/inserts.sql` apontam para capas SVG autorais em `public/uploads/capas-demo/`. Essas capas são locais, simples e feitas apenas para apresentação acadêmica.
+Os dados iniciais em `database/inserts.sql` possuem 20 livros e apontam para capas SVG autorais em `public/uploads/capas-demo/`. Essas capas são locais, simples e feitas apenas para apresentação acadêmica.
+
+## Modal de detalhes
+
+A tela de livros mantém a listagem simples e usa um modal Bootstrap para exibir capa maior, título, autor, categoria, ano, páginas, editora, ISBN, quantidade disponível e sinopse.
+
+## Licença
+
+O projeto usa licença MIT, disponível no arquivo `LICENSE`.
 
 ## Screenshots
 
@@ -118,4 +129,4 @@ Os screenshots principais ficam em `docs/assets/screenshots/`. As evidências co
 
 ## Endpoints
 
-A lista completa esta em `docs/ENDPOINTS.md`.
+A lista completa está em `docs/ENDPOINTS.md`.

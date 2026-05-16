@@ -3,14 +3,20 @@ const pool = require('../config/mysql_database');
 
 class LivroDAO extends IDAO {
   async create(livro) {
+    // Prepared statements evitam SQL injection e mantêm o SQL fora dos Services.
     const [result] = await pool.execute(
-      `INSERT INTO livros (titulo, ano, quantidade, imagem, id_autor, id_categoria)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO livros
+       (titulo, ano, quantidade, imagem, paginas, sinopse, editora, isbn, id_autor, id_categoria)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         livro.titulo,
         Number(livro.ano),
         Number(livro.quantidade),
         livro.imagem || null,
+        Number(livro.paginas || 0),
+        livro.sinopse || null,
+        livro.editora || null,
+        livro.isbn || null,
         Number(livro.id_autor),
         Number(livro.id_categoria),
       ],
@@ -71,6 +77,7 @@ class LivroDAO extends IDAO {
     await pool.execute(
       `UPDATE livros
        SET titulo = ?, ano = ?, quantidade = ?, imagem = COALESCE(?, imagem),
+           paginas = ?, sinopse = ?, editora = ?, isbn = ?,
            id_autor = ?, id_categoria = ?
        WHERE id_livro = ?`,
       [
@@ -78,6 +85,10 @@ class LivroDAO extends IDAO {
         Number(livro.ano),
         Number(livro.quantidade),
         livro.imagem || null,
+        Number(livro.paginas || 0),
+        livro.sinopse || null,
+        livro.editora || null,
+        livro.isbn || null,
         Number(livro.id_autor),
         Number(livro.id_categoria),
         id,
@@ -107,7 +118,7 @@ class LivroDAO extends IDAO {
     }
 
     const [rows] = await pool.execute(
-      `SELECT l.id_livro, l.titulo, l.ano, l.quantidade,
+      `SELECT l.id_livro, l.titulo, l.ano, l.quantidade, l.paginas, l.editora, l.isbn,
               a.nome AS autor, c.nome AS categoria
        FROM livros l
        INNER JOIN autores a ON a.id_autor = l.id_autor

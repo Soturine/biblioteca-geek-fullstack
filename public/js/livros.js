@@ -17,6 +17,10 @@ function limparLivro() {
   document.getElementById('tituloLivro').value = '';
   document.getElementById('anoLivro').value = new Date().getFullYear();
   document.getElementById('quantidadeLivro').value = 1;
+  document.getElementById('paginasLivro').value = 0;
+  document.getElementById('editoraLivro').value = '';
+  document.getElementById('isbnLivro').value = '';
+  document.getElementById('sinopseLivro').value = '';
   document.getElementById('autorLivro').value = '';
   document.getElementById('categoriaLivro').value = '';
   document.getElementById('imagemLivro').value = '';
@@ -64,7 +68,8 @@ async function carregarLivros(busca = '') {
         <td>${escapeHtml(livro.autor_nome)}</td>
         <td>${escapeHtml(livro.categoria_nome)}</td>
         <td>${escapeHtml(livro.quantidade)}</td>
-        <td class="text-end">
+        <td class="text-end text-nowrap">
+          <button class="btn btn-sm btn-outline-secondary me-1" onclick="abrirDetalhesLivro(${livro.id_livro})">Detalhes</button>
           <button class="btn btn-sm btn-outline-primary me-1" onclick="editarLivro(${livro.id_livro})">Editar</button>
           <button class="btn btn-sm btn-outline-danger" onclick="excluirLivro(${livro.id_livro})">Excluir</button>
         </td>
@@ -72,6 +77,18 @@ async function carregarLivros(busca = '') {
     `;
     })
     .join('');
+}
+
+function preencherPreview(livro) {
+  const preview = document.getElementById('previewImagemLivro');
+  if (livro.imagem) {
+    preview.src = livro.imagem;
+    preview.classList.remove('d-none');
+    return;
+  }
+
+  preview.classList.add('d-none');
+  preview.removeAttribute('src');
 }
 
 function editarLivro(id) {
@@ -84,19 +101,58 @@ function editarLivro(id) {
   document.getElementById('tituloLivro').value = livro.titulo;
   document.getElementById('anoLivro').value = livro.ano;
   document.getElementById('quantidadeLivro').value = livro.quantidade;
+  document.getElementById('paginasLivro').value = livro.paginas || 0;
+  document.getElementById('editoraLivro').value = livro.editora || '';
+  document.getElementById('isbnLivro').value = livro.isbn || '';
+  document.getElementById('sinopseLivro').value = livro.sinopse || '';
   document.getElementById('autorLivro').value = livro.id_autor;
   document.getElementById('categoriaLivro').value = livro.id_categoria;
   document.getElementById('imagemLivro').value = '';
+  preencherPreview(livro);
+  document.getElementById('tituloFormLivro').textContent = 'Editar livro';
+}
 
-  if (livro.imagem) {
-    document.getElementById('previewImagemLivro').src = livro.imagem;
-    document.getElementById('previewImagemLivro').classList.remove('d-none');
-  } else {
-    document.getElementById('previewImagemLivro').classList.add('d-none');
-    document.getElementById('previewImagemLivro').removeAttribute('src');
+function detalheLinha(rotulo, valor) {
+  return `
+    <div class="detail-item">
+      <span>${rotulo}</span>
+      <strong>${escapeHtml(valor || 'Não informado')}</strong>
+    </div>
+  `;
+}
+
+function abrirDetalhesLivro(id) {
+  const livro = livros.find((item) => Number(item.id_livro) === Number(id));
+  if (!livro) {
+    return;
   }
 
-  document.getElementById('tituloFormLivro').textContent = 'Editar livro';
+  document.getElementById('detalheTitulo').textContent = livro.titulo;
+  const capa = livro.imagem
+    ? `<img class="detail-cover" src="${escapeHtml(livro.imagem)}" alt="Capa de ${escapeHtml(livro.titulo)}">`
+    : '<span class="detail-cover empty-cover">Sem capa</span>';
+
+  document.getElementById('detalheLivroConteudo').innerHTML = `
+    <div class="book-detail">
+      <div>${capa}</div>
+      <div>
+        <h3>${escapeHtml(livro.titulo)}</h3>
+        <div class="detail-grid">
+          ${detalheLinha('Autor', livro.autor_nome)}
+          ${detalheLinha('Categoria', livro.categoria_nome)}
+          ${detalheLinha('Ano', livro.ano)}
+          ${detalheLinha('Páginas', livro.paginas)}
+          ${detalheLinha('Editora', livro.editora)}
+          ${detalheLinha('ISBN', livro.isbn)}
+          ${detalheLinha('Disponível', livro.quantidade)}
+        </div>
+        <h4 class="h6 mt-3">Sinopse</h4>
+        <p class="mb-0">${escapeHtml(livro.sinopse || 'Sinopse não informada.')}</p>
+      </div>
+    </div>
+  `;
+
+  bootstrap.Modal.getOrCreateInstance(document.getElementById('modalDetalhesLivro')).show();
 }
 
 function validarArquivoImagem(input) {
@@ -120,6 +176,23 @@ function validarArquivoImagem(input) {
     showAlert('alertLivros', 'A capa deve ter no máximo 2 MB.', 'warning');
     input.value = '';
     document.getElementById('previewImagemLivro').classList.add('d-none');
+    return false;
+  }
+
+  return true;
+}
+
+function validarDetalhesLivro() {
+  const paginas = Number(document.getElementById('paginasLivro').value || 0);
+  const sinopse = document.getElementById('sinopseLivro').value.trim();
+
+  if (!Number.isInteger(paginas) || paginas < 0) {
+    showAlert('alertLivros', 'Páginas deve ser um número maior ou igual a zero.', 'warning');
+    return false;
+  }
+
+  if (sinopse && sinopse.length < 10) {
+    showAlert('alertLivros', 'A sinopse deve ter pelo menos 10 caracteres.', 'warning');
     return false;
   }
 
@@ -194,7 +267,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    if (!validarArquivoImagem(document.getElementById('imagemLivro'))) {
+    if (!validarDetalhesLivro() || !validarArquivoImagem(document.getElementById('imagemLivro'))) {
       return;
     }
 
@@ -203,6 +276,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       titulo: document.getElementById('tituloLivro').value,
       ano: Number(document.getElementById('anoLivro').value),
       quantidade: Number(document.getElementById('quantidadeLivro').value),
+      paginas: Number(document.getElementById('paginasLivro').value || 0),
+      editora: document.getElementById('editoraLivro').value,
+      isbn: document.getElementById('isbnLivro').value,
+      sinopse: document.getElementById('sinopseLivro').value,
       id_autor: Number(document.getElementById('autorLivro').value),
       id_categoria: Number(document.getElementById('categoriaLivro').value),
     };

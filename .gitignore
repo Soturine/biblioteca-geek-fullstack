@@ -9,5 +9,13 @@ public/uploads/*
 !public/uploads/capas-demo/
 !public/uploads/capas-demo/**
 
+scripts/windows/
+scripts/gerar_screenshots.js
+scripts/open-browser.js
+scripts/start-and-open.js
+scripts/gerar_der_png.ps1
+*.bat
+*.ps1
+
 .DS_Store
 Thumbs.db

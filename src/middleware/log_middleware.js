@@ -6,6 +6,7 @@ function logMiddleware(req, res, next) {
   res.on('finish', () => {
     const tempo = Date.now() - inicio;
 
+    // O log de acesso é assíncrono para não atrasar a resposta HTTP.
     LogService.registrar({
       usuario: req.usuario ? req.usuario.email : 'anonimo',
       acao: 'ACESSO_ROTA',

@@ -12,6 +12,9 @@ O tema escolhido foi **Sistema Biblioteca Geek**. O objetivo é controlar uma bi
 - Autor deve ter nome com pelo menos 3 caracteres.
 - Categoria não pode ser duplicada.
 - Livro precisa ter título, ano, quantidade, autor e categoria.
+- Livro pode ter páginas, editora, ISBN e sinopse.
+- Páginas deve ser número maior ou igual a zero.
+- Sinopse pode ser vazia, mas se preenchida deve ter pelo menos 10 caracteres.
 - Empréstimo precisa ter nome do leitor e pelo menos um item.
 - A quantidade emprestada não pode ser maior que o estoque.
 - Ao criar empréstimo, o estoque do livro diminui.
@@ -92,7 +95,7 @@ Tabelas:
 - `usuarios`
 - `autores`
 - `categorias`
-- `livros`
+- `livros`: título, ano, quantidade, imagem, páginas, sinopse, editora, ISBN, autor e categoria.
 - `emprestimos`
 - `itens_emprestimo`
 
@@ -103,6 +106,7 @@ Tabelas:
 - Categoria 1:N Livros.
 - Empréstimo N:N Livros por `itens_emprestimo`.
 - `itens_emprestimo` e a tabela intermediária que guarda quantidade por livro.
+- A migration `database/migrations/001_add_detalhes_livros.sql` adiciona os campos de detalhes em bancos já criados.
 
 ## MongoDB e estrutura dos logs
 
@@ -161,6 +165,7 @@ O backend retorna dados em JSON por `/api/v1/relatorios/livros`. O frontend gera
 - tabela organizada
 - total de livros
 - total de exemplares
+- total de páginas
 - rodape do sistema
 
 ## Telas principais
@@ -169,7 +174,7 @@ Os screenshots finais estão em `docs/assets/screenshots/`:
 
 - `01-login.png`: tela de login.
 - `02-dashboard.png`: dashboard com cards, logs e gráfico.
-- `03-livros.png`: CRUD de livros com capas.
+- `03-livros.png`: CRUD de livros com capas e botão de detalhes.
 - `04-autores.png`: CRUD de autores.
 - `05-categorias.png`: CRUD de categorias.
 - `06-empréstimos.png`: CRUD de empréstimos.
@@ -181,7 +186,11 @@ As evidências anteriores às melhorias finais foram preservadas em `docs/assets
 
 ## Capas demonstrativas locais
 
-Os livros iniciais usam capas autorais simples em SVG dentro de `public/uploads/capas-demo/`. Elas são usadas apenas para demonstração e não dependem de API externa nem de imagens protegidas baixadas da internet.
+Os 20 livros iniciais usam capas autorais simples em SVG dentro de `public/uploads/capas-demo/`. Elas são usadas apenas para demonstração e não dependem de API externa nem de imagens protegidas baixadas da internet.
+
+## Modal de detalhes do livro
+
+A tela `public/livros.html` mantém a tabela simples e usa um modal Bootstrap para exibir capa maior, título, autor, categoria, ano, páginas, editora, ISBN, quantidade disponível e sinopse.
 
 ## Gráfico
 
@@ -196,18 +205,16 @@ O Dashboard usa Chart.js e consome `/api/v1/graficos/livros-por-categoria`, que 
 5. Criar `.env` baseado em `.env.example`.
 6. Rodar:
 
-```powershell
+```text
 npm install
 npm start
 ```
 
 7. Acessar `http://localhost:3000`.
 
-Também é possível usar o modo fácil no Windows:
+## Licença
 
-```text
-scripts/windows/iniciar_tudo.bat
-```
+O projeto está sob a licença MIT, registrada no arquivo `LICENSE`.
 
 ## Endpoints principais
 

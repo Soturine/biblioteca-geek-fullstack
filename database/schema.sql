@@ -37,6 +37,10 @@ CREATE TABLE livros (
   ano INT NOT NULL,
   quantidade INT NOT NULL DEFAULT 0,
   imagem VARCHAR(255),
+  paginas INT NOT NULL DEFAULT 0,
+  sinopse TEXT,
+  editora VARCHAR(120),
+  isbn VARCHAR(30),
   id_autor INT NOT NULL,
   id_categoria INT NOT NULL,
   CONSTRAINT fk_livros_autores

@@ -26,11 +26,16 @@ class LivroService extends IService {
   }
 
   normalizar(dados) {
+    // O Service centraliza a preparação dos dados antes do DAO gravar no MySQL.
     return {
       titulo: dados.titulo.trim(),
       ano: Number(dados.ano),
       quantidade: Number(dados.quantidade),
       imagem: dados.imagem || null,
+      paginas: Number(dados.paginas || 0),
+      sinopse: dados.sinopse ? dados.sinopse.trim() : null,
+      editora: dados.editora ? dados.editora.trim() : null,
+      isbn: dados.isbn ? dados.isbn.trim() : null,
       id_autor: Number(dados.id_autor),
       id_categoria: Number(dados.id_categoria),
     };

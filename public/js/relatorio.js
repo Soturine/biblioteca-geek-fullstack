@@ -28,6 +28,7 @@ async function carregarRelatorio() {
       <td>${escapeHtml(livro.autor)}</td>
       <td>${escapeHtml(livro.categoria)}</td>
       <td>${escapeHtml(livro.ano)}</td>
+      <td>${escapeHtml(livro.paginas || 0)}</td>
       <td>${escapeHtml(livro.quantidade)}</td>
     </tr>
   `,
@@ -35,6 +36,10 @@ async function carregarRelatorio() {
     .join('');
 
   document.getElementById('totalRelatorio').textContent = resposta.data.total;
+  document.getElementById('totalPaginasRelatorio').textContent = dadosRelatorio.reduce(
+    (total, livro) => total + Number(livro.paginas || 0),
+    0,
+  );
 }
 
 function gerarPdf() {
@@ -50,7 +55,12 @@ function gerarPdf() {
     (total, livro) => total + Number(livro.quantidade),
     0,
   );
+  const totalPaginas = dadosRelatorio.reduce(
+    (total, livro) => total + Number(livro.paginas || 0),
+    0,
+  );
 
+  // O PDF é gerado no navegador para atender ao requisito de jsPDF do frontend.
   doc.setFontSize(16);
   doc.text('Relatório de livros - Biblioteca Geek', 14, 16);
   doc.setFontSize(10);
@@ -60,12 +70,13 @@ function gerarPdf() {
 
   doc.autoTable({
     startY: 44,
-    head: [['Livro', 'Autor', 'Categoria', 'Ano', 'Quantidade']],
+    head: [['Livro', 'Autor', 'Categoria', 'Ano', 'Páginas', 'Quantidade']],
     body: dadosRelatorio.map((livro) => [
       livro.titulo,
       livro.autor,
       livro.categoria,
       livro.ano,
+      livro.paginas || 0,
       livro.quantidade,
     ]),
     styles: { fontSize: 9 },
@@ -75,6 +86,7 @@ function gerarPdf() {
   const finalY = doc.lastAutoTable.finalY + 10;
   doc.text(`Total de livros cadastrados: ${dadosRelatorio.length}`, 14, finalY);
   doc.text(`Total de exemplares disponíveis: ${totalExemplares}`, 14, finalY + 6);
+  doc.text(`Total de páginas: ${totalPaginas}`, 14, finalY + 12);
   doc.text('Biblioteca Geek - Programação para Internet', 14, 285);
   doc.save('relatorio_livros_biblioteca_geek.pdf');
 }
