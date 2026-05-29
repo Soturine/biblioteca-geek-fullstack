@@ -1,6 +1,7 @@
 const express = require('express');
 const EmprestimoController = require('../controller/EmprestimoController');
 const { validarEmprestimo } = require('../middleware/validation_middleware');
+const { somenteAdmin } = require('../middleware/role_middleware');
 
 class EmprestimoRouter {
   constructor() {
@@ -10,6 +11,7 @@ class EmprestimoRouter {
   }
 
   configurarRotas() {
+    this.router.use(somenteAdmin);
     this.router.get('/', this.controller.index.bind(this.controller));
     this.router.get('/:id', this.controller.show.bind(this.controller));
     this.router.post('/', validarEmprestimo, this.controller.store.bind(this.controller));

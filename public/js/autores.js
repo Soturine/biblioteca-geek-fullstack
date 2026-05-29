@@ -55,7 +55,9 @@ async function excluirAutor(id) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  protegerPagina();
+  if (!protegerAdmin()) {
+    return;
+  }
   montarNavbar('autores');
 
   document.getElementById('btnLimparAutor').addEventListener('click', limparAutor);

@@ -41,7 +41,7 @@ class AuthService extends IService {
   }
 
   async register(dados) {
-    return this.usuarioService.create(dados);
+    return this.usuarioService.create({ ...dados, perfil: 'leitor' });
   }
 
   async create(dados) {

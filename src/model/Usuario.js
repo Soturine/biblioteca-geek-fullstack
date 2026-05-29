@@ -1,7 +1,7 @@
 const ErrorResponse = require('../utils/ErrorResponse');
 
 class Usuario {
-  constructor({ id_usuario, nome, email, senha, senha_hash, perfil = 'usuario', criado_em }) {
+  constructor({ id_usuario, nome, email, senha, senha_hash, perfil = 'leitor', criado_em }) {
     this.id_usuario = id_usuario;
     this.nome = nome;
     this.email = email;
@@ -49,6 +49,11 @@ class Usuario {
     if (erros.length) {
       throw new ErrorResponse('Dados de login invalidos', 400, erros);
     }
+  }
+
+  static normalizarPerfil(perfil) {
+    const valor = String(perfil || 'leitor').toLowerCase();
+    return valor === 'admin' ? 'admin' : 'leitor';
   }
 }
 

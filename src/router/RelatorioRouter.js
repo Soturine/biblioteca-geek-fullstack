@@ -1,5 +1,6 @@
 const express = require('express');
 const RelatorioController = require('../controller/RelatorioController');
+const { somenteAdmin } = require('../middleware/role_middleware');
 
 class RelatorioRouter {
   constructor() {
@@ -9,6 +10,7 @@ class RelatorioRouter {
   }
 
   configurarRotas() {
+    this.router.use(somenteAdmin);
     this.router.get('/livros', this.controller.livros.bind(this.controller));
   }
 

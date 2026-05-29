@@ -26,10 +26,39 @@ function usuarioAtual() {
   }
 }
 
+function perfilAtual() {
+  const perfil = String(usuarioAtual()?.perfil || '').toLowerCase();
+  return perfil === 'usuario' ? 'leitor' : perfil;
+}
+
+function isAdmin() {
+  return perfilAtual() === 'admin';
+}
+
+function destinoInicial() {
+  return isAdmin() ? 'dashboard.html' : 'livros.html';
+}
+
 function protegerPagina() {
   if (!getToken()) {
     window.location.href = 'login.html';
+    return false;
   }
+
+  return true;
+}
+
+function protegerAdmin() {
+  if (!protegerPagina()) {
+    return false;
+  }
+
+  if (!isAdmin()) {
+    window.location.href = 'livros.html';
+    return false;
+  }
+
+  return true;
 }
 
 function authHeaders(extra = {}) {
@@ -63,7 +92,10 @@ async function apiFetch(path, options = {}) {
     : await response.text();
 
   if (!response.ok) {
-    const message = data && data.message ? data.message : 'Erro na requisicao';
+    const message =
+      data && (data.message || data.mensagem)
+        ? data.message || data.mensagem
+        : 'Erro na requisicao';
     throw new Error(message);
   }
 
@@ -117,9 +149,9 @@ function montarNavbar(active = '') {
     return;
   }
 
-  const links = [
+  const linksAdmin = [
     ['dashboard.html', 'Dashboard', 'dashboard'],
-    ['livros.html', 'Livros', 'livros'],
+    ['livros.html', 'Catálogo', 'livros'],
     ['autores.html', 'Autores', 'autores'],
     ['categorias.html', 'Categorias', 'categorias'],
     ['emprestimos.html', 'Empréstimos', 'emprestimos'],
@@ -127,11 +159,14 @@ function montarNavbar(active = '') {
     ['logs.html', 'Logs XML', 'logs'],
     ['relatorio.html', 'Relatório', 'relatorio'],
   ];
+  const linksLeitor = [['livros.html', 'Catálogo', 'livros']];
+  const links = isAdmin() ? linksAdmin : linksLeitor;
+  const home = isAdmin() ? 'dashboard.html' : 'livros.html';
 
   alvo.innerHTML = `
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="dashboard.html">Biblioteca Geek</a>
+        <a class="navbar-brand" href="${home}">Biblioteca Geek</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menu">
           <span class="navbar-toggler-icon"></span>
         </button>

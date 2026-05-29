@@ -1,5 +1,6 @@
 const express = require('express');
 const GraficoController = require('../controller/GraficoController');
+const { somenteAdmin } = require('../middleware/role_middleware');
 
 class GraficoRouter {
   constructor() {
@@ -9,6 +10,7 @@ class GraficoRouter {
   }
 
   configurarRotas() {
+    this.router.use(somenteAdmin);
     this.router.get(
       '/livros-por-categoria',
       this.controller.livrosPorCategoria.bind(this.controller),

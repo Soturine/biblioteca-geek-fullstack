@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  protegerPagina();
+  if (!protegerAdmin()) {
+    return;
+  }
   montarNavbar('json');
 
   document.getElementById('btnExportarJson').addEventListener('click', async () => {

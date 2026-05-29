@@ -1,6 +1,7 @@
 const express = require('express');
 const CategoriaController = require('../controller/CategoriaController');
 const { validarCategoria } = require('../middleware/validation_middleware');
+const { somenteAdmin } = require('../middleware/role_middleware');
 
 class CategoriaRouter {
   constructor() {
@@ -12,9 +13,19 @@ class CategoriaRouter {
   configurarRotas() {
     this.router.get('/', this.controller.index.bind(this.controller));
     this.router.get('/:id', this.controller.show.bind(this.controller));
-    this.router.post('/', validarCategoria, this.controller.store.bind(this.controller));
-    this.router.put('/:id', validarCategoria, this.controller.update.bind(this.controller));
-    this.router.delete('/:id', this.controller.destroy.bind(this.controller));
+    this.router.post(
+      '/',
+      somenteAdmin,
+      validarCategoria,
+      this.controller.store.bind(this.controller),
+    );
+    this.router.put(
+      '/:id',
+      somenteAdmin,
+      validarCategoria,
+      this.controller.update.bind(this.controller),
+    );
+    this.router.delete('/:id', somenteAdmin, this.controller.destroy.bind(this.controller));
   }
 
   getRouter() {

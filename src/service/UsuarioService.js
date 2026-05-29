@@ -23,7 +23,7 @@ class UsuarioService extends IService {
       nome: dados.nome.trim(),
       email: dados.email.trim().toLowerCase(),
       senha_hash: senhaHash,
-      perfil: dados.perfil || 'usuario',
+      perfil: Usuario.normalizarPerfil(dados.perfil),
     });
   }
 
@@ -52,7 +52,7 @@ class UsuarioService extends IService {
     return this.usuarioDAO.update(id, {
       nome: dados.nome || atual.nome,
       email: dados.email || atual.email,
-      perfil: dados.perfil || atual.perfil,
+      perfil: dados.perfil ? Usuario.normalizarPerfil(dados.perfil) : atual.perfil,
     });
   }
 

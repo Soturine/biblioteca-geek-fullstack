@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  protegerPagina();
+  if (!protegerAdmin()) {
+    return;
+  }
   montarNavbar('logs');
 
   document.getElementById('formLogs').addEventListener('submit', async (event) => {

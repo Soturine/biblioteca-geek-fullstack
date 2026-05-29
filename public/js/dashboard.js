@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  protegerPagina();
+  if (!protegerAdmin()) {
+    return;
+  }
   montarNavbar('dashboard');
 
   try {

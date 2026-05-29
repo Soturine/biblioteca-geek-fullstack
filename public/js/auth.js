@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   if (getToken()) {
-    window.location.href = 'dashboard.html';
+    window.location.href = destinoInicial();
     return;
   }
 
@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       setToken(resposta.data.token);
-      window.location.href = 'dashboard.html';
+      window.location.href =
+        resposta.data.usuario.perfil === 'admin' ? 'dashboard.html' : 'livros.html';
     } catch (error) {
       showAlert('alertAuth', error.message, 'danger');
     }

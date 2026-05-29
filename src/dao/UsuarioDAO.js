@@ -5,7 +5,7 @@ class UsuarioDAO extends IDAO {
   async create(usuario) {
     const [result] = await pool.execute(
       'INSERT INTO usuarios (nome, email, senha_hash, perfil) VALUES (?, ?, ?, ?)',
-      [usuario.nome, usuario.email, usuario.senha_hash, usuario.perfil || 'usuario'],
+      [usuario.nome, usuario.email, usuario.senha_hash, usuario.perfil || 'leitor'],
     );
 
     return this.findById(result.insertId);
@@ -38,7 +38,7 @@ class UsuarioDAO extends IDAO {
     await pool.execute('UPDATE usuarios SET nome = ?, email = ?, perfil = ? WHERE id_usuario = ?', [
       usuario.nome,
       usuario.email,
-      usuario.perfil || 'usuario',
+      usuario.perfil || 'leitor',
       id,
     ]);
     return this.findById(id);

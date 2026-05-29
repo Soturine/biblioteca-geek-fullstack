@@ -52,7 +52,9 @@ async function excluirCategoria(id) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  protegerPagina();
+  if (!protegerAdmin()) {
+    return;
+  }
   montarNavbar('categorias');
 
   document.getElementById('btnLimparCategoria').addEventListener('click', limparCategoria);

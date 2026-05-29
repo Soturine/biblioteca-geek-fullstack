@@ -92,7 +92,9 @@ function gerarPdf() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  protegerPagina();
+  if (!protegerAdmin()) {
+    return;
+  }
   montarNavbar('relatorio');
 
   document.getElementById('formRelatorio').addEventListener('submit', async (event) => {
