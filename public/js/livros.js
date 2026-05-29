@@ -31,26 +31,47 @@ function limparLivro() {
 }
 
 async function carregarCombosLivro() {
-  const [autoresResp, categoriasResp] = await Promise.all([
-    apiFetch('/autores'),
-    apiFetch('/categorias'),
-  ]);
-
-  autoresLivro = autoresResp.data;
+  const categoriasResp = await apiFetch('/categorias');
   categoriasLivro = categoriasResp.data;
-  document.getElementById('autorLivro').innerHTML = options(autoresLivro, 'id_autor', 'nome');
-  document.getElementById('categoriaLivro').innerHTML = options(
-    categoriasLivro,
-    'id_categoria',
-    'nome',
-  );
+  document.getElementById('filtroCategoriaLivro').innerHTML =
+    '<option value="">Todas as categorias</option>' +
+    categoriasLivro
+      .map(
+        (categoria) => `
+      <option value="${categoria.id_categoria}">${escapeHtml(categoria.nome)}</option>
+    `,
+      )
+      .join('');
+
+  if (isAdmin()) {
+    const autoresResp = await apiFetch('/autores');
+    autoresLivro = autoresResp.data;
+    document.getElementById('autorLivro').innerHTML = options(autoresLivro, 'id_autor', 'nome');
+    document.getElementById('categoriaLivro').innerHTML = options(
+      categoriasLivro,
+      'id_categoria',
+      'nome',
+    );
+  }
 }
 
 async function carregarLivros(busca = '') {
-  const query = busca ? `?busca=${encodeURIComponent(busca)}` : '';
+  const params = new URLSearchParams();
+  const categoria = document.getElementById('filtroCategoriaLivro').value;
+
+  if (busca) {
+    params.append('busca', busca);
+  }
+
+  if (categoria) {
+    params.append('categoria', categoria);
+  }
+
+  const query = params.toString() ? `?${params.toString()}` : '';
   const resposta = await apiFetch(`/livros${query}`);
   livros = resposta.data;
   const tbody = document.getElementById('tbodyLivros');
+  const usuarioAdmin = isAdmin();
 
   tbody.innerHTML = livros
     .map((livro) => {
@@ -70,13 +91,64 @@ async function carregarLivros(busca = '') {
         <td>${escapeHtml(livro.quantidade)}</td>
         <td class="text-end text-nowrap">
           <button class="btn btn-sm btn-outline-secondary me-1" onclick="abrirDetalhesLivro(${livro.id_livro})">Detalhes</button>
-          <button class="btn btn-sm btn-outline-primary me-1" onclick="editarLivro(${livro.id_livro})">Editar</button>
-          <button class="btn btn-sm btn-outline-danger" onclick="excluirLivro(${livro.id_livro})">Excluir</button>
+          ${
+            usuarioAdmin
+              ? `<button class="btn btn-sm btn-outline-primary me-1" onclick="editarLivro(${livro.id_livro})">Editar</button>
+          <button class="btn btn-sm btn-outline-danger" onclick="excluirLivro(${livro.id_livro})">Excluir</button>`
+              : ''
+          }
         </td>
       </tr>
     `;
     })
     .join('');
+}
+
+function renderCatalogoResumo(containerId, lista) {
+  const container = document.getElementById(containerId);
+
+  if (!lista.length) {
+    container.innerHTML = '<p class="text-secondary mb-0">Nenhum livro encontrado.</p>';
+    return;
+  }
+
+  container.innerHTML = lista
+    .slice(0, 10)
+    .map(
+      (livro) => `
+    <button class="catalog-mini" type="button" onclick="abrirDetalhesLivro(${livro.id_livro})">
+      <img src="${escapeHtml(livro.imagem || '')}" alt="Capa de ${escapeHtml(livro.titulo)}">
+      <span>
+        <strong>${escapeHtml(livro.titulo)}</strong>
+        <small>${escapeHtml(livro.categoria_nome || livro.categoria || '')}</small>
+      </span>
+    </button>
+  `,
+    )
+    .join('');
+}
+
+async function carregarDestaquesCatalogo() {
+  if (isAdmin()) {
+    return;
+  }
+
+  const [topResp, recomendadosResp] = await Promise.all([
+    apiFetch('/livros/top-emprestados'),
+    apiFetch('/livros/recomendados'),
+  ]);
+
+  renderCatalogoResumo('topLivrosCatalogo', topResp.data);
+  renderCatalogoResumo('recomendacoesCatalogo', recomendadosResp.data);
+}
+
+function configurarTelaPorPerfil() {
+  const admin = isAdmin();
+  document.getElementById('tituloPaginaLivros').textContent = admin ? 'Livros' : 'Catálogo';
+  document.querySelector('.breadcrumb-item.active').textContent = admin ? 'Livros' : 'Catálogo';
+  document.getElementById('painelCatalogoLeitor').classList.toggle('d-none', admin);
+  document.getElementById('colunaFormularioLivro').classList.toggle('d-none', !admin);
+  document.getElementById('colunaListaLivros').className = admin ? 'col-lg-8' : 'col-lg-12';
 }
 
 function preencherPreview(livro) {
@@ -123,8 +195,14 @@ function detalheLinha(rotulo, valor) {
   `;
 }
 
-function abrirDetalhesLivro(id) {
-  const livro = livros.find((item) => Number(item.id_livro) === Number(id));
+async function abrirDetalhesLivro(id) {
+  let livro = livros.find((item) => Number(item.id_livro) === Number(id));
+
+  if (!livro) {
+    const resposta = await apiFetch(`/livros/${id}`);
+    livro = resposta.data;
+  }
+
   if (!livro) {
     return;
   }
@@ -269,22 +347,25 @@ async function excluirLivro(id) {
 document.addEventListener('DOMContentLoaded', async () => {
   protegerPagina();
   montarNavbar('livros');
-  limparLivro();
+  configurarTelaPorPerfil();
 
-  document.getElementById('btnLimparLivro').addEventListener('click', limparLivro);
-  document.getElementById('btnNovaCategoria').addEventListener('click', abrirModalNovaCategoria);
-  document.getElementById('formNovaCategoria').addEventListener('submit', salvarNovaCategoria);
+  if (isAdmin()) {
+    limparLivro();
+    document.getElementById('btnLimparLivro').addEventListener('click', limparLivro);
+    document.getElementById('btnNovaCategoria').addEventListener('click', abrirModalNovaCategoria);
+    document.getElementById('formNovaCategoria').addEventListener('submit', salvarNovaCategoria);
 
-  document.getElementById('imagemLivro').addEventListener('change', (event) => {
-    const input = event.target;
-    if (!validarArquivoImagem(input) || !input.files.length) {
-      return;
-    }
+    document.getElementById('imagemLivro').addEventListener('change', (event) => {
+      const input = event.target;
+      if (!validarArquivoImagem(input) || !input.files.length) {
+        return;
+      }
 
-    const preview = document.getElementById('previewImagemLivro');
-    preview.src = URL.createObjectURL(input.files[0]);
-    preview.classList.remove('d-none');
-  });
+      const preview = document.getElementById('previewImagemLivro');
+      preview.src = URL.createObjectURL(input.files[0]);
+      preview.classList.remove('d-none');
+    });
+  }
 
   document.getElementById('formBuscaLivro').addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -295,58 +376,73 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  document.getElementById('formLivro').addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    if (
-      !validarFormulario(
-        event.target,
-        'alertLivros',
-        'Informe título, ano, quantidade, autor e categoria.',
-      )
-    ) {
-      return;
-    }
-
-    if (!validarDetalhesLivro() || !validarArquivoImagem(document.getElementById('imagemLivro'))) {
-      return;
-    }
-
-    const id = document.getElementById('idLivro').value;
-    const payload = {
-      titulo: document.getElementById('tituloLivro').value,
-      ano: Number(document.getElementById('anoLivro').value),
-      quantidade: Number(document.getElementById('quantidadeLivro').value),
-      paginas: Number(document.getElementById('paginasLivro').value || 0),
-      editora: document.getElementById('editoraLivro').value,
-      isbn: document.getElementById('isbnLivro').value,
-      sinopse: document.getElementById('sinopseLivro').value,
-      id_autor: Number(document.getElementById('autorLivro').value),
-      id_categoria: Number(document.getElementById('categoriaLivro').value),
-    };
-
+  document.getElementById('filtroCategoriaLivro').addEventListener('change', async () => {
     try {
-      const resposta = await apiFetch(id ? `/livros/${id}` : '/livros', {
-        method: id ? 'PUT' : 'POST',
-        body: JSON.stringify(payload),
-      });
-
-      const idSalvo = id || resposta.data.id_livro;
-      await enviarImagemLivro(idSalvo);
-      showAlert(
-        'alertLivros',
-        id ? 'Livro atualizado com sucesso.' : 'Livro cadastrado com sucesso.',
-      );
-      limparLivro();
       await carregarLivros(document.getElementById('buscaLivro').value);
     } catch (error) {
       showAlert('alertLivros', error.message, 'danger');
     }
   });
 
+  if (isAdmin()) {
+    document.getElementById('formLivro').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (
+        !validarFormulario(
+          event.target,
+          'alertLivros',
+          'Informe título, ano, quantidade, autor e categoria.',
+        )
+      ) {
+        return;
+      }
+
+      if (
+        !validarDetalhesLivro() ||
+        !validarArquivoImagem(document.getElementById('imagemLivro'))
+      ) {
+        return;
+      }
+
+      const id = document.getElementById('idLivro').value;
+      const payload = {
+        titulo: document.getElementById('tituloLivro').value,
+        ano: Number(document.getElementById('anoLivro').value),
+        quantidade: Number(document.getElementById('quantidadeLivro').value),
+        paginas: Number(document.getElementById('paginasLivro').value || 0),
+        editora: document.getElementById('editoraLivro').value,
+        isbn: document.getElementById('isbnLivro').value,
+        sinopse: document.getElementById('sinopseLivro').value,
+        id_autor: Number(document.getElementById('autorLivro').value),
+        id_categoria: Number(document.getElementById('categoriaLivro').value),
+      };
+
+      try {
+        const resposta = await apiFetch(id ? `/livros/${id}` : '/livros', {
+          method: id ? 'PUT' : 'POST',
+          body: JSON.stringify(payload),
+        });
+
+        const idSalvo = id || resposta.data.id_livro;
+        await enviarImagemLivro(idSalvo);
+        showAlert(
+          'alertLivros',
+          id ? 'Livro atualizado com sucesso.' : 'Livro cadastrado com sucesso.',
+        );
+        limparLivro();
+        await carregarLivros(document.getElementById('buscaLivro').value);
+        await carregarDestaquesCatalogo();
+      } catch (error) {
+        showAlert('alertLivros', error.message, 'danger');
+      }
+    });
+  }
+
   try {
     await carregarCombosLivro();
     await carregarLivros();
+    await carregarDestaquesCatalogo();
   } catch (error) {
     showAlert('alertLivros', error.message, 'danger');
   }

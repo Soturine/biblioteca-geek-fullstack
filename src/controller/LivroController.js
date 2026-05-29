@@ -12,8 +12,29 @@ class LivroController extends IController {
 
   async index(req, res, next) {
     try {
-      const livros = await this.livroService.findAll({ busca: req.query.busca });
+      const livros = await this.livroService.findAll({
+        busca: req.query.busca,
+        categoria: req.query.categoria,
+      });
       return successResponse(res, 200, 'Livros listados com sucesso', livros);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async topEmprestados(req, res, next) {
+    try {
+      const livros = await this.livroService.topEmprestados();
+      return successResponse(res, 200, 'Top 10 de livros mais emprestados', livros);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async recomendados(req, res, next) {
+    try {
+      const livros = await this.livroService.recomendados(req.usuario.id_usuario);
+      return successResponse(res, 200, 'Livros recomendados com sucesso', livros);
     } catch (error) {
       next(error);
     }

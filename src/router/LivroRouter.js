@@ -12,6 +12,8 @@ class LivroRouter {
   }
 
   configurarRotas() {
+    this.router.get('/top-emprestados', this.controller.topEmprestados.bind(this.controller));
+    this.router.get('/recomendados', this.controller.recomendados.bind(this.controller));
     this.router.get('/', this.controller.index.bind(this.controller));
     this.router.get('/:id', this.controller.show.bind(this.controller));
     this.router.post('/', somenteAdmin, validarLivro, this.controller.store.bind(this.controller));

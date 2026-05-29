@@ -51,6 +51,14 @@ class LivroService extends IService {
     return this.livroDAO.findAll(filtros);
   }
 
+  async topEmprestados() {
+    return this.livroDAO.topEmprestados(10);
+  }
+
+  async recomendados(idUsuario) {
+    return this.livroDAO.recomendadosPorUsuario(idUsuario, 10);
+  }
+
   async findById(id) {
     const livro = await this.livroDAO.findById(id);
     if (!livro) {

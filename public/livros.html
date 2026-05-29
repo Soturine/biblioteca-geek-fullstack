@@ -20,11 +20,26 @@
         </ol>
       </nav>
       <div class="page-title">
-        <h1>Livros</h1>
+        <h1 id="tituloPaginaLivros">Livros</h1>
       </div>
       <div id="alertLivros"></div>
+      <section class="panel mb-3 d-none" id="painelCatalogoLeitor">
+        <div class="panel-header">Destaques do catálogo</div>
+        <div class="panel-body">
+          <div class="row g-3">
+            <div class="col-lg-6">
+              <h2 class="h6">Top 10 mais emprestados</h2>
+              <div class="catalog-list" id="topLivrosCatalogo"></div>
+            </div>
+            <div class="col-lg-6">
+              <h2 class="h6">Recomendações para você</h2>
+              <div class="catalog-list" id="recomendacoesCatalogo"></div>
+            </div>
+          </div>
+        </div>
+      </section>
       <div class="row g-3">
-        <div class="col-lg-4">
+        <div class="col-lg-4" id="colunaFormularioLivro">
           <section class="panel">
             <div class="panel-header" id="tituloFormLivro">Novo livro</div>
             <div class="panel-body">
@@ -119,7 +134,7 @@
             </div>
           </section>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-8" id="colunaListaLivros">
           <section class="panel">
             <div class="panel-header">
               <form class="row g-2 align-items-center" id="formBuscaLivro">
@@ -130,6 +145,11 @@
                     id="buscaLivro"
                     placeholder="Pesquisar por título"
                   />
+                </div>
+                <div class="col-md-4">
+                  <select class="form-select" id="filtroCategoriaLivro">
+                    <option value="">Todas as categorias</option>
+                  </select>
                 </div>
                 <div class="col-auto">
                   <button class="btn btn-outline-primary" type="submit">Pesquisar</button>

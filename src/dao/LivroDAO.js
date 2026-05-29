@@ -27,11 +27,16 @@ class LivroDAO extends IDAO {
 
   async findAll(filtros = {}) {
     const params = [];
-    let where = '';
+    const where = [];
 
     if (filtros.busca) {
-      where = 'WHERE l.titulo LIKE ?';
+      where.push('l.titulo LIKE ?');
       params.push(`%${filtros.busca}%`);
+    }
+
+    if (filtros.categoria) {
+      where.push('l.id_categoria = ?');
+      params.push(Number(filtros.categoria));
     }
 
     const [rows] = await pool.execute(
@@ -39,12 +44,81 @@ class LivroDAO extends IDAO {
        FROM livros l
        INNER JOIN autores a ON a.id_autor = l.id_autor
        INNER JOIN categorias c ON c.id_categoria = l.id_categoria
-       ${where}
+       ${where.length ? `WHERE ${where.join(' AND ')}` : ''}
        ORDER BY l.titulo`,
       params,
     );
 
     return rows;
+  }
+
+  async topEmprestados(limite = 10) {
+    const [rows] = await pool.execute(
+      `SELECT l.*, a.nome AS autor_nome, c.nome AS categoria_nome,
+              COALESCE(t.total_emprestimos, 0) AS total_emprestimos
+       FROM livros l
+       INNER JOIN autores a ON a.id_autor = l.id_autor
+       INNER JOIN categorias c ON c.id_categoria = l.id_categoria
+       LEFT JOIN (
+         SELECT id_livro, SUM(quantidade) AS total_emprestimos
+         FROM itens_emprestimo
+         GROUP BY id_livro
+       ) t ON t.id_livro = l.id_livro
+       ORDER BY total_emprestimos DESC, l.quantidade DESC, l.titulo
+       LIMIT ?`,
+      [Number(limite)],
+    );
+
+    return rows;
+  }
+
+  async recomendadosPorUsuario(idUsuario, limite = 10) {
+    const [historico] = await pool.execute(
+      `SELECT DISTINCT l.id_categoria
+       FROM emprestimos e
+       INNER JOIN itens_emprestimo i ON i.id_emprestimo = e.id_emprestimo
+       INNER JOIN livros l ON l.id_livro = i.id_livro
+       WHERE e.id_usuario = ?`,
+      [Number(idUsuario)],
+    );
+
+    if (!historico.length) {
+      return this.topEmprestados(limite);
+    }
+
+    const categorias = historico.map((item) => Number(item.id_categoria));
+    const placeholders = categorias.map(() => '?').join(', ');
+    const [jaLidos] = await pool.execute(
+      `SELECT DISTINCT i.id_livro
+       FROM emprestimos e
+       INNER JOIN itens_emprestimo i ON i.id_emprestimo = e.id_emprestimo
+       WHERE e.id_usuario = ?`,
+      [Number(idUsuario)],
+    );
+    const idsIgnorados = jaLidos.map((item) => Number(item.id_livro));
+    const params = [...categorias];
+    let ignoradosSql = '';
+
+    if (idsIgnorados.length) {
+      ignoradosSql = `AND l.id_livro NOT IN (${idsIgnorados.map(() => '?').join(', ')})`;
+      params.push(...idsIgnorados);
+    }
+
+    params.push(Number(limite));
+    const [rows] = await pool.execute(
+      `SELECT l.*, a.nome AS autor_nome, c.nome AS categoria_nome,
+              0 AS total_emprestimos
+       FROM livros l
+       INNER JOIN autores a ON a.id_autor = l.id_autor
+       INNER JOIN categorias c ON c.id_categoria = l.id_categoria
+       WHERE l.id_categoria IN (${placeholders})
+         ${ignoradosSql}
+       ORDER BY l.quantidade DESC, l.titulo
+       LIMIT ?`,
+      params,
+    );
+
+    return rows.length ? rows : this.topEmprestados(limite);
   }
 
   async findById(id) {
