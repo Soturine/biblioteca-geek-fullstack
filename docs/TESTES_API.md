@@ -83,6 +83,25 @@ Body:
 
 Resposta esperada: status `201`.
 
+## 3.1. Bloqueio por perfil
+
+Faça cadastro de um usuário comum por `/auth/register`, faça login e tente acessar rota administrativa:
+
+```http
+GET /autores
+Authorization: Bearer JWT_LEITOR
+```
+
+Resposta esperada: status `403`.
+
+```json
+{
+  "success": false,
+  "erro": true,
+  "mensagem": "Acesso negado. Recurso permitido apenas para administradores."
+}
+```
+
 ## 4. Criar categoria
 
 ```http
@@ -144,6 +163,20 @@ Authorization: Bearer JWT_AQUI
 ```
 
 Resposta esperada: livros com titulo parecido.
+
+## 7.1. Top 10 e recomendações
+
+```http
+GET /livros/top-emprestados
+Authorization: Bearer JWT_AQUI
+```
+
+```http
+GET /livros/recomendados
+Authorization: Bearer JWT_AQUI
+```
+
+Resposta esperada: status `200` e lista de livros em `data`.
 
 ## 8. Buscar livro por ID
 
@@ -256,7 +289,48 @@ Resposta esperada:
 }
 ```
 
-## 14. Exportar XML de logs
+## 14. Reservas
+
+Criar reserva como leitor:
+
+```http
+POST /reservas
+Authorization: Bearer JWT_LEITOR
+Content-Type: application/json
+```
+
+Body:
+
+```json
+{
+  "id_livro": 1
+}
+```
+
+Resposta esperada: status `201`, com status `liberada` se houver estoque ou `aguardando` se não houver.
+
+Listar minhas reservas:
+
+```http
+GET /reservas/minhas
+Authorization: Bearer JWT_LEITOR
+```
+
+Cancelar reserva:
+
+```http
+PUT /reservas/1/cancelar
+Authorization: Bearer JWT_LEITOR
+```
+
+Admin lista todas:
+
+```http
+GET /reservas
+Authorization: Bearer JWT_ADMIN
+```
+
+## 15. Exportar XML de logs
 
 Este teste exige MongoDB ligado na porta configurada no `.env`.
 
@@ -271,9 +345,13 @@ Com filtros:
 GET /logs/exportar/xml?usuario=admin&dataInicio=2026-01-01&dataFim=2026-12-31
 ```
 
+```http
+GET /logs/exportar/xml?tipo=BUSINESS
+```
+
 Resposta esperada: arquivo XML.
 
-## 15. Relatório de livros
+## 16. Relatório de livros
 
 ```http
 GET /relatorios/livros
@@ -288,7 +366,7 @@ GET /relatorios/livros?categoria=1
 
 Resposta esperada: status `200`, total, páginas e array de livros.
 
-## 16. Dados do gráfico
+## 17. Dados do gráfico
 
 ```http
 GET /graficos/livros-por-categoria

@@ -7,6 +7,8 @@ erDiagram
     CATEGORIAS ||--o{ LIVROS : classifica
     EMPRESTIMOS ||--o{ ITENS_EMPRESTIMO : possui
     LIVROS ||--o{ ITENS_EMPRESTIMO : aparece_em
+    USUARIOS ||--o{ RESERVAS : faz
+    LIVROS ||--o{ RESERVAS : reservado_em
 
     USUARIOS {
         int id_usuario PK
@@ -56,5 +58,15 @@ erDiagram
         int id_emprestimo FK
         int id_livro FK
         int quantidade
+    }
+
+    RESERVAS {
+        int id_reserva PK
+        int id_usuario FK
+        int id_livro FK
+        datetime data_reserva
+        date data_prevista_retirada
+        string status
+        string observacao
     }
 ```

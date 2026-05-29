@@ -7,6 +7,10 @@ O tema escolhido foi **Sistema Biblioteca Geek**. O objetivo é controlar uma bi
 ## Regras de negócio principais
 
 - Usuário deve fazer login com JWT.
+- Usuários podem ter perfil `admin` ou `leitor`.
+- Admin acessa Dashboard, CRUDs, JSON, Logs XML, Relatório, Empréstimos e Reservas.
+- Leitor acessa Catálogo, Detalhes, Top 10, Recomendações e Minhas Reservas.
+- Rotas administrativas retornam 403 quando acessadas por leitor.
 - Senha deve ter no mínimo 6 caracteres.
 - E-mail de usuário não pode duplicar.
 - Autor deve ter nome com pelo menos 3 caracteres.
@@ -20,6 +24,8 @@ O tema escolhido foi **Sistema Biblioteca Geek**. O objetivo é controlar uma bi
 - Ao criar empréstimo, o estoque do livro diminui.
 - Ao excluir empréstimo, o estoque é devolvido.
 - Upload aceita apenas PNG, JPG, JPEG e WEBP até 2 MB.
+- Reserva não pode duplicar uma reserva ativa do mesmo livro para o mesmo usuário.
+- Reserva de livro disponível fica `liberada`; reserva de livro sem estoque fica `aguardando`.
 
 ## Estrutura MVC implementada
 
@@ -49,6 +55,7 @@ DAOs:
 - `LivroDAO`
 - `EmprestimoDAO`
 - `LogDAO`
+- `ReservaDAO`
 
 Controllers:
 
@@ -61,6 +68,7 @@ Controllers:
 - `LogController`
 - `RelatórioController`
 - `GráficoController`
+- `ReservaController`
 
 Services:
 
@@ -73,6 +81,7 @@ Services:
 - `LogService`
 - `JsonService`
 - `RelatorioService`
+- `ReservaService`
 
 ## Explicação dos Services
 
@@ -82,6 +91,7 @@ Services:
 - `CategoriaService`: evita categoria duplicada.
 - `LivroService`: valida livro e existência de autor/categoria.
 - `EmprestimoService`: valida itens e estoque.
+- `ReservaService`: cria, lista e cancela reservas respeitando disponibilidade e perfil.
 - `LogService`: salva logs no MongoDB e exporta XML.
 - `JsonService`: importa/exporta JSON e trata duplicidades.
 - `RelatorioService`: gera dados para relatório e gráfico.
@@ -98,6 +108,7 @@ Tabelas:
 - `livros`: título, ano, quantidade, imagem, páginas, sinopse, editora, ISBN, autor e categoria.
 - `emprestimos`
 - `itens_emprestimo`
+- `reservas`: usuário, livro, data da reserva, previsão de retirada, status e observação.
 
 ## Tabelas e relacionamentos
 
@@ -106,7 +117,10 @@ Tabelas:
 - Categoria 1:N Livros.
 - Empréstimo N:N Livros por `itens_emprestimo`.
 - `itens_emprestimo` é a tabela intermediária que guarda a quantidade por livro.
+- Usuário 1:N Reservas.
+- Livro 1:N Reservas.
 - A migration `database/migrations/001_add_detalhes_livros.sql` adiciona os campos de detalhes em bancos já criados.
+- A migration `database/migrations/002_create_reservas.sql` cria a tabela de reservas em bancos já criados.
 
 ## MongoDB e estrutura dos logs
 
@@ -119,7 +133,9 @@ Campos:
 ```json
 {
   "timestamp": "Date",
+  "tipo": "REQUEST | BUSINESS | ERROR",
   "usuario": "admin@admin.com",
+  "perfil": "admin",
   "acao": "LOGIN",
   "tabela": "usuarios",
   "registro_id": 1,
@@ -129,22 +145,27 @@ Campos:
   "endpoint": "/api/v1/auth/login",
   "metodo": "POST",
   "status_code": 200,
-  "tempo_resposta": 10
+  "tempo_resposta_ms": 10,
+  "body_resumido": {},
+  "erro": null
 }
 ```
 
+O logger remove campos sensíveis como senha, token e senha_hash antes de gravar o corpo resumido. Se o MongoDB estiver desligado, a aplicação continua respondendo e apenas registra aviso no console.
+
 ## Exportação XML
 
-O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB e gera:
+O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB. Ele aceita filtros por `usuario`, `dataInicio`, `dataFim` e `tipo` (`REQUEST`, `BUSINESS` ou `ERROR`) e gera:
 
 ```xml
 <logs>
   <evento id="1">
     <usuario>admin@admin.com</usuario>
+    <perfil>admin</perfil>
     <acao>LOGIN</acao>
     <descricao>Login realizado</descricao>
     <data_hora>2026-05-15T10:00:00.000Z</data_hora>
-    <tipo_evento>LOGIN</tipo_evento>
+    <tipo_evento>BUSINESS</tipo_evento>
     <ip_origem>::1</ip_origem>
     <dados_vinculados>
       <tabela>usuarios</tabela>
@@ -182,6 +203,9 @@ Os screenshots finais estão em `docs/assets/screenshots/`:
 - `08-json.png`: importação e exportação JSON.
 - `09-logs-xml.png`: exportação XML.
 - `10-relatorio-pdf.png`: tela de relatório PDF.
+- `11-catalogo-leitor.png`: catálogo do leitor com Top 10 e recomendações.
+- `12-minhas-reservas.png`: reservas do usuário logado.
+- `13-reservas-admin.png`: reservas vistas pelo administrador.
 
 Os prints duplicados da etapa anterior foram removidos da entrega para manter apenas as evidências finais usadas no README.
 
@@ -193,9 +217,19 @@ Os 30 livros iniciais usam capas autorais em SVG dentro de `public/uploads/capas
 
 A tela `public/livros.html` mantém a tabela simples e usa um modal Bootstrap para exibir capa maior, título, sinopse em destaque, autor, categoria, ano, páginas, editora, ISBN e quantidade disponível. A tela também possui o botão **Nova categoria**, que abre um modal simples, cadastra a categoria pela API e atualiza o select usado no cadastro de livros.
 
+## Catálogo, recomendações e reservas
+
+Para administradores, `livros.html` continua sendo uma tela de CRUD. Para leitores, a mesma página vira catálogo: não exibe formulário, edição ou exclusão, mas mostra Top 10 mais emprestados, recomendações, filtro por categoria, detalhes e botão **Reservar**.
+
+As recomendações usam histórico de empréstimos e reservas do usuário. Se não houver histórico suficiente, o sistema usa o Top 10 como fallback.
+
+Na reserva, se o livro tiver quantidade disponível, o status fica `liberada` e a retirada pode ser feita no balcão. Se não houver disponibilidade, o status fica `aguardando` e a previsão usa a data de devolução mais próxima ou 7 dias depois.
+
 ## Gráfico
 
 O Dashboard usa Chart.js e consome `/api/v1/graficos/livros-por-categoria`, que consulta o MySQL e agrupa livros por categoria.
+
+O endpoint usa `LEFT JOIN`, então categorias criadas sem livros podem aparecer com quantidade zero quando o dashboard é recarregado.
 
 ## Como executar
 
@@ -228,10 +262,17 @@ O projeto está sob a licença MIT, registrada no arquivo `LICENSE`.
 - `POST /api/v1/categorias`
 - `GET /api/v1/livros`
 - `GET /api/v1/livros?busca=texto`
+- `GET /api/v1/livros/top-emprestados`
+- `GET /api/v1/livros/recomendados`
 - `POST /api/v1/livros`
 - `POST /api/v1/livros/:id/imagem`
 - `GET /api/v1/emprestimos`
 - `POST /api/v1/emprestimos`
+- `GET /api/v1/reservas`
+- `GET /api/v1/reservas/minhas`
+- `POST /api/v1/reservas`
+- `PUT /api/v1/reservas/:id/cancelar`
+- `PUT /api/v1/reservas/:id/status`
 - `GET /api/v1/json/exportar/:entidade`
 - `POST /api/v1/json/importar/:entidade`
 - `GET /api/v1/logs/exportar/xml`

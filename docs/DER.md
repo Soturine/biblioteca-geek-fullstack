@@ -9,6 +9,8 @@ erDiagram
     CATEGORIAS ||--o{ LIVROS : classifica
     EMPRESTIMOS ||--o{ ITENS_EMPRESTIMO : possui
     LIVROS ||--o{ ITENS_EMPRESTIMO : aparece_em
+    USUARIOS ||--o{ RESERVAS : faz
+    LIVROS ||--o{ RESERVAS : reservado_em
 
     USUARIOS {
         int id_usuario PK
@@ -59,6 +61,16 @@ erDiagram
         int id_livro FK
         int quantidade
     }
+
+    RESERVAS {
+        int id_reserva PK
+        int id_usuario FK
+        int id_livro FK
+        datetime data_reserva
+        date data_prevista_retirada
+        string status
+        string observacao
+    }
 ```
 
 ## Relacionamentos
@@ -71,3 +83,5 @@ erDiagram
 | Empréstimo possui itens     | 1:N  | `itens_emprestimo.id_emprestimo`        |
 | Livro aparece em itens      | 1:N  | `itens_emprestimo.id_livro`             |
 | Empréstimos e livros        | N:N  | tabela intermediária `itens_emprestimo` |
+| Usuário faz reservas        | 1:N  | `reservas.id_usuario`                   |
+| Livro aparece em reservas   | 1:N  | `reservas.id_livro`                     |

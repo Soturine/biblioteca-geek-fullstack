@@ -2,7 +2,7 @@
 
 ## Tema
 
-O Sistema Biblioteca Geek controla autores, categorias, livros com capa, empréstimos e itens de empréstimo. A proposta é manter um projeto acadêmico simples, mas completo, com backend em Node.js/Express, banco principal MySQL, logs em MongoDB e frontend em HTML, CSS, JavaScript puro e Bootstrap 5.
+O Sistema Biblioteca Geek controla autores, categorias, livros com capa, empréstimos, reservas e itens de empréstimo. A proposta é manter um projeto acadêmico simples, mas completo, com backend em Node.js/Express, banco principal MySQL, logs em MongoDB e frontend em HTML, CSS, JavaScript puro e Bootstrap 5.
 
 ## Regras de negócio
 
@@ -18,6 +18,9 @@ O Sistema Biblioteca Geek controla autores, categorias, livros com capa, emprés
 - Ao excluir empréstimo, a quantidade dos livros é devolvida.
 - Usuário não pode ter e-mail duplicado.
 - Senha deve ter no mínimo 6 caracteres.
+- Perfil `admin` acessa as telas administrativas.
+- Perfil `leitor` acessa apenas catálogo, detalhes, recomendações e reservas próprias.
+- Reserva de livro disponível fica liberada; sem estoque, fica aguardando previsão.
 
 ## Arquitetura
 
@@ -48,6 +51,7 @@ As classes principais estendem esses contratos, por exemplo `LivroDAO extends ID
 - `CategoriaService`: valida categoria duplicada.
 - `LivroService`: valida livro e relacionamentos com autor/categoria.
 - `EmprestimoService`: valida itens, usuario e estoque.
+- `ReservaService`: cria, lista e cancela reservas conforme disponibilidade e perfil.
 - `LogService`: registra logs e exporta XML.
 - `JsonService`: importa/exporta dados JSON.
 - `RelatorioService`: gera dados de relatório e gráfico.
@@ -64,15 +68,18 @@ Tabelas:
 - `livros`: possui também `paginas`, `sinopse`, `editora` e `isbn`.
 - `emprestimos`
 - `itens_emprestimo`
+- `reservas`
 
 Relacionamentos:
 
 - Autor 1:N Livros.
 - Categoria 1:N Livros.
 - Usuário 1:N Empréstimos.
+- Usuário 1:N Reservas.
+- Livro 1:N Reservas.
 - Empréstimos N:N Livros por `itens_emprestimo`.
 
-Os scripts estão em `database/schema.sql`, `database/inserts.sql` e `database/migrations/001_add_detalhes_livros.sql`.
+Os scripts estão em `database/schema.sql`, `database/inserts.sql`, `database/migrations/001_add_detalhes_livros.sql` e `database/migrations/002_create_reservas.sql`.
 
 ## MongoDB
 
@@ -85,7 +92,9 @@ Campos principais:
 ```json
 {
   "timestamp": "Date",
+  "tipo": "REQUEST | BUSINESS | ERROR",
   "usuario": "admin@admin.com",
+  "perfil": "admin",
   "acao": "LOGIN",
   "tabela": "usuarios",
   "registro_id": 1,
@@ -95,13 +104,13 @@ Campos principais:
   "endpoint": "/api/v1/auth/login",
   "metodo": "POST",
   "status_code": 200,
-  "tempo_resposta": 15
+  "tempo_resposta_ms": 15
 }
 ```
 
 ## XML
 
-O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB, aplica filtros opcionais por usuário e período, e gera XML seguro usando escape de caracteres especiais.
+O endpoint `/api/v1/logs/exportar/xml` busca logs no MongoDB, aplica filtros opcionais por usuário, período e tipo, e gera XML seguro usando escape de caracteres especiais.
 
 ## Relatório PDF
 
@@ -110,6 +119,10 @@ O backend entrega dados em JSON pelo endpoint `/api/v1/relatorios/livros`. O fro
 ## Gráfico
 
 O dashboard usa Chart.js. Os dados chegam de `/api/v1/graficos/livros-por-categoria`, calculados no MySQL por categoria.
+
+## Catálogo e reservas
+
+Para administradores, a tela de livros continua com CRUD, upload e atalho de categoria. Para leitores, a mesma tela funciona como catálogo com Top 10, recomendações, filtro por categoria, detalhes e botão Reservar. A tela `reservas.html` mostra todas as reservas para admin e apenas as próprias reservas para leitor.
 
 ## Capas demonstrativas
 

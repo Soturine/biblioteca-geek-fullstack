@@ -2,7 +2,7 @@
 
 ## 1. Abertura
 
-Apresentar o tema: **Sistema Biblioteca Geek**. Explicar que o sistema gerencia autores, categorias, livros, empréstimos, relatórios e logs.
+Apresentar o tema: **Sistema Biblioteca Geek**. Explicar que o sistema gerencia autores, categorias, livros, empréstimos, reservas, relatórios e logs, separando perfil `admin` e perfil `leitor`.
 
 ## 2. Estrutura de pastas
 
@@ -42,6 +42,7 @@ Abrir `database/schema.sql` e mostrar as tabelas:
 - livros, incluindo páginas, sinopse, editora e ISBN
 - empréstimos
 - itens de empréstimo
+- reservas
 
 Mostrar `docs/DER.md` e a imagem `docs/DER.png` exibida no README.
 
@@ -51,7 +52,7 @@ Abrir MongoDB Compass e mostrar:
 
 - banco `biblioteca_geek_logs`
 - collection `logs`
-- logs de login, rotas, CRUD e erros.
+- logs de requisições, ações de negócio, acesso negado, reservas e erros.
 
 ## 7. Login
 
@@ -74,22 +75,30 @@ Mostrar:
 
 Mostrar a listagem com capas, abrir o modal **Detalhes** com sinopse em destaque, cadastrar uma categoria pelo botão **Nova categoria**, cadastrar um livro, editar, pesquisar pelo título e excluir.
 
-## 10. Upload de imagem
+## 10. Perfil leitor e catálogo
+
+Criar ou entrar com um usuário leitor. Mostrar que ele não vê Dashboard, Autores, Categorias, JSON, Logs XML ou Relatório. Abrir o Catálogo, mostrar Top 10, Recomendações, filtro por categoria e botão **Reservar**.
+
+## 11. Reservas
+
+Criar uma reserva de livro disponível, abrir **Minhas Reservas**, mostrar status, previsão e botão Cancelar. Depois voltar como admin e mostrar a tela **Reservas** com todas as reservas e alteração de status.
+
+## 12. Upload de imagem
 
 Selecionar uma capa PNG/JPG/JPEG/WEBP, mostrar preview e depois a capa na listagem.
 
-## 11. JSON
+## 13. JSON
 
 Exportar autores ou livros. Depois importar um JSON de autores/categorias/livros e mostrar o feedback de importados, duplicados e erros.
 
-## 12. XML
+## 14. XML
 
-Acessar Logs XML, aplicar filtro opcional e baixar o XML.
+Acessar Logs XML, aplicar filtro por usuário, período ou tipo e baixar o XML.
 
-## 13. Relatório PDF
+## 15. Relatório PDF
 
 Acessar Relatório, filtrar por categoria e gerar PDF.
 
-## 14. Encerramento
+## 16. Encerramento
 
-Mostrar o repositório GitHub, a licença MIT e finalizar explicando que o projeto cumpre MVC, Service Layer, Router, Middleware, MySQL, MongoDB, JWT, JSON, XML, PDF, gráfico e upload.
+Mostrar o repositório GitHub, a licença MIT e finalizar explicando que o projeto cumpre MVC, Service Layer, Router, Middleware, MySQL, MongoDB, JWT, perfis, reservas, JSON, XML, PDF, gráfico e upload.

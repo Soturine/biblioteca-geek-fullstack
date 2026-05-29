@@ -39,6 +39,13 @@ mysql -u root -p biblioteca_geek < database/inserts.sql
 
 No XAMPP, normalmente o usuário é `root` e a senha fica vazia.
 
+Se você já tinha criado o banco antes das melhorias finais, aplique também:
+
+```text
+mysql -u root -p biblioteca_geek < database/migrations/001_add_detalhes_livros.sql
+mysql -u root -p biblioteca_geek < database/migrations/002_create_reservas.sql
+```
+
 ### 4. Iniciar MongoDB
 
 Crie a pasta de dados, se ela ainda não existir:
@@ -79,6 +86,8 @@ npm start
 ```
 
 Acesse `http://localhost:3000` e faça login com `admin@admin.com` / `123456`.
+
+Para testar o perfil de leitor, use a aba **Cadastro**. Todo cadastro público entra como `leitor`, com acesso ao catálogo e às próprias reservas.
 
 ## Conferir MongoDB e logs
 

@@ -16,9 +16,10 @@
         <p class="text-uppercase fw-bold mb-2">Projeto acadêmico full stack</p>
         <h1 class="display-4">Biblioteca Geek Fullstack</h1>
         <p class="lead col-lg-8">
-          Sistema web para gestão de livros, autores, categorias, empréstimos, logs, XML, relatório
-          PDF, gráfico, upload de capas e modal de detalhes. O acervo inicial reúne 30 livros de
-          ficção científica, distopia, fantasia, fantasia sombria, cyberpunk, HQ e terror geek.
+          Sistema web para gestão de livros, autores, categorias, empréstimos, reservas, logs, XML,
+          relatório PDF, gráfico, upload de capas e modal de detalhes. O acervo inicial reúne 30
+          livros de ficção científica, distopia, fantasia, fantasia sombria, cyberpunk, HQ e terror
+          geek.
         </p>
         <p class="mb-0">
           Esta página é apenas uma apresentação estática. O sistema completo roda localmente com
@@ -41,6 +42,8 @@
             <span class="tech-badge">Chart.js</span>
             <span class="tech-badge">jsPDF</span>
             <span class="tech-badge">MVC + Service Layer</span>
+            <span class="tech-badge">Perfis admin/leitor</span>
+            <span class="tech-badge">Reservas</span>
           </div>
         </div>
       </section>
@@ -77,7 +80,7 @@
               />
             </div>
             <div class="col-md-6">
-              <h3 class="h5">Livros</h3>
+              <h3 class="h5">Livros administrativos</h3>
               <img class="img-fluid shot" src="assets/screenshots/03-livros.png" alt="Livros" />
             </div>
             <div class="col-md-6">
@@ -86,6 +89,30 @@
                 class="img-fluid shot"
                 src="assets/screenshots/04-detalhes-livro.png"
                 alt="Modal de detalhes do livro"
+              />
+            </div>
+            <div class="col-md-6">
+              <h3 class="h5">Catálogo do leitor</h3>
+              <img
+                class="img-fluid shot"
+                src="assets/screenshots/11-catalogo-leitor.png"
+                alt="Catálogo do leitor"
+              />
+            </div>
+            <div class="col-md-6">
+              <h3 class="h5">Minhas reservas</h3>
+              <img
+                class="img-fluid shot"
+                src="assets/screenshots/12-minhas-reservas.png"
+                alt="Minhas reservas"
+              />
+            </div>
+            <div class="col-md-6">
+              <h3 class="h5">Reservas do administrador</h3>
+              <img
+                class="img-fluid shot"
+                src="assets/screenshots/13-reservas-admin.png"
+                alt="Reservas do administrador"
               />
             </div>
             <div class="col-md-6">
@@ -99,6 +126,10 @@
             <div class="col-md-6">
               <h3 class="h5">JSON</h3>
               <img class="img-fluid shot" src="assets/screenshots/08-json.png" alt="JSON" />
+            </div>
+            <div class="col-md-6">
+              <h3 class="h5">Logs XML</h3>
+              <img class="img-fluid shot" src="assets/screenshots/09-logs-xml.png" alt="Logs XML" />
             </div>
             <div class="col-md-6">
               <h3 class="h5">Relatório</h3>
@@ -118,8 +149,8 @@
             <div class="col-lg-5">
               <h2>DER</h2>
               <p>
-                O banco MySQL possui usuários, autores, categorias, livros, empréstimos e itens de
-                empréstimo. A tabela de livros inclui páginas, sinopse, editora e ISBN.
+                O banco MySQL possui usuários, autores, categorias, livros, empréstimos, itens de
+                empréstimo e reservas. A tabela de livros inclui páginas, sinopse, editora e ISBN.
               </p>
               <a class="btn btn-primary" href="DER.md">Ver DER em Markdown</a>
             </div>

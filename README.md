@@ -34,24 +34,29 @@ Sistema web full stack acadêmico para gestão de Biblioteca Geek com Node.js, E
 
 ## Sobre o projeto
 
-O **Sistema Biblioteca Geek** controla livros de uma biblioteca com tema geek/nerd. O usuário autenticado pode cadastrar autores, categorias, livros com imagem de capa, empréstimos e itens de empréstimo.
+O **Sistema Biblioteca Geek** controla livros de uma biblioteca com tema geek/nerd. O sistema separa o perfil **admin**, que gerencia cadastros e relatórios, do perfil **leitor**, que acessa o catálogo, detalhes dos livros, recomendações e reservas próprias.
 
-O projeto também possui pesquisa, importação/exportação JSON, logs em MongoDB, exportação XML, relatório PDF no frontend e gráfico com Chart.js. A tela de livros traz um modal de detalhes com capa, título, sinopse em destaque, autor, categoria, ano, páginas, editora, ISBN e quantidade disponível.
+O projeto também possui pesquisa, importação/exportação JSON, logs em MongoDB, exportação XML, relatório PDF no frontend e gráfico com Chart.js. A tela de livros funciona como catálogo para leitores e como CRUD administrativo para admins.
 
 ## Funcionalidades
 
 - Login, cadastro e logout com JWT.
-- Rotas públicas e privadas.
+- Rotas públicas, privadas e administrativas com bloqueio por perfil.
+- Perfil `admin` com acesso a Dashboard, CRUDs, JSON, Logs XML, Relatório e Reservas.
+- Perfil `leitor` com acesso ao Catálogo, Top 10, Recomendações e Minhas Reservas.
 - CRUD de autores, categorias, livros e empréstimos.
 - Pesquisa de livros por título.
+- Filtro de catálogo por categoria.
 - Upload e exibição de capa dos livros.
 - Modal de detalhes do livro.
 - Atalho para cadastrar categoria pela tela de livros.
+- Reservas de livros com status `liberada`, `aguardando`, `cancelada`, `retirada` e `expirada`.
+- Top 10 de livros mais emprestados e recomendações por histórico do usuário.
 - Banco inicial com 30 livros famosos da cultura geek.
 - Capas demonstrativas locais em SVG.
 - Importação e exportação JSON.
-- Logs no MongoDB para login, erro, acesso a rotas e operações de CRUD.
-- Exportação XML dos logs.
+- Logs no MongoDB para requisições, erros e ações de negócio.
+- Exportação XML dos logs com filtros por usuário, período e tipo.
 - Relatório PDF com jsPDF e AutoTable.
 - Dashboard com cards, últimos logs e gráfico Chart.js.
 - Documentação, DER, roteiro de vídeo, screenshots, licença MIT e release final.
@@ -81,6 +86,7 @@ View -> Router -> Middleware -> Controller -> Service -> DAO -> Model -> Banco d
 - **View**: telas HTML em `public/`.
 - **Router**: classes em `src/router/`, separadas por recurso.
 - **Middleware**: autenticação, logs, validação, upload e erros globais.
+- **Autorização por perfil**: bloqueia rotas administrativas para leitores e registra tentativa negada.
 - **Controller**: recebe requisição, chama o service e retorna JSON padronizado.
 - **Service**: concentra regras de negócio.
 - **DAO**: concentra SQL/MySQL ou acesso ao MongoDB.
@@ -108,6 +114,18 @@ View -> Router -> Middleware -> Controller -> Service -> DAO -> Model -> Banco d
 ### Detalhes do livro
 
 <img src="docs/assets/screenshots/04-detalhes-livro.png" width="760" alt="Modal de detalhes do livro">
+
+### Catálogo do leitor
+
+<img src="docs/assets/screenshots/11-catalogo-leitor.png" width="760" alt="Catálogo do leitor com recomendações">
+
+### Minhas reservas
+
+<img src="docs/assets/screenshots/12-minhas-reservas.png" width="760" alt="Reservas do leitor">
+
+### Reservas do administrador
+
+<img src="docs/assets/screenshots/13-reservas-admin.png" width="760" alt="Reservas vistas pelo administrador">
 
 ### Autores
 
@@ -147,6 +165,8 @@ Relacionamentos principais:
 - Autor 1:N Livros.
 - Categoria 1:N Livros.
 - Empréstimos N:N Livros por `itens_emprestimo`.
+- Usuário 1:N Reservas.
+- Livro 1:N Reservas.
 
 ## Pré-requisitos
 
@@ -174,6 +194,8 @@ mysql -u root -p < database/schema.sql
 mysql -u root -p biblioteca_geek < database/inserts.sql
 ```
 
+Se o banco já existia antes desta versão, aplique também as migrations em `database/migrations/`.
+
 6. Instale as dependências e inicie o sistema:
 
 ```text
@@ -194,6 +216,8 @@ email: admin@admin.com
 senha: 123456
 ```
 
+Para testar o perfil leitor, use a aba **Cadastro** na tela de login. Novos usuários são criados como `leitor`.
+
 ## MongoDB e logs
 
 O XAMPP só liga o MySQL. O MongoDB não vem no XAMPP e precisa ficar aberto durante a apresentação.
@@ -210,7 +234,7 @@ npm run check:mongo
 
 Para conferir no MongoDB Compass, conecte em `mongodb://127.0.0.1:27017` e abra `biblioteca_geek_logs.logs`.
 
-A exportação XML fica na tela **Logs XML**.
+O logger registra documentos do tipo `REQUEST`, `BUSINESS` e `ERROR`. A exportação XML fica na tela **Logs XML** e aceita filtros por usuário, período e tipo.
 
 ## Relatório PDF
 
@@ -281,14 +305,17 @@ Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE).
 - Login JWT: implementado.
 - CRUD: autores, categorias, livros e empréstimos.
 - Pesquisa: livros por título.
-- MySQL: 6 tabelas relacionadas.
-- MongoDB: logs do sistema.
+- MySQL: 7 tabelas relacionadas, incluindo `reservas`.
+- Perfis: admin e leitor com permissões diferentes.
+- Catálogo: Top 10, recomendações e reserva para leitor.
+- MongoDB: logs do sistema por requisição, erro e ação de negócio.
 - JSON: importação/exportação.
 - XML: exportação de logs.
 - PDF: relatório de livros no frontend.
 - Gráfico: Chart.js no dashboard.
 - Upload: capa dos livros.
 - Modal de detalhes: implementado na tela de livros.
+- Reservas: criadas e canceladas pelo leitor, acompanhadas pelo admin.
 - DER: imagem PNG atualizada.
 - Licença MIT: incluída.
 - GitHub Pages: página estática em `docs/index.html`.
