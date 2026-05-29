@@ -16,6 +16,7 @@ const JsonRouter = require('./router/JsonRouter');
 const LogRouter = require('./router/LogRouter');
 const RelatorioRouter = require('./router/RelatorioRouter');
 const GraficoRouter = require('./router/GraficoRouter');
+const ReservaRouter = require('./router/ReservaRouter');
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use('/api/v1/json', JsonRouter);
 app.use('/api/v1/logs', LogRouter);
 app.use('/api/v1/relatorios', RelatorioRouter);
 app.use('/api/v1/graficos', GraficoRouter);
+app.use('/api/v1/reservas', ReservaRouter);
 
 app.use('/api', (req, res, next) => {
   next(new ErrorResponse('Rota nao encontrada', 404));

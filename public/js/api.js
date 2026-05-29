@@ -155,11 +155,15 @@ function montarNavbar(active = '') {
     ['autores.html', 'Autores', 'autores'],
     ['categorias.html', 'Categorias', 'categorias'],
     ['emprestimos.html', 'Empréstimos', 'emprestimos'],
+    ['reservas.html', 'Reservas', 'reservas'],
     ['import_export.html', 'JSON', 'json'],
     ['logs.html', 'Logs XML', 'logs'],
     ['relatorio.html', 'Relatório', 'relatorio'],
   ];
-  const linksLeitor = [['livros.html', 'Catálogo', 'livros']];
+  const linksLeitor = [
+    ['livros.html', 'Catálogo', 'livros'],
+    ['reservas.html', 'Minhas Reservas', 'reservas'],
+  ];
   const links = isAdmin() ? linksAdmin : linksLeitor;
   const home = isAdmin() ? 'dashboard.html' : 'livros.html';
 

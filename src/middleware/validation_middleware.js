@@ -3,6 +3,7 @@ const Autor = require('../model/Autor');
 const Categoria = require('../model/Categoria');
 const Livro = require('../model/Livro');
 const Emprestimo = require('../model/Emprestimo');
+const Reserva = require('../model/Reserva');
 
 function validarLogin(req, res, next) {
   try {
@@ -61,6 +62,24 @@ function validarEmprestimo(req, res, next) {
   }
 }
 
+function validarReserva(req, res, next) {
+  try {
+    Reserva.validarCriacao(req.body);
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
+function validarStatusReserva(req, res, next) {
+  try {
+    Reserva.validarStatus(req.body.status);
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   validarLogin,
   validarRegistro,
@@ -68,4 +87,6 @@ module.exports = {
   validarCategoria,
   validarLivro,
   validarEmprestimo,
+  validarReserva,
+  validarStatusReserva,
 };

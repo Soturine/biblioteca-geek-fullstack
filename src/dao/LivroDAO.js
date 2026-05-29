@@ -74,12 +74,21 @@ class LivroDAO extends IDAO {
 
   async recomendadosPorUsuario(idUsuario, limite = 10) {
     const [historico] = await pool.execute(
-      `SELECT DISTINCT l.id_categoria
-       FROM emprestimos e
-       INNER JOIN itens_emprestimo i ON i.id_emprestimo = e.id_emprestimo
-       INNER JOIN livros l ON l.id_livro = i.id_livro
-       WHERE e.id_usuario = ?`,
-      [Number(idUsuario)],
+      `SELECT DISTINCT historico.id_categoria
+       FROM (
+         SELECT l.id_categoria
+         FROM emprestimos e
+         INNER JOIN itens_emprestimo i ON i.id_emprestimo = e.id_emprestimo
+         INNER JOIN livros l ON l.id_livro = i.id_livro
+         WHERE e.id_usuario = ?
+         UNION
+         SELECT l.id_categoria
+         FROM reservas r
+         INNER JOIN livros l ON l.id_livro = r.id_livro
+         WHERE r.id_usuario = ?
+           AND r.status IN ('liberada', 'aguardando', 'retirada')
+       ) historico`,
+      [Number(idUsuario), Number(idUsuario)],
     );
 
     if (!historico.length) {
@@ -89,11 +98,19 @@ class LivroDAO extends IDAO {
     const categorias = historico.map((item) => Number(item.id_categoria));
     const placeholders = categorias.map(() => '?').join(', ');
     const [jaLidos] = await pool.execute(
-      `SELECT DISTINCT i.id_livro
-       FROM emprestimos e
-       INNER JOIN itens_emprestimo i ON i.id_emprestimo = e.id_emprestimo
-       WHERE e.id_usuario = ?`,
-      [Number(idUsuario)],
+      `SELECT DISTINCT historico.id_livro
+       FROM (
+         SELECT i.id_livro
+         FROM emprestimos e
+         INNER JOIN itens_emprestimo i ON i.id_emprestimo = e.id_emprestimo
+         WHERE e.id_usuario = ?
+         UNION
+         SELECT r.id_livro
+         FROM reservas r
+         WHERE r.id_usuario = ?
+           AND r.status IN ('liberada', 'aguardando', 'retirada')
+       ) historico`,
+      [Number(idUsuario), Number(idUsuario)],
     );
     const idsIgnorados = jaLidos.map((item) => Number(item.id_livro));
     const params = [...categorias];

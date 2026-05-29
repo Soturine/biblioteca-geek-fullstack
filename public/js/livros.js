@@ -95,7 +95,7 @@ async function carregarLivros(busca = '') {
             usuarioAdmin
               ? `<button class="btn btn-sm btn-outline-primary me-1" onclick="editarLivro(${livro.id_livro})">Editar</button>
           <button class="btn btn-sm btn-outline-danger" onclick="excluirLivro(${livro.id_livro})">Excluir</button>`
-              : ''
+              : `<button class="btn btn-sm btn-success" onclick="reservarLivro(${livro.id_livro})">Reservar</button>`
           }
         </td>
       </tr>
@@ -339,6 +339,19 @@ async function excluirLivro(id) {
     await apiFetch(`/livros/${id}`, { method: 'DELETE' });
     showAlert('alertLivros', 'Livro excluído com sucesso.');
     await carregarLivros(document.getElementById('buscaLivro').value);
+  } catch (error) {
+    showAlert('alertLivros', error.message, 'danger');
+  }
+}
+
+async function reservarLivro(id) {
+  try {
+    const resposta = await apiFetch('/reservas', {
+      method: 'POST',
+      body: JSON.stringify({ id_livro: id }),
+    });
+    showAlert('alertLivros', resposta.message || 'Reserva realizada com sucesso.');
+    await carregarDestaquesCatalogo();
   } catch (error) {
     showAlert('alertLivros', error.message, 'danger');
   }
