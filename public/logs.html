@@ -27,15 +27,24 @@
         <div class="panel-header">Filtros</div>
         <div class="panel-body">
           <form class="row g-3 align-items-end" id="formLogs">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <label class="form-label" for="usuarioLog">Usuário</label>
               <input class="form-control" type="text" id="usuarioLog" placeholder="admin" />
             </div>
             <div class="col-md-3">
+              <label class="form-label" for="tipoLog">Tipo</label>
+              <select class="form-select" id="tipoLog">
+                <option value="">Todos</option>
+                <option value="REQUEST">REQUEST</option>
+                <option value="BUSINESS">BUSINESS</option>
+                <option value="ERROR">ERROR</option>
+              </select>
+            </div>
+            <div class="col-md-2">
               <label class="form-label" for="dataInicioLog">Início</label>
               <input class="form-control" type="date" id="dataInicioLog" />
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label class="form-label" for="dataFimLog">Fim</label>
               <input class="form-control" type="date" id="dataFimLog" />
             </div>

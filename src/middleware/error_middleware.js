@@ -23,22 +23,31 @@ function errorMiddleware(err, req, res, next) {
     },
   };
 
+  const usuario = LogService.dadosUsuario(req);
+
   LogService.registrar({
-    usuario: req.usuario ? req.usuario.email : 'anonimo',
+    tipo: 'ERROR',
+    usuario: usuario.usuario,
+    perfil: usuario.perfil,
     acao: 'ERRO',
     tabela: null,
     registro_id: null,
-    detalhes: {
-      mensagem: err.message,
-      stack_trace: err.stack,
-    },
+    detalhes: err.message,
     ip: req.ip,
     user_agent: req.get('user-agent'),
     endpoint: req.originalUrl,
     metodo: req.method,
     status_code: statusCode,
-    tempo_resposta: null,
-    stack_trace: err.stack,
+    tempo_resposta_ms: null,
+    query_params: req.query,
+    body_resumido: req.body,
+    erro: {
+      mensagem: err.message,
+      tipo: err.name || 'Error',
+      origem: err.origem || 'middleware',
+      stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+    },
+    stack_trace: process.env.NODE_ENV === 'production' ? null : err.stack,
   }).catch(() => {});
 
   return res.status(statusCode).json(body);

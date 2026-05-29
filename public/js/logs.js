@@ -9,10 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const params = new URLSearchParams();
     const usuario = document.getElementById('usuarioLog').value;
+    const tipo = document.getElementById('tipoLog').value;
     const dataInicio = document.getElementById('dataInicioLog').value;
     const dataFim = document.getElementById('dataFimLog').value;
 
     if (usuario) params.append('usuario', usuario);
+    if (tipo) params.append('tipo', tipo);
     if (dataInicio) params.append('dataInicio', dataInicio);
     if (dataFim) params.append('dataFim', dataFim);
 

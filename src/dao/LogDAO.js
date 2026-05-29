@@ -5,10 +5,12 @@ const { getLogsCollection } = require('../config/mongo_database');
 class LogDAO extends IDAO {
   async create(log) {
     const collection = await getLogsCollection();
-    // Documento flexível: MongoDB guarda tanto acessos simples quanto erros com stack_trace.
+    // Documento flexível: MongoDB guarda acessos, erros e ações de negócio.
     const documento = {
       timestamp: log.timestamp || new Date(),
+      tipo: String(log.tipo || 'REQUEST').toUpperCase(),
       usuario: log.usuario || 'anonimo',
+      perfil: log.perfil || 'anonimo',
       acao: log.acao || 'ACESSO',
       tabela: log.tabela || null,
       registro_id: log.registro_id || null,
@@ -18,7 +20,11 @@ class LogDAO extends IDAO {
       endpoint: log.endpoint || null,
       metodo: log.metodo || null,
       status_code: log.status_code || null,
-      tempo_resposta: log.tempo_resposta || null,
+      tempo_resposta: log.tempo_resposta_ms ?? log.tempo_resposta ?? null,
+      tempo_resposta_ms: log.tempo_resposta_ms ?? log.tempo_resposta ?? null,
+      query_params: log.query_params || null,
+      body_resumido: log.body_resumido || null,
+      erro: log.erro || null,
       stack_trace: log.stack_trace || null,
     };
 
@@ -32,6 +38,10 @@ class LogDAO extends IDAO {
 
     if (filtros.usuario) {
       query.usuario = { $regex: filtros.usuario, $options: 'i' };
+    }
+
+    if (filtros.tipo) {
+      query.tipo = String(filtros.tipo).toUpperCase();
     }
 
     if (filtros.dataInicio || filtros.dataFim) {

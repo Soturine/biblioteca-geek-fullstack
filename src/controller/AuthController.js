@@ -14,6 +14,7 @@ class AuthController extends IController {
       const resultado = await this.authService.login(req.body);
       LogService.registrarAcao(req, {
         usuario: resultado.usuario.email,
+        perfil: resultado.usuario.perfil,
         acao: 'LOGIN',
         tabela: 'usuarios',
         registro_id: resultado.usuario.id_usuario,
@@ -24,6 +25,7 @@ class AuthController extends IController {
     } catch (error) {
       LogService.registrarAcao(req, {
         usuario: req.body && req.body.email ? req.body.email : 'anonimo',
+        perfil: 'anonimo',
         acao: 'LOGIN_ERRO',
         tabela: 'usuarios',
         registro_id: null,
@@ -54,6 +56,7 @@ class AuthController extends IController {
       const usuario = await this.authService.register(req.body);
       LogService.registrarAcao(req, {
         usuario: usuario.email,
+        perfil: usuario.perfil,
         acao: 'INCLUSAO',
         tabela: 'usuarios',
         registro_id: usuario.id_usuario,
