@@ -153,11 +153,11 @@ View -> Router -> Middleware -> Controller -> Service -> DAO -> Model -> Banco d
 
 ## DER
 
-O DER representa as tabelas principais do MySQL e seus relacionamentos 1:N e N:N.
+O DER abaixo representa o banco relacional MySQL usado pelo sistema. Os logs ficam separados no MongoDB.
 
-<img src="docs/DER.png" width="900" alt="DER do sistema Biblioteca Geek">
+<img src="docs/DER.png" alt="DER - Biblioteca Geek" width="900">
 
-[Ver DER em Markdown](docs/DER.md)
+Ver também: [DER em Markdown](docs/DER.md)
 
 Relacionamentos principais:
 
